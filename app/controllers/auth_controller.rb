@@ -4,9 +4,10 @@ class AuthController < ApplicationController
   def login
     if params[:email]
       user = User.find_by(email: params[:email])
+      p user
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
-        #redirect_to admin_url
+        redirect_to dashboard_show_url
       else
         flash.now[:alert] = 'Invalid email/password combination'
       end

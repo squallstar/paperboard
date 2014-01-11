@@ -4,6 +4,10 @@ Paperboard::Application.routes.draw do
   get "auth/logout"
   post "auth/login"
 
+  get "dashboard/show"
+
+  root 'dashboard#show'
+
   #resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

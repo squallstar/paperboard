@@ -9,4 +9,11 @@
 # encoding: utf-8
 
 User.delete_all
-User.create!(username: 'test', password: 'test', first_name: 'John', last_name: 'Doe')
+User.create!(
+  username: 'test',
+  password: 'test',
+  password_confirmation: 'test',
+  email: 'test@test.com',
+  first_name: 'John',
+  last_name: 'Doe'
+)
