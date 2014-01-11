@@ -1,0 +1,6 @@
+default:
+  username: johndoe
+  first_name: John
+  last_name: doe
+  email: johndoe@gmail.com
+  password_digest: <%= BCrypt::Password.create('secret') %>
