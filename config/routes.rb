@@ -1,8 +1,9 @@
 Paperboard::Application.routes.draw do
 
-  get "auth/login"
-  get "auth/logout"
-  post "auth/login"
+  get "login" => "auth#login", as: :login
+  get "logout" => "auth#logout", as: :logout
+
+  post "login" => "auth#login"
 
   get "dashboard/show"
 

@@ -1,4 +1,5 @@
 class AuthController < ApplicationController
+  skip_before_action :authorize
   layout "forms"
 
   def login
@@ -7,15 +8,21 @@ class AuthController < ApplicationController
       p user
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to dashboard_show_url
+        redirect_after_login
       else
         flash.now[:alert] = 'Invalid email/password combination'
       end
+    elsif session[:user_id]
+      redirect_after_login
     end
   end
 
   def logout
     session[:user_id] = nil
-    redirect_to auth_login_url, notice: "Logged out"
+    redirect_to login_url, notice: "Logged out"
+  end
+
+  def redirect_after_login
+    redirect_to dashboard_show_url
   end
 end
