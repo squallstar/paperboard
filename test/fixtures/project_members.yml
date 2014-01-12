@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+owner:
+  role: owner
+  project_id:
+  user_id:
+
+member:
+  role: member
+  project_id:
+  user_id:
