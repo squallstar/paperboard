@@ -1,17 +1,27 @@
 development:
-  adapter: postgresql
-  host: localhost
-  database: paper_dev
-  encoding: unicode
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
 test:
-  adapter: postgresql
-  host: localhost
-  database: paper_test
-  encoding: unicode
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
 
 production:
   adapter: postgresql
   host: localhost
   username: user
   database: paper_prod
+
+production_squallstar:
+   adapter: mysql2
+   encoding: utf8
+   database: paperboard
+   pool: 10
+   username: paperboard
+   password: <%= ENV['PRODUCTION_SQUALLSTAR_DB_PASSWORD'] %>
+   socket: /var/run/mysqld/mysqld.sock
+   reconnect: true

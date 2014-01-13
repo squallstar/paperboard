@@ -6,7 +6,15 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 
 # SQL adapter type
-gem 'pg'
+gem 'sqlite3', :group => :development
+gem 'pg', :group => :production
+gem 'mysql2', :group => :production_squallstar
+
+# Env files
+gem 'dotenv-rails'
+
+# New relic for heroku
+gem 'newrelic_rpm', :group => :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -47,6 +55,9 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Multi thread
+gem "puma" #, "~> 2.7"
 
 # Use unicorn as the app server
 # gem 'unicorn'
