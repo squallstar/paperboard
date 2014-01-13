@@ -1,6 +1,6 @@
 h2 Projects you belong to
 
-- if @memberships.length
+- if @memberships.length > 0
   - for membership in @memberships
     li
       h3
@@ -8,7 +8,7 @@ h2 Projects you belong to
       p The project has #{pluralize membership.project.members.length, 'member'}
       = link_to 'Delete', project_destroy_path(membership.project), method: :delete, data: { confirm: 'Are you sure?' }
       hr
-  else
-    p You don't belong to any project
+- else
+  p You don't belong to any project
 
 = link_to "Create new", projects_new_path
