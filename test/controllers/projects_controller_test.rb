@@ -11,4 +11,10 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should create a project" do
+    project = projects(:one)
+    post :create, name: project.name
+    assert_redirected_to projects_url
+  end
+
 end
