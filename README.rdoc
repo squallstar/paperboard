@@ -1,28 +1,43 @@
-== README
+== Paperboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Architecture
 
-Things you may want to cover:
+Paperboard runs **ruby 2.0** with **rails 4**.
 
-* Ruby version
+### Database
 
-* System dependencies
+On development, it will use **sqlite**.
+On Heroku production **Postgre** will be used, while on Squallstar production **MySQL** server will be used.
 
-* Configuration
+## Configuration
 
-* Database creation
+    $ brew install mysql
+    $ bundle install
 
-* Database initialization
+Then, setup the DB:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    $ rake db:create && rake db:seed
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Tests
+
+To run the tests:
+
+    $ rake test
+
+
+## Deployment
+
+### 1. Heroku staging
+
+    $ git remote add heroku git@heroku.com:paperboard.git
+    $ git push heroku master
+
+### 2. Squallstar production
+
+Connect with ssh to the server, then navigate to **/home/source/paperboard** and run the following commands:
+
+    $ git pull
+    $ rake db:migrate
+    $ rake assets:precompile
+    $ sudo webrestart
