@@ -8,6 +8,9 @@ gem 'rails', '4.0.0'
 # SQL adapter type
 gem 'pg'
 
+# New relic for heroku
+gem 'newrelic_rpm'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
