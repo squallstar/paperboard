@@ -51,6 +51,9 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+# Multi thread
+gem "puma" #, "~> 2.7"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
