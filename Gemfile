@@ -6,10 +6,14 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 
 # SQL adapter type
-gem 'pg'
+gem 'pg', :groups => [:development, :production]
+gem 'mysql2', :group => :production_squallstar
+
+# Env files
+gem 'dotenv-rails'
 
 # New relic for heroku
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', :group => :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
