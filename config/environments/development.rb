@@ -27,6 +27,9 @@ Paperboard::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Prettify slim templates
+  Slim::Engine.set_default_options pretty: true
+
   # Bullet configuration to monitor and alert us of N+1 queries.
   config.after_initialize do
     Bullet.enable = true
