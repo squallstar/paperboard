@@ -1,0 +1,11 @@
+h2 Projects you belong to
+
+- if @memberships.length
+  - for membership in @memberships
+    li
+      strong #{membership.project.name}&nbsp;
+      span has #{membership.project.members.length} members
+  else
+    p You don't belong to any project
+
+= link_to "Create new", projects_new_path

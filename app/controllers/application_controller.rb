@@ -6,9 +6,16 @@ class ApplicationController < ActionController::Base
 
 
   protected
+
   def authorize
-    unless User.find_by(id: session[:user_id])
+    unless current_user
       redirect_to login_url, notice: "Please log in"
     end
+  end
+
+  private
+
+  def current_user
+    @current_user ||= User.select(:id).find_by(id: session[:user_id])
   end
 end

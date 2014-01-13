@@ -9,7 +9,7 @@ class AuthControllerTest < ActionController::TestCase
   test "should login when email/password are valid" do
     user = users(:default)
     post :login, email: user.email, password: 'secret'
-    assert_redirected_to dashboard_show_url
+    assert_redirected_to projects_url
     assert_equal user.id, session[:user_id]
   end
 
@@ -25,7 +25,7 @@ class AuthControllerTest < ActionController::TestCase
     user = users(:default)
     post :login, email: user.email, password: 'secret'
     get :login
-    assert_redirected_to dashboard_show_url
+    assert_redirected_to projects_url
   end
 
   test "should get logout" do

@@ -23,6 +23,6 @@ class AuthController < ApplicationController
   end
 
   def redirect_after_login
-    redirect_to dashboard_show_url
+    redirect_to projects_url
   end
 end

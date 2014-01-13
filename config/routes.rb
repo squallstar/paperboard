@@ -1,5 +1,9 @@
 Paperboard::Application.routes.draw do
 
+  get "projects" => "projects#show"
+  get "projects/new"
+  post "projects" => "projects#create"
+
   get "login" => "auth#login", as: :login
   get "logout" => "auth#logout", as: :logout
 
@@ -7,7 +11,7 @@ Paperboard::Application.routes.draw do
 
   get "dashboard/show"
 
-  root 'dashboard#show'
+  root 'projects#show'
 
   #resources :users
 
