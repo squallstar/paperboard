@@ -6,7 +6,8 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 
 # SQL adapter type
-gem 'pg', :groups => [:development, :production]
+gem 'sqlite3', :group => :development
+gem 'pg', :group => :production
 gem 'mysql2', :group => :production_squallstar
 
 # Env files
