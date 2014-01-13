@@ -3,7 +3,7 @@
 
 = form_tag do
   fieldset
-    legend Please Log In
+    legend Sign up
     div
       = label_tag :email, 'Email:'
       = text_field_tag :email, params[:email]
@@ -11,8 +11,7 @@
       = label_tag :password, 'Password:'
       = password_field_tag :password, params[:password]
     div
-      = submit_tag "Login"
-
-p
- | No account?&nbsp;
- = link_to "Sign up", signup_path
+      = label_tag :password_confirmation, 'Repeat password:'
+      = password_field_tag :password_confirmation, params[:password_confirmation]
+    div
+      = submit_tag "Create account"

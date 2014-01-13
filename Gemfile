@@ -17,7 +17,10 @@ gem 'dotenv-rails'
 gem 'newrelic_rpm', :group => :production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+group :assets do
+  gem 'sass-rails'
+  gem 'compass-rails'
+end
 
 # Template engine
 gem "slim-rails"

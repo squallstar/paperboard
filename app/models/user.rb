@@ -1,3 +1,16 @@
+#
+# Database Schema for User class
+#
+# string   "username"
+# string   "first_name"
+# string   "last_name"
+# string   "email"
+# string   "password_digest"
+# datetime "created_at"
+# datetime "updated_at"
+# boolean  "is_active"
+# boolean  "email_verified"
+
 class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true

@@ -16,7 +16,7 @@ On Heroku production **Postgre** will be used, while on Squallstar production **
 
 Then, setup the DB:
 
-    $ rake db:create && rake db:seed
+    $ rake db:schema:load && rake db:seed
 
 
 ## Tests
