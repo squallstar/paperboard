@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.select(:id).find_by(id: session[:user_id])
+    @current_user ||= User.select(:id, :first_name, :last_name).find_by(id: session[:user_id])
   end
 end

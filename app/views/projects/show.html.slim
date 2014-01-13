@@ -3,7 +3,8 @@ h2 Projects you belong to
 - if @memberships.length
   - for membership in @memberships
     li
-      h3 #{membership.project.name}&nbsp;
+      h3
+        = link_to membership.project.name, project_path(membership.project)
       p The project has #{pluralize membership.project.members.length, 'member'}
       = link_to 'Delete', project_destroy_path(membership.project), method: :delete, data: { confirm: 'Are you sure?' }
       hr

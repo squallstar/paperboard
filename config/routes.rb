@@ -1,15 +1,21 @@
 Paperboard::Application.routes.draw do
 
+  # Projects
+  get "project/index"
   get "projects" => "projects#show"
   get "projects/new"
   post "projects" => "projects#create", as: :project_create
   delete "projects/:id" => 'projects#destroy', as: :project_destroy
 
+  # Single project
+  get "project/:id" => 'project#index', as: :project
+
+  # Sessions
   get "login" => "auth#login", as: :login
   get "logout" => "auth#logout", as: :logout
-
   post "login" => "auth#login"
 
+  # Other
   get "dashboard/show"
 
   root 'projects#show'

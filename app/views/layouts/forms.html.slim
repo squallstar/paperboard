@@ -3,9 +3,9 @@ html
   head
     title Paperboard
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body
     h1 Paperboard
     div.form
       = yield
+    = javascript_include_tag "application", "data-turbolinks-track" => true
