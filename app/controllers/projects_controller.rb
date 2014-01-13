@@ -29,6 +29,17 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    membership = Project.find(params[:id]).members.where(user: current_user).first
+    if membership.role == 'owner'
+      membership.project.destroy
+
+      redirect_to projects_path, notice: 'Project was successfully deleted.'
+    else
+      format.html { redirect_to projects_path, notice: 'You are not the owner of this project.' }
+    end
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.

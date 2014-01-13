@@ -3,8 +3,10 @@ h2 Projects you belong to
 - if @memberships.length
   - for membership in @memberships
     li
-      strong #{membership.project.name}&nbsp;
-      span has #{membership.project.members.length} members
+      h3 #{membership.project.name}&nbsp;
+      p The project has #{pluralize membership.project.members.length, 'member'}
+      = link_to 'Delete', project_destroy_path(membership.project), method: :delete, data: { confirm: 'Are you sure?' }
+      hr
   else
     p You don't belong to any project
 

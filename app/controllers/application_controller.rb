@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless current_user
+      session.destroy
       redirect_to login_url, notice: "Please log in"
     end
   end

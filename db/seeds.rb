@@ -17,3 +17,6 @@ User.create!(
   first_name: 'John',
   last_name: 'Doe'
 )
+
+Project.delete_all
+ProjectMember.delete_all

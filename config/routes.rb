@@ -2,7 +2,8 @@ Paperboard::Application.routes.draw do
 
   get "projects" => "projects#show"
   get "projects/new"
-  post "projects" => "projects#create"
+  post "projects" => "projects#create", as: :project_create
+  delete "projects/:id" => 'projects#destroy', as: :project_destroy
 
   get "login" => "auth#login", as: :login
   get "logout" => "auth#logout", as: :logout
