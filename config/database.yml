@@ -19,6 +19,7 @@ production:
 production_squallstar:
    adapter: mysql2
    encoding: utf8
+   collation: utf8_unicode_ci
    database: paperboard
    pool: 10
    username: paperboard
