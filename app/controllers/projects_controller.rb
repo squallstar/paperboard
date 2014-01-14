@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def show
-    @memberships = @current_user.projects.includes(project: :members)
+    @projects = @current_user.projects
   end
 
   # GET /projects/new
