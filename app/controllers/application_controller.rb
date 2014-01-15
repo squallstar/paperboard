@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_project
-    @current_project ||= @current_user.projects.find(params[:id])
+    @current_project ||= @current_user.projects.find(params[:id].to_i)
     if not @current_project
       redirect_to projects_path, alert: 'That project does not exist or you don\'t have the rights to view it'
     end
