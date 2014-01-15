@@ -22,7 +22,7 @@ Paperboard::Application.routes.draw do
   # Other
   get "dashboard/show"
 
-  root 'projects#show'
+  root 'projects#index'
 
   #resources :users
 
