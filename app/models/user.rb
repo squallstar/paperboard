@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
 
-  def project_with_id(project_id)
-    projects.where(id: project_id).limit(1).first
+  def full_name
+    first_name + ' ' + last_name
   end
 end

@@ -2,6 +2,8 @@ h1 #{@project.name}
 
 ul
   li
-    = link_to "Dashboard", project_path(@project.id)
+    = link_to "Dashboard", project_path(@project)
+  li
+    = link_to "Members", project_members_path(@project)
 
 hr

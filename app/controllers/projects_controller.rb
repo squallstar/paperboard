@@ -1,13 +1,24 @@
 class ProjectsController < ApplicationController
+  before_action :current_project, only: [:show]
 
   # GET /projects
-  def show
+  def index
     @projects = @current_user.projects
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+  end
+
+  # GET /projects/1
+  # GET /projects/1.json
+  def show
+    @project = current_project
+    puts "hello world"
+    puts @project
+    p @project
+    render "project/index"
   end
 
   # POST /projects
@@ -30,6 +41,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    p "asd"
     membership = Project.find(params[:id]).members.where(user: current_user).first
     if membership.role == 'owner'
       membership.project.destroy
@@ -42,7 +54,6 @@ class ProjectsController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
     params.require(:project).permit(:name)
   end
