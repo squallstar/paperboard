@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-  before_action :set_project
+  before_action :current_project
 
   def index
   end
