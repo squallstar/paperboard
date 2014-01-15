@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = current_project
+    @project = @current_project
     render "project/index"
   end
 
