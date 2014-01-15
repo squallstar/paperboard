@@ -15,9 +15,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = current_project
-    puts "hello world"
-    puts @project
-    p @project
     render "project/index"
   end
 
