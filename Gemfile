@@ -9,6 +9,7 @@ gem 'rails', '4.0.0'
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'mysql2', :group => :production_squallstar
+gem 'rack-cache', :groups => [:production, :production_squallstar]
 
 # Env files
 gem 'dotenv-rails'
