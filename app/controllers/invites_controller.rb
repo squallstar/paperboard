@@ -14,6 +14,8 @@ class InvitesController < ApplicationController
 
     respond_to do |format|
       if invite.save
+        ProjectMailer.send_invite(invite).deliver
+
         format.html { redirect_to project_invites_path(@current_project), notice: "Project invite was successfully sent to #{invite.email}." }
         format.json { render action: 'show', status: :created }
       else
