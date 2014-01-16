@@ -9,6 +9,7 @@ class InvitesController < ApplicationController
 
   def create
     invite = @current_project.invites.build(invite_params)
+    invite.accepted = false
     invite.project = @current_project
     invite.user = @current_user
 
