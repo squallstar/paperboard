@@ -3,22 +3,19 @@ class InvitesController < ApplicationController
   before_action :set_invite, only: [:destroy]
 
   def index
-    @invites = @current_project.invites.includes(:user)
-  end
-
-  def new
-    @invite = @project.invites.build
+    @invites = @current_project.invites.includes(:user).order(:accepted, :email)
+    @new_invite = @current_project.invites.build
   end
 
   def create
-    invite = @project.invites.create(invite_params)
-    invite.project = @project
+    invite = @current_project.invites.build(invite_params)
+    invite.project = @current_project
     invite.user = @current_user
 
     respond_to do |format|
       if invite.save
-        format.html { redirect_to @project.invites, notice: "Project invite was successfully sent to #{invite.email}." }
-        format.json { render action: 'show', status: :created, location: @project.invites }
+        format.html { redirect_to project_invites_path(@current_project), notice: "Project invite was successfully sent to #{invite.email}." }
+        format.json { render action: 'show', status: :created }
       else
         format.html { render action: 'new' }
         format.json { render json: @project.invites.errors, status: :unprocessable_entity }

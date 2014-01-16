@@ -1,4 +1,25 @@
-h1 Listing project invites
+h2 New invitation
+
+= form_for [@current_project, @new_invite] do |f|
+  - if @new_invite.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@new_invite.errors.count, "error")
+        | &nbsp;prohibited this invite from being saved:
+      ul
+        - @new_invite.errors.full_messages.each do |msg|
+          li= msg
+
+  .field
+    = f.label :email
+    = f.text_field :email
+
+  .actions
+    = f.submit "Send invitation email"
+
+hr
+
+h2 Listing project invites
 
 - if @invites.length
 
@@ -16,11 +37,9 @@ h1 Listing project invites
           - else
             | Pending
         td
-          - if invite.accepted
+          - if invite.user && invite.accepted
             = link_to invite.user.full_name, "todo"
           - else
             #{invite.email}
 
         td = link_to 'Delete', project_invite_path(params[:project_id], invite), data: {:confirm => 'Are you sure?'}, :method => :delete
-
-//= link_to 'New invite invite', new_invite_path
