@@ -1,17 +1,11 @@
 Paperboard::Application.routes.draw do
 
+
   # Projects
-  resources :projects
+  resources :projects do
+    resources :invites
 
-  #get    "project/index"
-  #get    "projects" => "projects#show"
-  #get    "projects/new"
-  #post   "projects" => "projects#create", as: :project_create
-  #delete "projects/:id" => 'projects#destroy', as: :project_destroy
-
-  # Single project
-  #get "project/:id-:slug" => 'project#index', as: :project
-  #get "project/:id-:slug/members" => 'project#members', as: :project_members
+  end
 
   # Sessions
   get  "login"  => "auth#login", as: :login

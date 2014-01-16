@@ -21,7 +21,7 @@ class AuthControllerTest < ActionController::TestCase
     assert_template :login
   end
 
-  test "should be redirected to the dashboard when accessed login and was logged in" do
+  test "should be redirected to the projects when accessed login and was logged in" do
     user = users(:default)
     post :login, email: user.email, password: 'secret'
     get :login

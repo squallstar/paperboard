@@ -9,6 +9,9 @@
 # encoding: utf-8
 
 User.delete_all
+Project.delete_all
+ProjectMember.delete_all
+
 User.create!(
   [
     {
@@ -30,5 +33,24 @@ User.create!(
   ]
 )
 
-Project.delete_all
-ProjectMember.delete_all
+Project.create!({
+  name: 'Test project'
+})
+
+ProjectMember.create!({
+  user: User.first,
+  project: Project.first,
+  role: 'owner'
+})
+
+Invite.create!({
+  email: 'squallstar@gmail.com',
+  project: Project.first
+})
+
+Invite.create!({
+  email: 'squallstar+accepted@gmail.com',
+  project: Project.first,
+  user: User.first,
+  accepted: true
+})
