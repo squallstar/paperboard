@@ -1,10 +1,17 @@
-doctype html
-html
-  head
-    meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
-  body
-    h1
-      | You have been invited by xxx to join the project
-      strong #{@project.name}
-    p
-      | To join the project, just follow this link: #{@url}.
+h1 #{@project.name}
+
+- if @user
+  h2
+    | Hey #{@user.first_name}, you have been invited by&nbsp;
+    strong #{@from_user.full_name}
+    | &nbsp;to join the project&nbsp;
+    strong #{@project.name}
+- else
+  h2
+    | You have been invited by&nbsp;
+    strong #{@from_user.full_name}
+    | &nbsp;to join the project&nbsp;
+    strong #{@project.name}
+
+p
+  | To join the project, just follow this link: #{@url}.

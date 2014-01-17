@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   def authorize
     unless current_user
       session.destroy
+      session[:return_to] = request.fullpath
+
       redirect_to login_url, notice: "Please log in"
     end
   end
@@ -23,8 +25,8 @@ class ApplicationController < ActionController::Base
       return redirect_to projects_path, alert: 'Project id not set'
     end
     @current_project ||= @current_user.projects.find(project_id)
-    if not @current_project
-      redirect_to projects_path, alert: 'That project does not exist or you don\'t have the rights to view it'
-    end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to projects_path, alert: 'That project does not exist or you don\'t have the rights to see it.'
   end
 end

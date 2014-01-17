@@ -4,8 +4,10 @@ Paperboard::Application.routes.draw do
   # Projects
   resources :projects do
     resources :invites
-
   end
+
+  # Invites
+  get 'projects/:project_id/accept-invite/:key' => 'invites#accept', as: :project_invite_accept
 
   # Sessions
   get  "login"  => "auth#login", as: :login

@@ -1,9 +1,12 @@
 class ProjectMailer < ActionMailer::Base
   default from: "no-reply@paperboard.me"
+  layout 'emails'
 
-  def send_invite(invite)
+  def send_invite(invite, from_user)
     @project = invite.project
-    @url  = project_url @project
+    @from_user = from_user
+    @url = project_invite_accept_url @project, invite.key
+    @user = User.where(email: invite.email).first
     mail(to: invite.email, subject: "You have been invited to #{@project.name}")
   end
 end

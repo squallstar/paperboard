@@ -9,7 +9,8 @@ class AuthController < ApplicationController
       p user
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to root_url
+        redirect_to session[:return_to] || root_url
+        session.delete(:return_to)
       else
         flash.now[:alert] = 'Invalid email/password combination'
       end
