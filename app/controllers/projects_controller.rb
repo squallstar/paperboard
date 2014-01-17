@@ -38,7 +38,6 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    p "asd"
     membership = Project.find(params[:id]).members.where(user: current_user).first
     if membership.role == 'owner'
       membership.project.destroy

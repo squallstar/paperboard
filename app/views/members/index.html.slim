@@ -1,0 +1,18 @@
+h2 Members
+
+table border=1 cellpadding=5 cellspacing=3
+  tr
+    th User
+    th Join date
+    th Role
+    th Actions
+
+  - @members.each do |member|
+    tr
+      td
+        = link_to member.user.full_name, "todo"
+      td #{member.created_at}
+      td #{member.role}
+      td
+        - if @is_admin && member.role != 'owner'
+          = link_to 'Delete', project_member_path(params[:project_id], member), data: {:confirm => 'Are you sure?'}, :method => :delete
