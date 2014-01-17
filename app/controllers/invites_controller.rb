@@ -1,9 +1,7 @@
 class InvitesController < ApplicationController
-  before_action :current_project
+  before_action :current_project, only: [:index, :create, :destroy]
   before_action :set_invite, only: [:destroy]
   before_action :set_invites, only: [:index]
-
-  skip_before_action :current_project, only: [:accept]
 
   def index
     @new_invite = @current_project.invites.build
@@ -36,14 +34,21 @@ class InvitesController < ApplicationController
     if invite
       @current_project = Project.find(params[:project_id])
       if invite.accepted
+        # Already accepted, just redirect
         redirect_to project_path(@current_project)
       else
-        invite.accepted = true
-        invite.user = @current_user
-        invite.save
+        # Check if the user that wants to accept belongs to the project
+        if ProjectMember.where(project_id: params[:project_id], user: @current_user).count > 0
+          redirect_to project_path(@current_project), notice: "You already joined this project."
+        else
+          # Ok, we can accept the invite
+          invite.accepted = true
+          invite.user = @current_user
+          invite.save
 
-        @current_project.members.create role: 'member', user: @current_user
-        redirect_to project_path(@current_project), notice: "You joined the project #{@current_project.name}."
+          @current_project.members.create role: 'member', user: @current_user
+          redirect_to project_path(@current_project), notice: "You joined the project #{@current_project.name}."
+        end
       end
     else
       redirect_to projects_path

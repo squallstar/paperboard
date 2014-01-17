@@ -46,16 +46,8 @@ ProjectMember.create!({
 Invite.create!({
   email: 'squallstar@gmail.com',
   project: Project.first,
-  accepted: false,
-  key: '1234',
-  sender: User.first
-})
-
-Invite.create!({
-  email: 'squallstar+accepted@gmail.com',
-  project: Project.first,
   accepted: true,
-  key: '12345',
+  key: '1234',
   sender: User.first,
-  user: User.limit(2)[1]
+  user: User.first
 })
