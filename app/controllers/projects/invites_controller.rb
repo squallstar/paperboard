@@ -1,4 +1,4 @@
-class InvitesController < ApplicationController
+class Projects::InvitesController < ApplicationController
   before_action :current_project, only: [:index, :create, :destroy]
   before_action :set_invite, only: [:destroy]
   before_action :set_invites, only: [:index]

@@ -1,4 +1,4 @@
-class MembersController < ApplicationController
+class Projects::MembersController < ApplicationController
   before_action :current_project
   before_action :is_admin
 

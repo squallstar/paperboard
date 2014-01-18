@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class Projects::ProjectsController < ApplicationController
   before_action :current_project, only: [:show]
 
   # GET /projects

@@ -4,7 +4,7 @@ Paperboard::Application.routes.draw do
   resources :user
 
   # Projects
-  resources :projects do
+  resources :projects, module: 'projects' do
     resources :invites
     resources :members
   end
