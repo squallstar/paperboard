@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115231134) do
+ActiveRecord::Schema.define(version: 20140118175117) do
 
   create_table "invites", force: true do |t|
     t.boolean  "accepted"
@@ -58,5 +58,6 @@ ActiveRecord::Schema.define(version: 20140115231134) do
 
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["is_active"], name: "index_users_on_is_active"
+  add_index "users", ["username"], name: "username_index"
 
 end

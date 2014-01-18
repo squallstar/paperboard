@@ -1,5 +1,7 @@
 Paperboard::Application.routes.draw do
 
+  # User
+  resources :user
 
   # Projects
   resources :projects do
