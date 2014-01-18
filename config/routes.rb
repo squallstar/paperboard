@@ -1,16 +1,18 @@
 Paperboard::Application.routes.draw do
 
   # User
-  resources :user
+  get "users/:username" => "users#show", as: :user
 
   # Projects
   resources :projects, module: 'projects' do
-    resources :invites
+    resources :invites do
+      collection do
+        get 'accept/:key' => 'invites#accept', as: :accept
+      end
+    end
+
     resources :members
   end
-
-  # Invites
-  get 'projects/:project_id/accept-invite/:key' => 'invites#accept', as: :project_invite_accept
 
   # Sessions
   get  "login"  => "auth#login", as: :login
@@ -21,7 +23,7 @@ Paperboard::Application.routes.draw do
   # Other
   get "dashboard/show"
 
-  root 'projects#index'
+  root 'projects/projects#index'
 
   #resources :users
 

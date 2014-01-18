@@ -28,6 +28,7 @@ h2 Listing project invites
   table border=1 cellpadding=5 cellspacing=3
     tr
       th Status
+      th Sent date
       th Sent to User/Email
       th Sender
       th Actions
@@ -39,12 +40,15 @@ h2 Listing project invites
             | Accepted
           - else
             | Pending
+        td #{time_ago_in_words(invite.created_at)} ago
         td
           - if invite.user && invite.accepted
-            = link_to invite.user.full_name, "todo"
+            = link_to invite.user.full_name, user_path(invite.user)
           - else
             #{invite.email}
         td
-          = link_to invite.sender.full_name, "todo"
+          = link_to invite.sender.full_name, user_path(invite.sender)
 
-        td = link_to 'Delete', project_invite_path(params[:project_id], invite), data: {:confirm => 'Are you sure?'}, :method => :delete
+        td
+          - if !invite.accepted
+            = link_to 'Delete', project_invite_path(params[:project_id], invite), data: {:confirm => 'Are you sure?'}, :method => :delete

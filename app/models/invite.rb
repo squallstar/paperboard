@@ -2,7 +2,9 @@ class Invite < ActiveRecord::Base
   validates :accepted, :default => false
   validates :email, :presence => true
   validates :sender, :presence => true
-  validates_uniqueness_of :email, scope: [:project_id, :user_id]
+  validates_uniqueness_of :email,
+    scope: [:project_id, :user_id],
+    message: "has already been used to invite a user on this project"
 
   before_create :set_defaults
 

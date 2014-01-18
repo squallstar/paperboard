@@ -5,7 +5,7 @@ class ProjectMailer < ActionMailer::Base
   def send_invite(invite, from_user)
     @project = invite.project
     @from_user = from_user
-    @url = project_invite_accept_url @project, invite.key
+    @url = accept_project_invites_url @project, invite.key
     @user = User.where(email: invite.email).first
     mail(to: invite.email, subject: "You have been invited to #{@project.name}")
   end

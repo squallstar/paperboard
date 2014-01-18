@@ -1,21 +1,5 @@
-p#notice = notice
+h2 #{@user.full_name}
+h3 #{@user.username}
 
-p
-  strong Username:
-  = @user.username
-p
-  strong First name:
-  = @user.first_name
-p
-  strong Last name:
-  = @user.last_name
-p
-  strong Email:
-  = @user.email
-p
-  strong Password:
-  = @user.password
-
-= link_to 'Edit', edit_user_path(@user)
-'|
-= link_to 'Back', users_path
+//- if @current_user.id == @user.id
+//  = link_to 'Edit your profile', edit_user_path(@user)
