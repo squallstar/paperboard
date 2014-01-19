@@ -32,7 +32,7 @@ class Projects::InvitesController < ApplicationController
   end
 
   def accept
-    invite = Invite.where(key: params[:key]).first
+    invite = ProjectInvite.where(key: params[:key]).first
     if invite
       @current_project = Project.find(params[:project_id])
       if invite.accepted
@@ -73,10 +73,10 @@ class Projects::InvitesController < ApplicationController
     end
 
     def set_invite
-      @invite = Invite.find(params[:id])
+      @invite = ProjectInvite.find(params[:id])
     end
 
     def invite_params
-      params.require(:invite).permit(:email)
+      params.require(:project_invite).permit(:email)
     end
 end

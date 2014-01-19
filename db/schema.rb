@@ -13,19 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140119164835) do
 
-  create_table "invites", force: true do |t|
-    t.boolean  "accepted"
-    t.string   "email"
-    t.string   "key"
-    t.integer  "project_id"
-    t.integer  "user_id"
-    t.integer  "sender_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invites", ["project_id"], name: "index_invites_on_project_id"
-
   create_table "organization_members", force: true do |t|
     t.string   "role"
     t.integer  "user_id"
@@ -42,6 +29,19 @@ ActiveRecord::Schema.define(version: 20140119164835) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "project_invites", force: true do |t|
+    t.boolean  "accepted"
+    t.string   "email"
+    t.string   "key"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_invites", ["project_id"], name: "index_project_invites_on_project_id"
 
   create_table "project_members", force: true do |t|
     t.string   "role"

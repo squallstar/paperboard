@@ -3,4 +3,8 @@ class Organization < ActiveRecord::Base
   has_many :members, foreign_key: :organization_id, class_name: :OrganizationMember, dependent: :destroy
 
   validates :name, null: false, presence: true
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
 end

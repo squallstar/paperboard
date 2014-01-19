@@ -1,4 +1,4 @@
-class Invite < ActiveRecord::Base
+class ProjectInvite < ActiveRecord::Base
   validates :accepted, :default => false
   validates :email, :presence => true
   validates :sender, :presence => true

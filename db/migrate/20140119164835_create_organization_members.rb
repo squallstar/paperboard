@@ -7,5 +7,7 @@ class CreateOrganizationMembers < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    rename_table :invites, :project_invites
   end
 end
