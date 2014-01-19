@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Role:
+  = @organization_member.role
+p
+  strong User:
+  = @organization_member.user
+p
+  strong Organization:
+  = @organization_member.organization
+
+= link_to 'Edit', edit_organization_member_path(@organization_member)
+'|
+= link_to 'Back', organization_members_path

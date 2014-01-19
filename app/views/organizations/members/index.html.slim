@@ -1,0 +1,23 @@
+h1 Listing organization_members
+
+table
+  tr
+    th Role
+    th User
+    th Organization
+    th
+    th
+    th
+
+  - @organization_members.each do |organization_member|
+    tr
+      td = organization_member.role
+      td = organization_member.user
+      td = organization_member.organization
+      td = link_to 'Show', organization_member
+      td = link_to 'Edit', edit_organization_member_path(organization_member)
+      td = link_to 'Destroy', organization_member, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Organization member', new_organization_member_path
