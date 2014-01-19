@@ -1,5 +1,7 @@
 class Projects::ProjectsController < ApplicationController
-  before_action :current_project, only: [:show]
+  include ProjectLoading
+
+  before_action :load_project, only: [:show]
 
   # GET /projects
   def index

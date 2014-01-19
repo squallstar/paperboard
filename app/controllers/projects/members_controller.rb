@@ -1,6 +1,8 @@
 class Projects::MembersController < ApplicationController
-  before_action :current_project
-  before_action :is_admin
+  include ProjectLoading
+
+  before_action :load_project
+  before_action :load_is_admin
 
   def index
     @members = @current_project.members.includes(:user)
@@ -24,7 +26,7 @@ class Projects::MembersController < ApplicationController
   end
 
   private
-    def is_admin
+    def load_is_admin
       @is_admin ||= ProjectMember.select(:role).where(project: @current_project, user: @current_user, role: 'owner').count > 0
     end
 end
