@@ -28,6 +28,9 @@ class Organizations::OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
+        # Sets the owner to the current user
+        @organization.members.create role: 'owner', user: @current_user
+
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render action: 'show', status: :created, location: @organization }
       else
