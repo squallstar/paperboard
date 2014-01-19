@@ -4,6 +4,9 @@ Paperboard::Application.routes.draw do
   # User
   get "users/:username" => "users#show", as: :user
 
+  # Organizations
+  resources :organizations, module: 'organizations'
+
   # Projects
   resources :projects, module: 'projects' do
     resources :invites do
