@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
 
+  has_many :organization_memberships, foreign_key: :user_id, class_name: :OrganizationMember, dependent: :destroy
+  has_many :organizations, through: :organization_memberships
+
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 

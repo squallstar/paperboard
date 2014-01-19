@@ -1,23 +1,18 @@
-h1 Listing organization_members
+h1 Listing members of #{@organization.name}
 
-table
+table border=1 cellpadding=6 cellspacing=0
   tr
-    th Role
     th User
-    th Organization
-    th
-    th
-    th
+    th Join date
+    th Role
+    th Actions
 
-  - @organization_members.each do |organization_member|
+  - @members.each do |member|
     tr
-      td = organization_member.role
-      td = organization_member.user
-      td = organization_member.organization
-      td = link_to 'Show', organization_member
-      td = link_to 'Edit', edit_organization_member_path(organization_member)
-      td = link_to 'Destroy', organization_member, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Organization member', new_organization_member_path
+      td
+        = link_to member.user.full_name, user_path(member.user)
+      td joined #{time_ago_in_words(member.created_at)} ago
+      td = member.role
+      td
+        - if @current_user.id != member.user.id
+          = link_to "Remove from this organization", organization_member_path(@organization, member), data: {method: 'delete'}

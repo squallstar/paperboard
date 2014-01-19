@@ -1,34 +1,18 @@
 class Organizations::MembersController < ApplicationController
-  before_action :set_organization_member, only: [:show, :edit, :update, :destroy]
+  before_action :load_organization, only: [:index, :create, :destroy]
+  before_action :is_admin, only: [:index]
+  before_action :require_admin, only: [:create, :update, :destroy]
 
-  # GET /organization_members
-  # GET /organization_members.json
   def index
-    @organization_members = OrganizationMember.all
+    @members = @organization.members.includes(:user)
   end
 
-  # GET /organization_members/1
-  # GET /organization_members/1.json
-  def show
-  end
-
-  # GET /organization_members/new
-  def new
-    @organization_member = OrganizationMember.new
-  end
-
-  # GET /organization_members/1/edit
-  def edit
-  end
-
-  # POST /organization_members
-  # POST /organization_members.json
   def create
     @organization_member = OrganizationMember.new(organization_member_params)
 
     respond_to do |format|
       if @organization_member.save
-        format.html { redirect_to @organization_member, notice: 'Organization member was successfully created.' }
+        format.html { redirect_to organization_path(@organization), notice: 'Organization member was successfully created.' }
         format.json { render action: 'show', status: :created, location: @organization_member }
       else
         format.html { render action: 'new' }
@@ -37,8 +21,6 @@ class Organizations::MembersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /organization_members/1
-  # PATCH/PUT /organization_members/1.json
   def update
     respond_to do |format|
       if @organization_member.update(organization_member_params)
@@ -51,24 +33,32 @@ class Organizations::MembersController < ApplicationController
     end
   end
 
-  # DELETE /organization_members/1
-  # DELETE /organization_members/1.json
   def destroy
-    @organization_member.destroy
+    OrganizationMember.find(params[:id]).destroy
+
     respond_to do |format|
-      format.html { redirect_to organization_members_url }
+      format.html { redirect_to organization_members_url(@organization) }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organization_member
-      @organization_member = OrganizationMember.find(params[:id])
+    def load_organization
+      @organization = @current_user.organizations.find(params[:organization_id].to_i)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_member_params
-      params.require(:organization_member).permit(:role, :user_id, :organization_id)
+      params.require(:organization_member).permit(:role)
+    end
+
+    def is_admin
+      @is_admin ||= OrganizationMember.select(:role).where(organization: @organization, user: @current_user, role: 'owner').count > 0
+    end
+
+    def require_admin
+      if !is_admin
+        redirect_to organization_members_url, notice: 'You have no rights to do this action'
+      end
     end
 end

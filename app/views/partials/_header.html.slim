@@ -8,3 +8,6 @@ header
     li
       = link_to "Organizations", organizations_path
 hr
+
+- if flash[:alert]
+  p#alert= flash[:alert]

@@ -2,7 +2,7 @@ class Projects::MembersController < ApplicationController
   include ProjectLoading
 
   before_action :load_project
-  before_action :load_is_admin
+  before_action :load_is_admin, only: [:destroy]
 
   def index
     @members = @current_project.members.includes(:user)
@@ -11,7 +11,7 @@ class Projects::MembersController < ApplicationController
   def destroy
     return if not is_admin
 
-    member = ProjectMember.where(id: params[:id]).first
+    member = ProjectMember.find(params[:id])
 
     # Deletes the invitation if was there
     Invite.where(project: @current_project, user: member.user).limit(1).destroy_all

@@ -1,19 +1,14 @@
-h1 Listing organizations
+h1 Organizations you belong to
 
-table
-  tr
-    th Name
-    th
-    th
-    th
-
+- if @organizations.length > 0
+  ul
   - @organizations.each do |organization|
-    tr
-      td = organization.name
-      td = link_to 'Show', organization
-      td = link_to 'Edit', edit_organization_path(organization)
-      td = link_to 'Destroy', organization, data: {:confirm => 'Are you sure?'}, :method => :delete
+    li
+      h3 = link_to organization.name, organization_path(organization)
 
-br
+- else
+  p You don't belong to any organization.
+
+hr
 
 = link_to 'New Organization', new_organization_path

@@ -30,7 +30,7 @@ class Projects::ProjectsController < ApplicationController
         # Sets the owner to the current user
         @project.members.create role: 'owner', user: @current_user
 
-        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.html { redirect_to project_path(@project), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: 'new' }
@@ -40,13 +40,13 @@ class Projects::ProjectsController < ApplicationController
   end
 
   def destroy
-    membership = Project.find(params[:id]).members.where(user: current_user).first
+    membership = ProjectMember.where(user: current_user, project_id: params[:id]).first
     if membership.role == 'owner'
       membership.project.destroy
 
-      redirect_to projects_path, notice: 'Project was successfully deleted.'
+      redirect_to projects_path, alert: 'Project was successfully deleted.'
     else
-      format.html { redirect_to projects_path, notice: 'You are not the owner of this project.' }
+      redirect_to projects_path, alert: 'You are not the owner of this project.'
     end
   end
 
