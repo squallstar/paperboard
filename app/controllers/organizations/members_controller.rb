@@ -1,4 +1,6 @@
 class Organizations::MembersController < ApplicationController
+  include OrganizationLoading
+
   before_action :load_organization, only: [:index, :create, :destroy]
   before_action :is_admin, only: [:index]
   before_action :require_admin, only: [:create, :update, :destroy]
@@ -43,22 +45,8 @@ class Organizations::MembersController < ApplicationController
   end
 
   private
-    def load_organization
-      @organization = @current_user.organizations.find(params[:organization_id].to_i)
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_member_params
       params.require(:organization_member).permit(:role)
-    end
-
-    def is_admin
-      @is_admin ||= OrganizationMember.select(:role).where(organization: @organization, user: @current_user, role: 'owner').count > 0
-    end
-
-    def require_admin
-      if !is_admin
-        redirect_to organization_members_url, notice: 'You have no rights to do this action'
-      end
     end
 end

@@ -1,0 +1,10 @@
+header
+  h1 = @organization.name
+
+  = link_to 'Edit details', edit_organization_path(@organization)
+  '&nbsp;|
+  = link_to 'Members', organization_members_path(@organization)
+  '&nbsp;|
+  = link_to 'Teams', organization_teams_path(@organization)
+  '&nbsp;|
+  = link_to 'Delete', organization_path(@organization), data: {method: 'delete'}
