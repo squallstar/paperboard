@@ -7,4 +7,5 @@ html id="r-c-#{params[:controller]}" dir='ltr' lang='en' prefix='og: http://ogp.
   body id="r-a-#{params[:action]}"
     = render "partials/header"
     = yield
+    = render "partials/footer"
     = javascript_include_tag "application", "data-turbolinks-track" => true
