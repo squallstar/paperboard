@@ -1,5 +1,8 @@
 Paperboard::Application.routes.draw do
 
+  namespace :v1, format: :json do
+    get "suggestions/people" => "suggestions#people"
+  end
 
   # User
   get "users/:username" => "users#show", as: :user
@@ -26,9 +29,6 @@ Paperboard::Application.routes.draw do
   get  "logout" => "auth#logout", as: :logout
   post "login"  => "auth#login"
   get  "signup" => "auth#signup", as: :signup
-
-  # Other
-  get "dashboard/show"
 
   root 'projects/projects#index'
 

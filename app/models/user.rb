@@ -12,6 +12,7 @@
 # boolean  "email_verified"
 
 class User < ActiveRecord::Base
+  before_save :before_save
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   has_secure_password
@@ -25,11 +26,12 @@ class User < ActiveRecord::Base
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
-  def full_name
-    first_name + ' ' + last_name
-  end
-
   def to_param
     "#{username}"
   end
+
+  private
+    def before_save
+      self.full_name = first_name + ' ' + last_name
+    end
 end

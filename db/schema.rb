@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119222925) do
+ActiveRecord::Schema.define(version: 20140120172852) do
 
   create_table "organization_members", force: true do |t|
     t.string   "role"
@@ -80,9 +80,11 @@ ActiveRecord::Schema.define(version: 20140119222925) do
     t.datetime "updated_at"
     t.boolean  "is_active"
     t.boolean  "email_verified"
+    t.string   "full_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email"
+  add_index "users", ["full_name"], name: "full_name_index"
   add_index "users", ["is_active"], name: "index_users_on_is_active"
   add_index "users", ["username"], name: "username_index"
 

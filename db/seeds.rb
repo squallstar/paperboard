@@ -15,20 +15,20 @@ ProjectMember.delete_all
 User.create!(
   [
     {
-      username: 'test',
+      username: 'squallstar',
       password: 'test',
       password_confirmation: 'test',
       email: 'test@test.com',
-      first_name: 'John',
-      last_name: 'Doe'
+      first_name: 'Nicholas',
+      last_name: 'Valbusa'
     },
     {
-      username: 'test2',
+      username: 'mintsugar',
       password: 'test',
       password_confirmation: 'test',
       email: 'test2@test.com',
-      first_name: 'John',
-      last_name: 'Second Doe'
+      first_name: 'Michela',
+      last_name: 'Tannoia'
     }
   ]
 )
