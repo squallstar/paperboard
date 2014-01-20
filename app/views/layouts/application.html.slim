@@ -3,9 +3,9 @@ html id="r-c-#{params[:controller]}" dir='ltr' lang='en' prefix='og: http://ogp.
   head
     title Paperboard
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body id="r-a-#{params[:action]}"
     = render "partials/header"
     = yield
     = render "partials/footer"
-    = javascript_include_tag "application", "data-turbolinks-track" => true
