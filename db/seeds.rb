@@ -43,7 +43,7 @@ ProjectMember.create!({
   role: 'owner'
 })
 
-Invite.create!({
+ProjectInvite.create!({
   email: 'squallstar@gmail.com',
   project: Project.first,
   accepted: true,
