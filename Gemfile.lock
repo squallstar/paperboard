@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Compass/compass-rails.git
+  revision: 30ca43b72a1a986a35055f9999a49b62e2257f5c
+  specs:
+    compass-rails (1.1.2)
+      compass (>= 0.12.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,8 +51,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.1.3)
-      compass (>= 0.12.2)
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
@@ -145,7 +150,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   bullet
   coffee-rails (~> 4.0.0)
-  compass-rails
+  compass-rails!
   dotenv-rails
   jbuilder (~> 1.2)
   jquery-rails

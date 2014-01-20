@@ -20,7 +20,7 @@ gem 'newrelic_rpm', :group => :production
 # Use SCSS for stylesheets
 group :assets do
   gem 'sass-rails'
-  gem 'compass-rails'
+  gem 'compass-rails', github: 'Compass/compass-rails'
 end
 
 # Template engine
