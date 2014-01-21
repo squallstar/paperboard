@@ -5,10 +5,6 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-# SQL adapter type
-gem 'sqlite3', :group => :development
-gem 'pg', :group => :production
-gem 'mysql2', :group => :production_squallstar
 gem 'rack-cache', :groups => [:production, :production_squallstar]
 
 # Env files
@@ -18,10 +14,8 @@ gem 'dotenv-rails'
 gem 'newrelic_rpm', :group => :production
 
 # Use SCSS for stylesheets
-group :assets do
-  gem 'sass-rails'
-  gem 'compass-rails', github: 'Compass/compass-rails'
-end
+gem 'sass-rails'
+gem 'compass-rails', github: 'Compass/compass-rails'
 
 # Template engine
 gem "slim-rails"
@@ -36,12 +30,24 @@ gem 'uglifier', '>= 1.3.0'
 gem 'faker'
 
 group :development do
+  # SQLite adapter
+  gem 'sqlite3', :group => :development
 
   # Quiet Assets turns off the Rails asset pipeline log
   gem 'quiet_assets', :group => :development
 
   # Eager loading
   gem 'bullet', :group => :development
+end
+
+group :production do
+  # PostgreSQL adapter
+  gem 'pg'
+end
+
+group :production_squallstar do
+  # MySQL adapter
+  gem 'mysql2'
 end
 
 # Use CoffeeScript for .js.coffee assets and views
@@ -68,7 +74,7 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Multi thread
-gem "puma" #, "~> 2.7"
+gem "puma"
 
 # Use unicorn as the app server
 # gem 'unicorn'

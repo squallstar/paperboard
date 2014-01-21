@@ -10,9 +10,14 @@
 
 Faker::Config.locale = 'it'
 
+puts "Clearing entities..."
+
 User.delete_all
 Project.delete_all
 ProjectMember.delete_all
+ProjectInvite.delete_all
+Organization.delete_all
+OrganizationMember.delete_all
 
 puts "Starting up the seed..."
 
@@ -38,6 +43,19 @@ User.create!(
 )
 
 first_user = User.first
+
+1.upto(3) do |o|
+  puts "Generating organization #{o}."
+  organization = Organization.create(:name => Faker::Company.name)
+
+  OrganizationMember.create({
+    user: first_user,
+    organization: organization,
+    role: 'owner'
+  })
+end
+
+first_organization = Organization.first
 
 1.upto(8) do |p|
   puts "Generating project #{p}."
@@ -70,6 +88,22 @@ first_user = User.first
       role: 'member'
     })
 
+    OrganizationMember.create({
+      user: user,
+      organization: first_organization,
+      role: 'member'
+    })
+  end
+
+  1.upto(5) do |i|
+    puts "Generating invite #{i} for project #{p}"
+    ProjectInvite.create!({
+      email: Faker::Internet.email,
+      project: project,
+      accepted: true,
+      key: '1234',
+      sender: first_user,
+    })
   end
 
 end
