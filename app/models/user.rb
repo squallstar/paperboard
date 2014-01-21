@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
     "#{username}"
   end
 
+  def colleagues
+    User.where(id:
+      ProjectMember.select(:user_id).where(project_id:
+        ProjectMember.select(:project_id).where(user: self)
+      )
+    ).where('id != ?', self.id)
+  end
+
   private
     def before_save
       self.full_name = first_name + ' ' + last_name
