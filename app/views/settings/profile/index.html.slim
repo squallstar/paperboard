@@ -17,5 +17,8 @@ h1 Your profile
   .field
     = f.label :email
     = f.text_field :email
+  .field
+    = f.label :avatar
+    = f.file_field :avatar
 
   .actions = f.submit 'Update profile'

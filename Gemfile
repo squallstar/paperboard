@@ -10,6 +10,10 @@ gem 'rack-cache', :groups => [:production, :production_squallstar]
 # Env files
 gem 'dotenv-rails'
 
+# Upload to S3
+gem 'paperclip'
+gem 'aws-sdk'
+
 # New relic for heroku
 gem 'newrelic_rpm', :group => :production
 
