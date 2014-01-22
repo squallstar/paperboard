@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
+  attr_accessible :avatar
+
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
     square: '200x200#',
