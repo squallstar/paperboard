@@ -1,11 +1,16 @@
 Paperboard::Application.routes.draw do
 
+  namespace :settings do
+    get "profile" => "profile#index"
+    patch "profile" => "profile#update"
+  end
+
   namespace :v1, format: :json do
     get "suggestions/people" => "suggestions#people"
   end
 
   # User
-  get "users/:username" => "users#show", as: :user
+  resources :users, only: [:show]
 
   # Organizations
   resources :organizations, module: 'organizations' do

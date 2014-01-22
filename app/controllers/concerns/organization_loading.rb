@@ -3,6 +3,9 @@ module OrganizationLoading
 
   def load_organization
     @organization = @current_user.organizations.find(params[:organization_id].to_i)
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to organizations_path, alert: 'That organization does not exist or you don\'t have the rights to see it.'
   end
 
   def is_admin

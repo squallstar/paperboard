@@ -8,8 +8,6 @@
 
 # encoding: utf-8
 
-Faker::Config.locale = 'it'
-
 puts "Clearing entities..."
 
 User.delete_all

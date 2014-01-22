@@ -12,7 +12,7 @@ table border=1 cellpadding=5 cellspacing=3
   - @members.each do |member|
     tr
       td
-        = link_to member.user.full_name, user_path(member.user)
+        = link_to member.user.full_name, member.user
       td joined #{time_ago_in_words(member.created_at)} ago
       td #{member.role}
       td

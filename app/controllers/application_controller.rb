@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include CacheHelper
+
   protect_from_forgery with: :exception
   before_filter :set_start_time
   before_action :authorize
@@ -22,6 +24,10 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
-      @current_user ||= User.select(:id, :full_name).find_by(id: session[:user_id])
+      return unless session[:user_id]
+
+      @current_user ||= Rails.cache.fetch key_for_user_session(session[:user_id]) do
+        User.select(:id, :full_name).find_by(id: session[:user_id])
+      end
     end
 end

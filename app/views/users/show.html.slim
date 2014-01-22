@@ -1,5 +1,5 @@
 h2 #{@user.full_name}
-h3 #{@user.username}
+h3 #{@user.email}
 
-//- if @current_user.id == @user.id
-//  = link_to 'Edit your profile', edit_user_path(@user)
+- if @current_user.id == @user.id
+  = link_to 'Edit your profile', settings_profile_path

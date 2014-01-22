@@ -43,11 +43,11 @@ h2 Listing project invites
         td #{time_ago_in_words(invite.created_at)} ago
         td
           - if invite.user && invite.accepted
-            = link_to invite.user.full_name, user_path(invite.user)
+            = link_to invite.user.full_name, invite.user
           - else
             #{invite.email}
         td
-          = link_to invite.sender.full_name, user_path(invite.sender)
+          = link_to invite.sender.full_name, invite.sender
 
         td
           - if !invite.accepted

@@ -14,7 +14,6 @@
 
 class User < ActiveRecord::Base
   before_save :before_save
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   has_secure_password
 
@@ -28,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
   def to_param
-    "#{username}"
+    "#{id}-#{full_name}"
   end
 
   def colleagues
@@ -37,6 +36,18 @@ class User < ActiveRecord::Base
         ProjectMember.select(:project_id).where(user: self)
       )
     ).where('id != ?', self.id)
+  end
+
+  def update_with_password(user_params)
+    current_password = user_params.delete(:current_password)
+
+    if self.authenticate(current_password)
+      self.update(user_params)
+      true
+    else
+      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
   end
 
   private
