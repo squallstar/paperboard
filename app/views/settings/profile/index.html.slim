@@ -18,6 +18,7 @@ h1 Your profile
     = f.label :email
     = f.text_field :email
   .field
+    = image_tag @user.avatar.url(:medium)
     = f.label :avatar
     = f.file_field :avatar
 
