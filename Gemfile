@@ -47,6 +47,9 @@ end
 group :production do
   # PostgreSQL adapter
   gem 'pg'
+
+  # Heroku logs and assets
+  gem 'rails_12factor'
 end
 
 group :production_squallstar do
