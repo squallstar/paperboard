@@ -17,9 +17,12 @@ gem 'aws-sdk'
 # New relic for heroku
 gem 'newrelic_rpm', :group => :production
 
-# Use SCSS for stylesheets
-gem 'sass-rails'
-gem 'compass-rails', github: 'Compass/compass-rails'
+# Assets
+group :assets do
+  gem 'sass-rails'
+  gem 'compass-rails', github: 'Compass/compass-rails'
+  gem 'asset_sync'
+end
 
 # Template engine
 gem "slim-rails"
