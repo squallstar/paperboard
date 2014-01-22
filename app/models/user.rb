@@ -15,6 +15,9 @@
 class User < ActiveRecord::Base
   before_save :before_save
   validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   has_secure_password
 
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
