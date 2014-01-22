@@ -1,6 +1,6 @@
 h1 Your profile
 
-= form_for @user, url: settings_profile_path do |f|
+= form_for @user, url: settings_profile_path, html: { :multipart => true } do |f|
   - if @user.errors.any?
     #error_explanation
       h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -18,8 +18,11 @@ h1 Your profile
     = f.label :email
     = f.text_field :email
   .field
-    = image_tag @user.avatar.url(:medium)
-    = f.label :avatar
+    hr
+    p Current avatar:
+    = image_tag @user.avatar.url(:small)
     = f.file_field :avatar
+
+  hr
 
   .actions = f.submit 'Update profile'

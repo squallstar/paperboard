@@ -29,18 +29,13 @@ class User < ActiveRecord::Base
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
-  attr_accessor :avatar_file_name
-  attr_accessor :avatar_content_type
-  attr_accessor :avatar_file_size
-  attr_accessor :avatar_updated_at
-
   has_attached_file :avatar, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
+    small: ['80x80#', :png],
+    medium: '200x200#'
   }
 
-  #validates_attachment :avatar, :content_type => { :content_type => "image/jpg" }
+  validates_attachment :avatar,
+    content_type: { :content_type => ["image/jpg", "image/gif", "image/png"] }
 
   def to_param
     "#{id}-#{full_name.parameterize}"
