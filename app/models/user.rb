@@ -34,8 +34,9 @@ class User < ActiveRecord::Base
     medium: '200x200#'
   }
 
+  validates_attachment_size :avatar, less_than: 1.megabyte
   validates_attachment :avatar,
-    content_type: { :content_type => ["image/jpg", "image/gif", "image/png"] }
+    content_type: { :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
 
   def to_param
     "#{id}-#{full_name.parameterize}"
