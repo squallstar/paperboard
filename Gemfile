@@ -18,11 +18,10 @@ gem 'aws-sdk'
 gem 'newrelic_rpm', :group => :production
 
 # Assets
-group :assets do
-  gem 'sass-rails'
-  gem 'compass-rails', github: 'Compass/compass-rails'
-  gem 'asset_sync'
-end
+gem 'sass-rails'
+gem 'compass-rails', github: 'Compass/compass-rails'
+gem 'unf'
+gem 'asset_sync'
 
 # Template engine
 gem "slim-rails"
