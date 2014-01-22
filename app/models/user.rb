@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
     medium: '300x300>'
   }
 
+  #validates_attachment :avatar, :content_type => { :content_type => "image/jpg" }
+
   def to_param
     "#{id}-#{full_name.parameterize}"
   end
