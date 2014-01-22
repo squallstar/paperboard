@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
   def to_param
-    "#{id}-#{full_name}"
+    "#{id}-#{full_name.parameterize}"
   end
 
   def colleagues

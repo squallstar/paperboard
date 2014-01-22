@@ -5,13 +5,14 @@ class Settings::ProfileController < ApplicationController
   end
 
   def update
-    Rails.cache.delete key_for_user_session(@current_user.id)
-
     if @user.update(user_params)
-      redirect_to settings_profile_path, alert: 'Your profile was successfully updated.'
-    else
-      render action: 'index'
+      Rails.cache.delete key_for_user_session(@current_user.id)
+      @current_user = @user
+
+      flash.now[:alert] = 'Your profile was successfully updated.'
     end
+
+    render action: 'index'
   end
 
   private
