@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :password, presence: true, length: { :within => 6..40 }
+  validates :password, presence: true, length: { :within => 6..40 }, if: :should_validate_password?
 
   has_secure_password
+  attr_accessor :updating_password
   attr_accessor :current_password
 
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
@@ -53,6 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def update_with_password(user_params)
+    updating_password = true
     current_password = user_params.delete(:current_password)
 
     if self.authenticate(current_password)
@@ -65,6 +67,10 @@ class User < ActiveRecord::Base
   end
 
   private
+    def should_validate_password?
+      updating_password || new_record?
+    end
+
     def before_save
       self.full_name = first_name + ' ' + last_name
     end
