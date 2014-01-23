@@ -1,9 +1,9 @@
 class Organizations::TeamsController < ApplicationController
   include OrganizationLoading
 
-  before_action :load_organization, only: [:index, :create, :destroy]
+  before_action :load_organization
   before_action :is_admin, only: [:index]
-  before_action :require_admin, only: [:create, :update, :destroy]
+  before_action :require_admin, only: [:new, :create, :update, :destroy]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   # GET /teams
@@ -28,7 +28,7 @@ class Organizations::TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to organization_team_path(@organization, @team), notice: 'Team was successfully created.' }
         format.json { render action: 'show', status: :created, location: @team }
       else
         format.html { render action: 'new' }

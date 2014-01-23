@@ -1,12 +1,5 @@
-p#notice = notice
+= render "organizations/header"
 
-p
-  strong Name:
-  = @team.name
-p
-  strong Organization:
-  = @team.organization
+h2 = @team.name
 
-= link_to 'Edit', edit_team_path(@team)
-'|
-= link_to 'Back', teams_path
+= link_to 'Team settings', edit_organization_team_path(@organization, @team)

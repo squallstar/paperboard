@@ -2,7 +2,8 @@ module OrganizationLoading
   extend ActiveSupport::Concern
 
   def load_organization
-    @organization = @current_user.organizations.find(params[:organization_id].to_i)
+    id = params[:organization_id] || params[:id]
+    @organization = @current_user.organizations.find(id.to_i)
 
   rescue ActiveRecord::RecordNotFound
     redirect_to organizations_path, alert: 'That organization does not exist or you don\'t have the rights to see it.'
