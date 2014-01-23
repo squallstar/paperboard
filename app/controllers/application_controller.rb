@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       return unless session[:user_id]
 
       @current_user ||= Rails.cache.fetch key_for_user_session(session[:user_id]) do
-        User.select(:id, :full_name).find_by(id: session[:user_id])
+        User.select(:id, :full_name, :avatar_file_name).find_by(id: session[:user_id])
       end
     end
 end
