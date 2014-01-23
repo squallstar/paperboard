@@ -1,9 +1,11 @@
+= render "settings/header"
+
 h1 Your profile
 
 = form_for @user, url: settings_profile_path, html: { :multipart => true } do |f|
   - if @user.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited your profile from being updated:"
       ul
         - @user.errors.full_messages.each do |message|
           li = message

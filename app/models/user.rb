@@ -17,8 +17,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :password, presence: true, length: { :within => 6..40 }
 
   has_secure_password
+  attr_accessor :current_password
 
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
@@ -57,7 +59,7 @@ class User < ActiveRecord::Base
       self.update(user_params)
       true
     else
-      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      self.errors.add(:current_password, current_password.blank? ? :blank : :match)
       false
     end
   end

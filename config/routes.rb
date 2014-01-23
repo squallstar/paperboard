@@ -3,6 +3,9 @@ Paperboard::Application.routes.draw do
   namespace :settings do
     get "profile" => "profile#index"
     patch "profile" => "profile#update"
+
+    get "account" => "account#index"
+    patch "account" => "account#update"
   end
 
   namespace :v1, format: :json do
