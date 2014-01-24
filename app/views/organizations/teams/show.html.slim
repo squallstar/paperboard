@@ -1,5 +1,21 @@
 = render "organizations/header"
 
-h2 = @team.name
+h2
+  | Team:&nbsp;
+  = @team.name
 
 = link_to 'Team settings', edit_organization_team_path(@organization, @team)
+
+hr
+
+table border=1 cellpadding=6 cellspacing=0
+  tr
+    th Role
+    th
+    th
+
+  - @team.members.each do |member|
+    tr
+      td = member.role
+      td = member.user.full_name
+      td = link_to 'Remove from the team', '#', :method => :delete

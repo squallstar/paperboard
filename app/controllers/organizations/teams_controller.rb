@@ -21,13 +21,21 @@ class Organizations::TeamsController < ApplicationController
   def edit
   end
 
+  def show
+    @team.members.includes(:user)
+  end
+
   # POST /teams
   # POST /teams.json
   def create
     @team = Team.new(team_params)
+    @team.organization = @organization
 
     respond_to do |format|
       if @team.save
+        # Sets the admin to the current user
+        @team.members.create role: 'admin', user: @current_user
+
         format.html { redirect_to organization_team_path(@organization, @team), notice: 'Team was successfully created.' }
         format.json { render action: 'show', status: :created, location: @team }
       else
@@ -56,14 +64,18 @@ class Organizations::TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to organization_teams_path(@organization) }
       format.json { head :no_content }
     end
   end
 
   private
     def set_team
-      @team = Team.find(params[:id])
+      @team = Team.where(organization: @organization, id: params[:id]).first
+
+      if not @team
+        redirect_to organization_teams_path(@organization), notice: 'The team does not exist.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

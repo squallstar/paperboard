@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122001715) do
+ActiveRecord::Schema.define(version: 20140124122612) do
 
   create_table "organization_members", force: true do |t|
     t.string   "role"
@@ -61,11 +61,23 @@ ActiveRecord::Schema.define(version: 20140122001715) do
     t.integer  "members_count", default: 0
   end
 
+  create_table "team_members", force: true do |t|
+    t.string   "role"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_members", ["team_id"], name: "index_team_members_on_team_id"
+  add_index "team_members", ["user_id"], name: "index_team_members_on_user_id"
+
   create_table "teams", force: true do |t|
     t.string   "name"
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "members_count",   default: 0
   end
 
   add_index "teams", ["organization_id"], name: "index_teams_on_organization_id"
