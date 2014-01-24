@@ -18,7 +18,12 @@ Paperboard::Application.routes.draw do
   # Organizations
   resources :organizations, module: 'organizations' do
     resources :members
-    resources :teams
+    resources :teams do
+      collection do
+        post 'members' => 'teams#add_member'
+        delete 'members/:id' => 'teams#remove_member'
+      end
+    end
   end
 
   # Projects
