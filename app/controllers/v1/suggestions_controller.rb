@@ -3,8 +3,8 @@ class V1::SuggestionsController < ApplicationController
 
   def people
 
-    @colleagues = @current_user.colleagues.where("full_name ILIKE :query", query: @query)
-    @siblings = @current_user.siblings.where("full_name ILIKE :query", query: @query)
+    @colleagues = @current_user.colleagues.where("last_name ILIKE :query OR full_name ILIKE :query", query: @query)
+    @siblings = @current_user.siblings.where("last_name ILIKE :query OR full_name ILIKE :query", query: @query)
 
     people = (@colleagues + @siblings).uniq{ |user| user.id }
 
@@ -13,6 +13,6 @@ class V1::SuggestionsController < ApplicationController
 
   private
     def set_query
-      @query = "%#{params[:query]}%"
+      @query = "#{params[:query]}%"
     end
 end
