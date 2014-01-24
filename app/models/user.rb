@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
 
   def colleagues
     User.where(id:
+      OrganizationMember.select(:user_id).where(organization_id:
+        OrganizationMember.select(:organization_id).where(user: self)
+      )
+    ).where('id != ?', self.id)
+  end
+
+  def siblings
+    User.where(id:
       ProjectMember.select(:user_id).where(project_id:
         ProjectMember.select(:project_id).where(user: self)
       )
