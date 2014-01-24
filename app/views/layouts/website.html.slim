@@ -1,0 +1,7 @@
+doctype html
+html id="r-c-#{params[:controller]}" dir='ltr' lang='en' prefix='og: http://ogp.me/ns schema: http://schema.org/' itemscope='' itemtype='http://schema.org/WebPage'
+  head
+    title Paperboard
+    = csrf_meta_tags
+  body id="r-a-w-#{params[:action]}"
+    = yield

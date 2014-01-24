@@ -43,7 +43,9 @@ Paperboard::Application.routes.draw do
   post "login"  => "auth#login"
   get  "signup" => "auth#signup", as: :signup
 
-  root 'projects/projects#index'
+  get "projects" => 'projects/projects#index', as: :dashboard
+
+  root 'website#index'
 
   # Example resource route with concerns:
   #   concern :toggleable do
