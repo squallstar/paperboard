@@ -33,6 +33,8 @@ To run the tests:
     $ git remote add heroku git@heroku.com:paperboard.git
     $ git push heroku master
 
+Production Heroku will run on paperboard-production.
+
 ### 2. Squallstar production
 
 Connect with ssh to the server, then navigate to **/home/source/paperboard** and run the following commands:
