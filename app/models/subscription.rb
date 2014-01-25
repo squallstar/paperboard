@@ -1,5 +1,6 @@
 class Subscription < ActiveRecord::Base
-  attr_accessible :name, :email, :paymill_id, :plan_id, :paymill_card_token
+  #attr_accessible :name, :email, :paymill_id, :plan_id, :paymill_card_token
+
   belongs_to :plan
   belongs_to :user
 

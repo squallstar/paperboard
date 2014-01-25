@@ -16,6 +16,8 @@ ProjectMember.delete_all
 ProjectInvite.delete_all
 Organization.delete_all
 OrganizationMember.delete_all
+Plan.delete_all
+Subscription.delete_all
 
 puts "Starting up the seed..."
 
@@ -23,16 +25,16 @@ User.create!(
   [
     {
       username: 'squallstar',
-      password: 'test',
-      password_confirmation: 'test',
+      password: 'testtest',
+      password_confirmation: 'testtest',
       email: 'test@test.com',
       first_name: 'Nicholas',
       last_name: 'Valbusa'
     },
     {
       username: 'mintsugar',
-      password: 'test',
-      password_confirmation: 'test',
+      password: 'testtest',
+      password_confirmation: 'testtest',
       email: 'test2@test.com',
       first_name: 'Michela',
       last_name: 'Tannoia'
@@ -74,8 +76,8 @@ first_organization = Organization.first
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: "#{p}#{i}" + Faker::Internet.email,
-      password: 'test',
-      password_confirmation: 'test'
+      password: 'testtest',
+      password_confirmation: 'testtest'
     )
 
     puts "User #{user.full_name} created."

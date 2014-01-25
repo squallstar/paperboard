@@ -30,23 +30,6 @@ ActiveRecord::Schema.define(version: 20140125181048) do
     t.datetime "updated_at"
   end
 
-  create_table "paymill_on_rails_plans", force: true do |t|
-    t.string   "name"
-    t.string   "price"
-    t.string   "paymill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "paymill_on_rails_subscriptions", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.integer  "plan_id"
-    t.string   "paymill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "plans", force: true do |t|
     t.string   "paymill_id"
     t.string   "name"
