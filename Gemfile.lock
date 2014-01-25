@@ -112,6 +112,8 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paymill (0.4.0)
+      json
     pg (0.17.1)
     polyglot (0.3.3)
     puma (2.7.1)
@@ -209,6 +211,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   paperclip
+  paymill
   pg
   puma
   quiet_assets

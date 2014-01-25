@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124122612) do
+ActiveRecord::Schema.define(version: 20140125181048) do
 
   create_table "organization_members", force: true do |t|
     t.string   "role"
@@ -26,6 +26,31 @@ ActiveRecord::Schema.define(version: 20140124122612) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paymill_on_rails_plans", force: true do |t|
+    t.string   "name"
+    t.string   "price"
+    t.string   "paymill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paymill_on_rails_subscriptions", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "plan_id"
+    t.string   "paymill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plans", force: true do |t|
+    t.string   "paymill_id"
+    t.string   "name"
+    t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,6 +85,19 @@ ActiveRecord::Schema.define(version: 20140124122612) do
     t.datetime "updated_at"
     t.integer  "members_count", default: 0
   end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "plan_id"
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "name"
+    t.string   "paymill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "team_members", force: true do |t|
     t.string   "role"

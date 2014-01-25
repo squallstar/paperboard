@@ -14,6 +14,9 @@ gem 'dotenv-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 
+# Payments
+gem 'paymill'
+
 # New relic for heroku
 gem 'newrelic_rpm', :group => :production
 

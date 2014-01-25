@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
 
+  has_one :subscription
+
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
     medium: '200x200#'
