@@ -49,6 +49,7 @@ Paperboard::Application.routes.draw do
   # User Signup
   match  "signup" => "auth#signup", via: [:get, :post], as: :signup
   get "signup/complete" => "auth#signup_complete", as: :signup_complete
+  get "signup/confirm/:key" => "auth#signup_confirm_email", as: :signup_confirm_email
 
   # Generic root url (dashboard) for logged in users
   get "projects" => 'projects/projects#index', as: :dashboard

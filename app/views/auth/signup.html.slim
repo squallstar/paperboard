@@ -17,14 +17,14 @@
       hr
     .field
       = f.label :email
-      = f.text_field :email
+      = f.text_field :email, autocomplete: 'off'
       hr
     .field
       = f.label :password
-      = f.password_field :password
+      = f.password_field :password, autocomplete: 'off'
     .field
       = f.label :password_confirmation
-      = f.password_field :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: 'off'
       hr
     .field
       = f.submit "Create account"

@@ -97,6 +97,12 @@ class User < ActiveRecord::Base
     subscription and subscription.active
   end
 
+  # Key to be used in the registration email
+  def optin_key
+    require 'digest/md5'
+    Digest::MD5.hexdigest("#{id}-#{email}")
+  end
+
   private
     def should_validate_password?
       updating_password || new_record?

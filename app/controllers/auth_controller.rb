@@ -19,10 +19,24 @@ class AuthController < ApplicationController
 
   def signup
     @user = User.new
-
-    if params[:method] == 'POST'
+    if params[:user]
       @user = User.new(signup_params)
+
+      if @user.save
+        AuthMailer.send_optin(@user)
+        redirect_to signup_complete_path, alert: @user.email
+      end
     end
+  end
+
+  def signup_complete
+    if not flash[:alert]
+      redirect_to login_url
+    end
+  end
+
+  def signup_confirm_email
+
   end
 
   def logout
@@ -41,6 +55,6 @@ class AuthController < ApplicationController
   end
 
   def signup_params
-    params.require(:user).permit(:email, :first_name, :last_name)
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
   end
 end
