@@ -14,6 +14,9 @@
 
 class User < ActiveRecord::Base
   before_save :before_save
+  after_update :after_change
+  after_destroy :after_destroy
+
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -76,12 +79,45 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Gets the paymill associated client
+  def client
+    if not @client
+      if self.client_id
+        @client = Paymill::Client.find(self.client_id)
+      else
+        @client = Paymill::Client.create paymill_attributes
+        self.client_id = @client.id
+        save!
+      end
+    end
+    @client
+  end
+
   private
     def should_validate_password?
       updating_password || new_record?
     end
 
+    # Updates the full_name before saving
     def before_save
       self.full_name = first_name + ' ' + last_name
+    end
+
+    # Updates the Paymill client whenever the full_name or email have changed
+    def after_change
+      if self.email_changed? or self.full_name_changed?
+        client.update_attributes paymill_attributes
+      end
+    end
+
+    def after_destroy
+      if self.client_id
+        Paymill::Client.delete(self.client_id)
+      end
+    end
+
+    # Attributes for Paymill client
+    def paymill_attributes
+      {email: email, description: full_name}
     end
 end

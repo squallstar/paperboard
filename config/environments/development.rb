@@ -14,6 +14,7 @@ Paperboard::Application.configure do
     :port => 3000 # refine with real port
   }
 
+  # S3
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
@@ -23,8 +24,8 @@ Paperboard::Application.configure do
     }
   }
 
+  # Mailer
   config.action_mailer.raise_delivery_errors = true
-
   ActionMailer::Base.delivery_method = :sendmail
 
   # Show full error reports and disable caching.
