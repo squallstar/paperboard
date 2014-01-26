@@ -27,6 +27,10 @@ class Subscription < ActiveRecord::Base
     false
   end
 
+  def expire_at
+    created_at + 1.months
+  end
+
   private
     def delete_paymill_subscription
       Paymill::Subscription.delete self.paymill_id

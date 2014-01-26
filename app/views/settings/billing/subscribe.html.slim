@@ -4,7 +4,7 @@ javascript:
 
 = render "settings/header"
 
-h1 Subscribe to #{@subscription.plan.name}
+h1 Subscribe to #{I18n.translate("plans.names.#{@subscription.plan.name}")}
 
 p
   = number_to_currency @subscription.plan.price, unit: "$"

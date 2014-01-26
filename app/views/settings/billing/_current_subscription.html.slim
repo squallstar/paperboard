@@ -1,7 +1,7 @@
-h3 You're signed up for monthly billing with the #{@subscription.plan.locale_name} plan.
+h3 You're signed up for monthly billing with the #{I18n.translate("plans.names.#{@subscription.plan.name}")} plan.
 
 p
-  | Your credit card **** **** **** #{@subscription.paymill_card_last} will automatically be charged #{number_to_currency @subscription.plan.price, unit: "$"} on Y.
+  | Your credit card **** **** **** #{@subscription.paymill_card_last} will automatically be charged #{number_to_currency @subscription.plan.price, unit: "$"} on #{@subscription.expire_at.strftime("%B %d, %Y")}.
   = button_to "Cancel subscription", settings_billing_subscribe_delete_path, method: 'delete'
 
 hr
