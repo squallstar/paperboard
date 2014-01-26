@@ -17,9 +17,6 @@ gem 'aws-sdk'
 # Payments
 gem 'paymill'
 
-# New relic for heroku
-gem 'newrelic_rpm', :group => :production
-
 # Assets
 gem 'sass-rails'
 gem 'compass-rails', github: 'Compass/compass-rails'
@@ -40,13 +37,13 @@ gem 'faker'
 
 group :development do
   # SQLite adapter
-  gem 'sqlite3', :group => :development
+  gem 'sqlite3'
 
   # Quiet Assets turns off the Rails asset pipeline log
-  gem 'quiet_assets', :group => :development
+  gem 'quiet_assets'
 
   # Eager loading
-  gem 'bullet', :group => :development
+  gem 'bullet'
 end
 
 group :production do
@@ -55,6 +52,9 @@ group :production do
 
   # Heroku logs and assets
   gem 'rails_12factor'
+
+  # New relic for heroku
+  gem 'newrelic_rpm'
 end
 
 group :production_squallstar do
@@ -64,9 +64,6 @@ end
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -85,11 +82,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Multi thread
+# Multi thread app server
 gem "puma"
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
