@@ -12,9 +12,10 @@ class Payments < ActiveRecord::Migration
       t.references :plan, index: true
       t.references :user, index: true
 
-      t.string :email
-      t.string :name
+      t.string :paymill_card_token
+      t.string :paymill_card_last
       t.string :paymill_id
+      t.boolean :active
 
       t.timestamps
     end

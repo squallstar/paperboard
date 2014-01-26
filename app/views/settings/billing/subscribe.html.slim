@@ -7,7 +7,7 @@ javascript:
 h1 Subscribe to #{@subscription.plan.name}
 
 p
-  = number_to_currency @subscription.plan.price, unit: "£"
+  = number_to_currency @subscription.plan.price, unit: "$"
   | &nbsp;per month!
 
 = form_for @subscription, url: "" do |f|
@@ -21,27 +21,22 @@ p
   = f.hidden_field :paymill_card_token
   = f.hidden_field :paymill_card_last
 
-  - if @subscription.paymill_card_token.present?
-    p Credit card has been provided.
+  .field
+    = label_tag :cardholder_name, "Cardholder name"
+    = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
 
-  - else
+  .field
+    = label_tag :card_number, "Credit Card Number"
+    = text_field_tag :card_number, nil, name: nil, maxlength: 16
 
-    .field
-      = label_tag :cardholder_name, "Cardholder name"
-      = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
+  .field
+    = label_tag :card_code, "Security Code on Card (CVV)"
+    = text_field_tag :card_code, nil, name: nil, maxlength: 5
 
-    .field
-      = label_tag :card_number, "Credit Card Number"
-      = text_field_tag :card_number, nil, name: nil, maxlength: 16
-
-    .field
-      = label_tag :card_code, "Security Code on Card (CVV)"
-      = text_field_tag :card_code, nil, name: nil, maxlength: 5
-
-    .field
-      = label_tag :card_month, "Card Expiration"
-      = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-      = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+  .field
+    = label_tag :card_month, "Card Expiration"
+    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
 
   #paymill_error
     noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.

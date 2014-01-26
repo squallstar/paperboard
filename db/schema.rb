@@ -72,9 +72,10 @@ ActiveRecord::Schema.define(version: 20140126115039) do
   create_table "subscriptions", force: true do |t|
     t.integer  "plan_id"
     t.integer  "user_id"
-    t.string   "email"
-    t.string   "name"
+    t.string   "paymill_card_token"
+    t.string   "paymill_card_last"
     t.string   "paymill_id"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

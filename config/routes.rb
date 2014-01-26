@@ -9,6 +9,7 @@ Paperboard::Application.routes.draw do
 
     get "billing" => "billing#index"
     post "billing/subscribe/:plan_id" => "billing#subscribe", as: :billing_subscribe
+    delete "billing/subscribe" => "billing#delete_subscription", as: :billing_subscribe_delete
   end
 
   namespace :v1, format: :json do

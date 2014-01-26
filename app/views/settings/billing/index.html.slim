@@ -2,15 +2,36 @@
 
 h1 Account billing
 
+- if @current_user.has_active_subscription
+  = render "current_subscription"
+
 table border=1 cellpadding=6 cellspacing=0
   tr
-    th Offer
+    th Plan name
+    th Features
     th Price
     th Action
 
-  - @plans.each do |plan|
+  - @plans.reverse_each do |plan|
 
     tr
-      td = plan.name
+      td = I18n.translate("plans.#{plan.name}.name")
+      td = I18n.translate("plans.#{plan.name}.features")
       td = number_to_currency plan.price, unit: "€"
-      td = button_to "Subscribe", settings_billing_subscribe_path(plan.id)
+      td
+        - if @current_user.has_active_subscription
+          - if @current_user.subscription.plan.id == plan.id
+            | Your plan
+          - else
+            = button_to (@current_user.subscription.plan.price > plan.price ? "Downgrade" : "Upgrade"), settings_billing_subscribe_path(plan.id)
+        - else
+          = button_to "Subscribe", settings_billing_subscribe_path(plan.id)
+
+
+  tr
+    td = I18n.translate("plans.free.name")
+    td = I18n.translate("plans.free.features")
+    td = number_to_currency 0, unit: "€"
+    td
+      - if not @current_user.has_active_subscription
+        | Your plan

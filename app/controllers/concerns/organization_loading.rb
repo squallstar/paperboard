@@ -15,7 +15,7 @@ module OrganizationLoading
 
   def require_admin
     if !is_admin
-      redirect_to organization_members_url, notice: 'You have no rights to do this action'
+      redirect_to organization_members_url, alert: 'You have no rights to do this action'
     end
   end
 

@@ -2,11 +2,10 @@ class Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :user
 
-  validates_presence_of :plan_id
-  validates_presence_of :user
+  before_destroy :delete_paymill_subscription
 
-  attr_accessor :paymill_card_token
-  attr_accessor :paymill_card_last
+  validates_presence_of :plan
+  validates_presence_of :user
 
   def save_with_payment
     if valid?
@@ -14,7 +13,13 @@ class Subscription < ActiveRecord::Base
       subscription = Paymill::Subscription.create offer: plan.paymill_id, client: user.client.id, payment: payment.id
 
       self.paymill_id = subscription.id
+      self.active = true
+
+      # If needed, delete the old subscription before saving
+      Subscription.where(user: user).destroy_all
+
       save!
+      logger.info "Subscription: a new subscription have been setup with paymill_id #{self.paymill_id}"
     end
   rescue Paymill::PaymillError => e
     logger.error "Paymill error while creating customer: #{e.message}"
@@ -22,4 +27,9 @@ class Subscription < ActiveRecord::Base
     false
   end
 
+  private
+    def delete_paymill_subscription
+      Paymill::Subscription.delete self.paymill_id
+      logger.info "Subscription: user #{user.id} has been unsubscribed from paymill_id #{self.paymill_id}"
+    end
 end

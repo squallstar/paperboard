@@ -1,0 +1,7 @@
+h3 You're signed up for monthly billing.
+
+p
+  | Your credit card **** **** **** #{@subscription.paymill_card_last} will automatically be charged #{number_to_currency @subscription.plan.price, unit: "$"} on Y.
+  = button_to "Cancel subscription", settings_billing_subscribe_delete_path, method: 'delete'
+
+hr

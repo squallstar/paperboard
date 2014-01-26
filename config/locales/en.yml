@@ -6,3 +6,16 @@ en:
           attributes:
             current_password:
               match: "doesn't match with your user password."
+
+  plans:
+    free:
+      name: "Free"
+      features: "1 project, 1 team, 10 users"
+
+    standard:
+      name: "Start-up"
+      features: "5 projects, 3 teams, unlimited users"
+
+    enterprise:
+      name: "Enterprise"
+      features: "Unlimited projects, unlimited teams, unlimited users"

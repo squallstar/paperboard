@@ -25,9 +25,11 @@ subscription =
 
       switch error_text
         when "field_invalid_card_number"
-          error_text "The credit/debit card number is not valid"
+          error_text = "The credit/debit card number is not valid"
         when "field_invalid_card_cvc"
-          error_text "The credit/debit CVC number is not valid"
+          error_text = "The credit/debit CVC number is not valid"
+        when "3ds_cancelled"
+          error_text = "You didn't authorize your card"
 
       $('#paymill_error').text error_text
       $('input[type=submit]').attr 'disabled', false
