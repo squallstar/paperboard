@@ -15,8 +15,8 @@ table border=1 cellpadding=6 cellspacing=0
   - @plans.reverse_each do |plan|
 
     tr
-      td = I18n.translate("plans.#{plan.name}.name")
-      td = I18n.translate("plans.#{plan.name}.features")
+      td = I18n.translate("plans.names.#{plan.name}")
+      td = plan_features plan.name
       td = number_to_currency plan.price, unit: "€"
       td
         - if @current_user.has_active_subscription
@@ -29,8 +29,8 @@ table border=1 cellpadding=6 cellspacing=0
 
 
   tr
-    td = I18n.translate("plans.free.name")
-    td = I18n.translate("plans.free.features")
+    td = I18n.translate("plans.names.free")
+    td = plan_features "free"
     td = number_to_currency 0, unit: "€"
     td
       - if not @current_user.has_active_subscription

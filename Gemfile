@@ -5,6 +5,9 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+# Config files
+gem 'rails_config'
+
 gem 'rack-cache', :groups => [:production, :production_squallstar]
 
 # Env files

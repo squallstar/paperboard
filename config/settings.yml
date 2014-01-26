@@ -1,0 +1,13 @@
+plans:
+  free:
+    n_projects: 1
+    n_teams: 1
+    n_users: 10
+  standard:
+    n_projects: 5
+    n_teams: 3
+    n_users: 0
+  enterprise:
+    n_projects: 0
+    n_teams: 0
+    n_users: 0
