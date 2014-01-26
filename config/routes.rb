@@ -41,12 +41,16 @@ Paperboard::Application.routes.draw do
     resources :members
   end
 
-  # Sessions
+  # Login/Logout sessions
   get  "login"  => "auth#login", as: :login
   get  "logout" => "auth#logout", as: :logout
   post "login"  => "auth#login"
-  get  "signup" => "auth#signup", as: :signup
 
+  # User Signup
+  match  "signup" => "auth#signup", via: [:get, :post], as: :signup
+  get "signup/complete" => "auth#signup_complete", as: :signup_complete
+
+  # Generic root url (dashboard) for logged in users
   get "projects" => 'projects/projects#index', as: :dashboard
 
   root 'website#index'

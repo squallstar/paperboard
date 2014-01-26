@@ -24,7 +24,6 @@ puts "\r\nStarting up the seed..."
 User.create!(
   [
     {
-      username: 'squallstar',
       password: 'testtest',
       password_confirmation: 'testtest',
       email: 'test@test.com',
@@ -32,7 +31,6 @@ User.create!(
       last_name: 'Valbusa'
     },
     {
-      username: 'mintsugar',
       password: 'testtest',
       password_confirmation: 'testtest',
       email: 'test2@test.com',

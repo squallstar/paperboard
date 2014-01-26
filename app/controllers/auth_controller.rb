@@ -18,7 +18,11 @@ class AuthController < ApplicationController
   end
 
   def signup
+    @user = User.new
 
+    if params[:method] == 'POST'
+      @user = User.new(signup_params)
+    end
   end
 
   def logout
@@ -34,5 +38,9 @@ class AuthController < ApplicationController
     if session[:user_id]
       redirect_to root_url
     end
+  end
+
+  def signup_params
+    params.require(:user).permit(:email, :first_name, :last_name)
   end
 end
