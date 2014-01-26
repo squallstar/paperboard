@@ -17,7 +17,7 @@ table border=1 cellpadding=6 cellspacing=0
     tr
       td = I18n.translate("plans.names.#{plan.name}")
       td = plan_features plan.name
-      td = number_to_currency plan.price, unit: "€"
+      td = number_to_currency plan.price, unit: "$"
       td
         - if @current_user.has_active_subscription
           - if @current_user.subscription.plan.id == plan.id
@@ -31,7 +31,7 @@ table border=1 cellpadding=6 cellspacing=0
   tr
     td = I18n.translate("plans.names.free")
     td = plan_features "free"
-    td = number_to_currency 0, unit: "€"
+    td = number_to_currency 0, unit: "$"
     td
       - if not @current_user.has_active_subscription
         | Your plan
