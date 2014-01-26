@@ -1,8 +1,8 @@
 doctype html
-html id="r-c-#{params[:controller]}" dir='ltr' lang='en' prefix='og: http://ogp.me/ns schema: http://schema.org/' itemscope='' itemtype='http://schema.org/WebPage'
+html dir='ltr' lang='en' prefix='og: http://ogp.me/ns schema: http://schema.org/' itemscope='' itemtype='http://schema.org/WebPage'
   head
     title Paperboard
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body id="r-a-#{params[:action]}"

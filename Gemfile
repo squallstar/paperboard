@@ -44,6 +44,8 @@ group :development do
 
   # Eager loading
   gem 'bullet'
+
+  gem 'debugger'
 end
 
 group :production do

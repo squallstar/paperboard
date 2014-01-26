@@ -1,20 +1,17 @@
 class Subscription < ActiveRecord::Base
-  #attr_accessible :name, :email, :paymill_id, :plan_id, :paymill_card_token
-
   belongs_to :plan
   belongs_to :user
 
   validates_presence_of :plan_id
-  validates_presence_of :email
   validates_presence_of :user
 
   attr_accessor :paymill_card_token
+  attr_accessor :paymill_card_last
 
   def save_with_payment
     if valid?
-      client = Paymill::Client.create email: email, description: name
-      payment = Paymill::Payment.create token: paymill_card_token, client: client.id
-      subscription = Paymill::Subscription.create offer: plan.paymill_id, client: client.id, payment: payment.id
+      payment = Paymill::Payment.create token: paymill_card_token, client: user.client.id
+      subscription = Paymill::Subscription.create offer: plan.paymill_id, client: user.client.id, payment: payment.id
 
       self.paymill_id = subscription.id
       save!

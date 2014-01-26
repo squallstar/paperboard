@@ -82,11 +82,11 @@ class User < ActiveRecord::Base
   # Gets the paymill associated client
   def client
     if not @client
-      if self.client_id
+      if client_id
         @client = Paymill::Client.find(self.client_id)
       else
         @client = Paymill::Client.create paymill_attributes
-        self.client_id = @client.id
+        client_id = @client.id
         save!
       end
     end
