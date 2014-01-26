@@ -19,7 +19,7 @@ OrganizationMember.delete_all
 Plan.delete_all
 Subscription.delete_all
 
-puts "Starting up the seed..."
+puts "\r\nStarting up the seed..."
 
 User.create!(
   [
@@ -58,7 +58,7 @@ end
 first_organization = Organization.first
 
 1.upto(8) do |p|
-  puts "Generating project #{p}."
+  puts "\r\nGenerating project #{p}."
 
   project = Project.create(
     name: Faker::Company.catch_phrase
@@ -116,5 +116,8 @@ ProjectInvite.create!({
   sender: User.first,
   user: User.first(:offset => 1)
 })
+
+puts "\r\nImporting plans from Paymill..."
+Rake::Task['paymill:import_plans'].invoke
 
 puts "Done!"

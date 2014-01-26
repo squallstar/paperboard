@@ -6,6 +6,9 @@ Paperboard::Application.routes.draw do
 
     get "account" => "account#index"
     patch "account" => "account#update"
+
+    get "billing" => "billing#index"
+    get "billing/subscribe/:id" => "billing#subscribe", as: :billing_subscribe
   end
 
   namespace :v1, format: :json do

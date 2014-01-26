@@ -1,0 +1,16 @@
+= render "settings/header"
+
+h1 Account billing
+
+table border=1 cellpadding=6 cellspacing=0
+  tr
+    th Offer
+    th Price
+    th Action
+
+  - @plans.each do |plan|
+
+    tr
+      td = plan.name
+      td = number_to_currency plan.price, unit: "€"
+      td = link_to "Subscribe", settings_billing_subscribe_path(plan.id)

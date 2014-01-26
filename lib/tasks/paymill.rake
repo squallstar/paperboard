@@ -9,6 +9,7 @@ namespace :paymill do
     offers = Paymill::Offer.all
     offers.each do |offer|
       Plan.create paymill_id: offer.id, name: offer.name, price: offer.amount / 100.0
+      puts "Imported offer #{offer.name} - #{offer.amount / 100.0}£"
     end
   end
 end
