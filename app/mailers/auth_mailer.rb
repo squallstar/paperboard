@@ -7,4 +7,8 @@ class AuthMailer < ActionMailer::Base
     mail(to: user.email, subject: "Please confirm your email")
     logger.info "AuthMailer: Opt-in sent to user ##{user.id} #{user.email}"
   end
+
+  def send_welcome(user)
+  	mail(to: user.email, subject: "Welcome to Paperboard")
+  end
 end
