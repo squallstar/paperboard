@@ -6,7 +6,6 @@ class Settings::AccountController < ApplicationController
 
   def update
     if @user.update_with_password(user_params)
-      Rails.cache.delete key_for_user_session(@current_user.id)
       @current_user = @user
 
       flash.now[:alert] = 'Your account was successfully updated.'

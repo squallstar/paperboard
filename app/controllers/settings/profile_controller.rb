@@ -6,7 +6,6 @@ class Settings::ProfileController < ApplicationController
 
   def update
     if @user.update(user_params)
-      Rails.cache.delete key_for_user_session(@current_user.id)
       @current_user = @user
 
       flash.now[:alert] = 'Your profile was successfully updated.'
