@@ -5,10 +5,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @can_edit = params[:id] == @current_user.id
-  end
-
-  def edit
+    @can_edit = params[:id].to_i == @current_user.id
   end
 
   private
