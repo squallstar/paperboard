@@ -1,14 +1,15 @@
 h2 Projects you belong to
 
-- if @projects.length > 0
-  - for project in @projects
-      li
-        h3
-          = link_to project.name, project_path(project)
-        p The project has #{pluralize project.members_count, 'member'}
-        = button_to 'Delete project', project, method: :delete, data: { confirm: 'Are you sure?' }
-        hr
-- else
-  p You don't belong to any project
+- cache ["projects", @current_user] do
+  - if @projects.length > 0
+    - for project in @projects
+        li
+          h3
+            = link_to project.name, project_path(project)
+          p The project has #{pluralize project.members_count, 'member'}
+          = button_to 'Delete project', project, method: :delete, data: { confirm: 'Are you sure?' }
+          hr
+  - else
+    p You don't belong to any project
 
 = link_to "Create new", new_project_path

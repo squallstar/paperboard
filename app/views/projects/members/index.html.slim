@@ -2,19 +2,22 @@
 
 h2 Members
 
-table border=1 cellpadding=5 cellspacing=3
-  tr
-    th User
-    th Join date
-    th Role
-    th Actions
 
-  - @members.each do |member|
+- cache ["members", @current_project] do
+
+  table border=1 cellpadding=5 cellspacing=3
     tr
-      td
-        = link_to member.user.full_name, member.user
-      td joined #{time_ago_in_words(member.created_at)} ago
-      td #{member.role}
-      td
-        - if @is_admin && member.role != 'owner'
-          = link_to 'Delete', project_member_path(params[:project_id], member), data: {:confirm => 'Are you sure?'}, :method => :delete
+      th User
+      th Join date
+      th Role
+      th Actions
+
+    - @members.each do |member|
+      tr
+        td
+          = link_to member.user.full_name, member.user
+        td joined #{time_ago_in_words(member.created_at)} ago
+        td #{member.role}
+        td
+          - if @is_admin && member.role != 'owner'
+            = link_to 'Delete', project_member_path(params[:project_id], member), data: {:confirm => 'Are you sure?'}, :method => :delete

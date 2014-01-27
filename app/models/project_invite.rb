@@ -8,7 +8,7 @@ class ProjectInvite < ActiveRecord::Base
 
   before_create :set_defaults
 
-  belongs_to :project
+  belongs_to :project, touch: true
   belongs_to :user, class_name: :User
   belongs_to :sender, class_name: :User
 
