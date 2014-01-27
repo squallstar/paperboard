@@ -10,6 +10,10 @@ gem 'rails_config'
 
 gem 'rack-cache', :groups => [:production, :production_squallstar]
 
+# Memcache
+gem 'dalli'
+gem 'memcachier'
+
 # Env files
 gem 'dotenv-rails'
 
@@ -47,8 +51,6 @@ group :development do
 
   # Eager loading
   gem 'bullet'
-
-  gem 'debugger'
 end
 
 group :production do

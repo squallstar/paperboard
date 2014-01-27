@@ -1,6 +1,7 @@
 class WebsiteController < ApplicationController
   skip_before_action :authorize
   before_filter :check_auth
+  caches_action :index
   layout "website"
 
   def index
