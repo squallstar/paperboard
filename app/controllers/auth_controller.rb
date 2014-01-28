@@ -24,13 +24,15 @@ class AuthController < ApplicationController
 
       if @user.save
         AuthMailer.send_optin(@user)
-        redirect_to signup_complete_path, alert: @user.email
+        redirect_to signup_complete_path, flash: {
+          email: @user.email, full_name: @user.full_name
+        }
       end
     end
   end
 
   def signup_complete
-    if not flash[:alert]
+    if not flash[:email]
       redirect_to login_url
     end
   end

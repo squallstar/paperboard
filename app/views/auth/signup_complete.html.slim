@@ -1,7 +1,7 @@
 h1 Just one more step
 
-p Thanks for signing up!
+p #{flash[:full_name]}, thanks for signing up!
 p
   | We have sent you a confirmation email at&nbsp;
-  strong #{flash[:alert]}
+  strong #{flash[:email]}
   | &nbsp;please click the link in it to activate your account.
