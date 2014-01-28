@@ -1,7 +1,6 @@
 #
 # Database Schema for User class
 #
-# string   "username"
 # string   "first_name"
 # string   "last_name"
 # string   "full_name"

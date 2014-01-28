@@ -70,7 +70,6 @@ first_organization = Organization.first
 
   1.upto(14) do |i|
     user = User.create(
-      username: "user#{p}#{i}",
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: "#{p}#{i}" + Faker::Internet.email,
