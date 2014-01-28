@@ -29,6 +29,11 @@ class Projects::ProjectsController < ApplicationController
         # Sets the owner to the current user
         @project.members.create role: 'owner', user: @current_user
 
+        Analytics.track(
+          user_id: @current_user.id,
+          event: 'Created a project'
+        )
+
         format.html { redirect_to project_path(@project), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
