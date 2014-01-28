@@ -62,6 +62,8 @@ group :production do
 
   # New relic for heroku
   gem 'newrelic_rpm'
+
+  gem 'analytics-ruby'
 end
 
 group :production_squallstar do
