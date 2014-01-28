@@ -18,6 +18,26 @@ Paperboard::Application.configure do
     :host => "rails.paperboard.me"
   }
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['FOG_DIRECTORY'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mandrillapp.com',
+    port:                 587,
+    domain:               'rails.paperboard.me',
+    user_name:            'app21141783@heroku.com',
+    password:             '7Ie-lL_alC6KFZqCN-1qdw',
+    authentication:       'login',
+    enable_starttls_auto: true
+  }
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
@@ -34,7 +54,10 @@ Paperboard::Application.configure do
   config.assets.compile = false
 
   # Generate digests for assets URLs.
+  config.assets.enabled = true
   config.assets.digest = true
+  config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  config.assets.initialize_on_precompile = true
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
