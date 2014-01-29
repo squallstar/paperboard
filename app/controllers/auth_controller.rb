@@ -10,11 +10,6 @@ class AuthController < ApplicationController
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
 
-        analytics_identify(
-          user_id: user.id,
-          traits: { email: user.email}
-        )
-
         redirect_to session[:return_to] || root_url
         session.delete(:return_to)
       else

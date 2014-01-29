@@ -39,9 +39,6 @@ gem "active_model_serializers"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Analytics using segment.io
-gem 'analytics-ruby'
-
 # For DB seed - we might move it to development environment at some point
 gem 'faker'
 
