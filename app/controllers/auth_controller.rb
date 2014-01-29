@@ -48,7 +48,7 @@ class AuthController < ApplicationController
   end
 
   def reset_password
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
 
     if @user.request_token != params[:request_token]
       return redirect_to forgot_password_path, alert: 'Invalid key. Please request a new reset password email.'

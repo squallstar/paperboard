@@ -17,7 +17,7 @@ class AuthMailer < ActionMailer::Base
   def reset_password(user)
     @user = user
     @url = reset_password_url user.id, user.generate_request_token
-    p @url
+
     mail(to: user.email, subject: "Please reset your Paperboard Password")
     logger.info "AuthMailer: Reset password email sent to user ##{user.id} #{user.email}"
   end

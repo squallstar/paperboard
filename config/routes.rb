@@ -46,7 +46,7 @@ Paperboard::Application.routes.draw do
   get   "logout" => "auth#logout", as: :logout
   post  "login"  => "auth#login"
   match "forgot-password" => "auth#forgot_password", via: [:get, :post], as: :forgot_password
-  match "reset-password/:user_id/:request_token" => "auth#reset_password", via: [:get, :patch], as: :reset_password
+  match "reset-password/:id/:request_token" => "auth#reset_password", via: [:get, :patch], as: :reset_password
 
   # User Signup
   match "signup" => "auth#signup", via: [:get, :post], as: :signup
