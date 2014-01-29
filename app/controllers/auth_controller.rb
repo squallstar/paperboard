@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
   skip_before_action :authorize
-  before_action :check_if_logged_in, only: [:login, :signup]
+  before_action :check_if_logged_in, only: [:login, :signup, :forgot_password]
   layout "forms"
 
   def login
@@ -8,10 +8,7 @@ class AuthController < ApplicationController
       user = User.find_by(email: params[:email])
       p user
       if user and user.authenticate(params[:password])
-        session[:user_id] = user.id
-
-        redirect_to session[:return_to] || root_url
-        session.delete(:return_to)
+        logs_and_redirect(user)
       else
         flash.now[:alert] = 'Invalid email/password combination'
       end
@@ -24,7 +21,8 @@ class AuthController < ApplicationController
       @user = User.new(signup_params)
 
       if @user.save
-        AuthMailer.send_optin(@user).deliver
+        # Sends the email and redirect
+        AuthMailer.confirm_email(@user).deliver
         redirect_to signup_complete_path, flash: {
           email: @user.email, full_name: @user.full_name
         }
@@ -34,13 +32,16 @@ class AuthController < ApplicationController
 
   def forgot_password
     if params[:email]
-      user = User.select('id, full_name').find_by_email(params[:email])
+      user = User.select('id, email, first_name').find_by_email(params[:email])
 
       if user
         # Send reset password email
+        AuthMailer.reset_password(user).deliver
 
         # Redirect to thank you page
-        redirect_to forgot_password_sent_path
+        redirect_to forgot_password_sent_path, flash: {
+          email: user.email
+        }
       else
         flash.now[:alert] = 'Email address not registered'
       end
@@ -67,11 +68,14 @@ class AuthController < ApplicationController
       @user.email_verified = true
       @user.is_active = true
 
+      # Joins any pending project
+      @user.join_pending_invites
+
       # Logs the user in
       session[:user_id] = @user.id
 
       # Send the welcome email
-      AuthMailer.send_welcome(@user).deliver
+      AuthMailer.welcome(@user).deliver
     else
       redirect_to login_path, alert: 'Confirmation key not valid'
     end
@@ -85,17 +89,21 @@ class AuthController < ApplicationController
     redirect_to login_url, notice: "Logged out"
   end
 
-  def redirect_after_login
-    redirect_to root_url
-  end
-
-  def check_if_logged_in
-    if session[:user_id]
-      redirect_to root_url
+  private
+    def check_if_logged_in
+      if session[:user_id]
+        redirect_to root_url
+      end
     end
-  end
 
-  def signup_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
-  end
+    def logs_and_redirect(user)
+      session[:user_id] = user.id
+
+      redirect_to session[:return_to] || dashboard_url
+      session.delete(:return_to)
+    end
+
+    def signup_params
+      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+    end
 end

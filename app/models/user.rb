@@ -10,6 +10,7 @@
 # datetime "updated_at"
 # boolean  "is_active"
 # boolean  "email_verified"
+# string   "request_token"
 
 class User < ActiveRecord::Base
   before_save :before_save
@@ -100,7 +101,18 @@ class User < ActiveRecord::Base
   # Key to be used in the registration email
   def optin_key
     require 'digest/md5'
-    Digest::MD5.hexdigest("#{id}-#{email}")
+    Digest::MD5.hexdigest("#{id}#{email}")
+  end
+
+  def generate_request_token
+    require 'digest/md5'
+    self.request_token = Digest::MD5.hexdigest("#{email}#{Time.now}")
+  end
+
+  def join_pending_invites
+    ProjectInvite.where(email: self.email, accepted: false).find_each do |invite|
+      invite.accept_with_user(self)
+    end
   end
 
   private

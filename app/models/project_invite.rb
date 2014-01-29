@@ -12,6 +12,14 @@ class ProjectInvite < ActiveRecord::Base
   belongs_to :user, class_name: :User
   belongs_to :sender, class_name: :User
 
+  def accept_with_user(user)
+    self.accepted = true
+    self.user = user
+    save!
+
+    project.members.create role: 'member', user: user
+  end
+
   private
     def set_defaults
       self.accepted = false

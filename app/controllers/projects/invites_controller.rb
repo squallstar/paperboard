@@ -44,11 +44,8 @@ class Projects::InvitesController < ApplicationController
           redirect_to project_path(@current_project), notice: "You already joined this project."
         else
           # Ok, we can accept the invite
-          invite.accepted = true
-          invite.user = @current_user
-          invite.save
+          invite.accept_with_user(@current_user)
 
-          @current_project.members.create role: 'member', user: @current_user
           redirect_to project_path(@current_project), notice: "You joined the project #{@current_project.name}."
         end
       end
