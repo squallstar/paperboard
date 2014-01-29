@@ -41,7 +41,7 @@ class AuthController < ApplicationController
   def signup_confirm_email
     @user = User.find(params[:id])
 
-    if @user.optin_key == params[:key]
+    if @user.optin_key == params[:key] && @user.email_verified = false
       # Enables the user
       @user.email_verified = true
       @user.is_active = true

@@ -10,6 +10,7 @@ class AuthMailer < ActionMailer::Base
   end
 
   def send_welcome(user)
+    @user = user
   	mail(to: user.email, subject: "Welcome to Paperboard")
   end
 end
