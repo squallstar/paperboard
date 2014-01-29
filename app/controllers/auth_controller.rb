@@ -10,7 +10,7 @@ class AuthController < ApplicationController
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
 
-        Analytics.identify(
+        analytics_identify(
           user_id: user.id,
           traits: { email: user.email}
         )
