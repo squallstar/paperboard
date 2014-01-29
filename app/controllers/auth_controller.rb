@@ -24,7 +24,7 @@ class AuthController < ApplicationController
       @user = User.new(signup_params)
 
       if @user.save
-        AuthMailer.send_optin(@user)
+        AuthMailer.send_optin(@user).deliver
         redirect_to signup_complete_path, flash: {
           email: @user.email, full_name: @user.full_name
         }
@@ -50,7 +50,7 @@ class AuthController < ApplicationController
       session[:user_id] = @user.id
 
       # Send the welcome email
-      AuthMailer.send_welcome(@user)
+      AuthMailer.send_welcome(@user).deliver
     else
       redirect_to login_path, alert: 'Confirmation key not valid'
     end
