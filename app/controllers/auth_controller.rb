@@ -32,25 +32,34 @@ class AuthController < ApplicationController
 
   def forgot_password
     if params[:email]
-      user = User.select('id, email, first_name').find_by_email(params[:email])
+      user = User.find_by_email(params[:email])
 
       if user
         # Send reset password email
         AuthMailer.reset_password(user).deliver
 
         # Redirect to thank you page
-        redirect_to forgot_password_sent_path, flash: {
-          email: user.email
-        }
+        @email = user.email
+        render "forgot_password_sent"
       else
         flash.now[:alert] = 'Email address not registered'
       end
     end
   end
 
-  def forgot_password_sent
-    if not flash[:email]
-      redirect_to login_url
+  def reset_password
+    @user = User.find(params[:user_id])
+
+    if @user.request_token != params[:request_token]
+      return redirect_to forgot_password_path, alert: 'Invalid key. Please request a new reset password email.'
+    end
+
+    if params[:user] && params[:password]
+      reset_password_params[:request_token] = nil
+
+      if @user.update(reset_password_params)
+        redirect_to login_path, alert: 'Your password has been updated!'
+      end
     end
   end
 
@@ -76,6 +85,8 @@ class AuthController < ApplicationController
 
       # Send the welcome email
       AuthMailer.welcome(@user).deliver
+
+      logger.info "Email confirmed for user ##{user.id} #{user.email}"
     else
       redirect_to login_path, alert: 'Confirmation key not valid'
     end
@@ -105,5 +116,9 @@ class AuthController < ApplicationController
 
     def signup_params
       params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+    end
+
+    def reset_password_params
+      params.require(:user).permit(:password, :password_confirmation)
     end
 end

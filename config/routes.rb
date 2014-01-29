@@ -42,34 +42,20 @@ Paperboard::Application.routes.draw do
   end
 
   # Login/Logout sessions
-  get  "login"  => "auth#login", as: :login
-  get  "logout" => "auth#logout", as: :logout
-  post "login"  => "auth#login"
+  get   "login"  => "auth#login", as: :login
+  get   "logout" => "auth#logout", as: :logout
+  post  "login"  => "auth#login"
   match "forgot-password" => "auth#forgot_password", via: [:get, :post], as: :forgot_password
-  get "email-sent" => "auth#forgot_password_sent", as: :forgot_password_sent
-  get "reset-password/:user/:request_token" => "auth#reset_password", as: :reset_password
+  match "reset-password/:user_id/:request_token" => "auth#reset_password", via: [:get, :patch], as: :reset_password
 
   # User Signup
   match "signup" => "auth#signup", via: [:get, :post], as: :signup
-  get "signup/complete" => "auth#signup_complete", as: :signup_complete
-  get "signup/confirm/:id/:key" => "auth#signup_confirm_email", as: :signup_confirm_email
+  get   "signup/complete" => "auth#signup_complete", as: :signup_complete
+  get   "signup/confirm/:id/:key" => "auth#signup_confirm_email", as: :signup_confirm_email
 
   # Generic root url (dashboard) for logged in users
   get "projects" => 'projects/projects#index', as: :dashboard
 
   root 'website#index'
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

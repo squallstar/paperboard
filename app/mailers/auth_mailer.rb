@@ -6,7 +6,7 @@ class AuthMailer < ActionMailer::Base
     @user = user
     @url = signup_confirm_email_url user.id, user.optin_key
     mail(to: user.email, subject: "Please confirm your email")
-    logger.info "AuthMailer: Opt-in sent to user ##{user.id} #{user.email}"
+    logger.info "AuthMailer: Confirmation email sent to user ##{user.id} #{user.email}"
   end
 
   def welcome(user)
@@ -18,6 +18,7 @@ class AuthMailer < ActionMailer::Base
     @user = user
     @url = reset_password_url user.id, user.generate_request_token
     p @url
-    mail(to: user.email, subject: "Reset Your Paperboad Password")
+    mail(to: user.email, subject: "Please reset your Paperboard Password")
+    logger.info "AuthMailer: Reset password email sent to user ##{user.id} #{user.email}"
   end
 end

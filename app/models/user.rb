@@ -107,6 +107,8 @@ class User < ActiveRecord::Base
   def generate_request_token
     require 'digest/md5'
     self.request_token = Digest::MD5.hexdigest("#{email}#{Time.now}")
+    save!
+    self.request_token
   end
 
   def join_pending_invites
