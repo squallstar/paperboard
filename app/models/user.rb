@@ -39,7 +39,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
     medium: '200x200#'
-  }
+  },
+  default_url: ActionController::Base.helpers.asset_path('avatar.png')
 
   validates_attachment_size :avatar, less_than: 1.megabyte
   validates_attachment :avatar,
