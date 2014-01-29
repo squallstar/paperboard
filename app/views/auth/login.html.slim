@@ -12,6 +12,8 @@
       = password_field_tag :password, params[:password]
     div
       = submit_tag "Login"
+      p
+        = link_to "Forgot password", forgot_password_path
 
 p
  | No account?&nbsp;

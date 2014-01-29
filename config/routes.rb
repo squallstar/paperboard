@@ -45,9 +45,11 @@ Paperboard::Application.routes.draw do
   get  "login"  => "auth#login", as: :login
   get  "logout" => "auth#logout", as: :logout
   post "login"  => "auth#login"
+  match "forgot-password" => "auth#forgot_password", via: [:get, :post], as: :forgot_password
+  get "email-sent" => "auth#forgot_password_sent", as: :forgot_password_sent
 
   # User Signup
-  match  "signup" => "auth#signup", via: [:get, :post], as: :signup
+  match "signup" => "auth#signup", via: [:get, :post], as: :signup
   get "signup/complete" => "auth#signup_complete", as: :signup_complete
   get "signup/confirm/:id/:key" => "auth#signup_confirm_email", as: :signup_confirm_email
 

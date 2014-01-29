@@ -32,6 +32,27 @@ class AuthController < ApplicationController
     end
   end
 
+  def forgot_password
+    if params[:email]
+      user = User.select('id, full_name').find_by_email(params[:email])
+
+      if user
+        # Send reset password email
+
+        # Redirect to thank you page
+        redirect_to forgot_password_sent_path
+      else
+        flash.now[:alert] = 'Email address not registered'
+      end
+    end
+  end
+
+  def forgot_password_sent
+    if not flash[:email]
+      redirect_to login_url
+    end
+  end
+
   def signup_complete
     if not flash[:email]
       redirect_to login_url
