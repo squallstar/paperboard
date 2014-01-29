@@ -54,7 +54,7 @@ class AuthController < ApplicationController
       return redirect_to forgot_password_path, alert: 'Invalid key. Please request a new reset password email.'
     end
 
-    if params[:user] && params[:password]
+    if params[:user] && params[:user][:password]
       reset_password_params[:request_token] = nil
 
       if @user.update(reset_password_params)
