@@ -3,6 +3,7 @@ Paperboard::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.static_cache_control = "public, max-age=2592000"
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
@@ -54,13 +55,16 @@ Paperboard::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable the asset pipeline
   config.assets.enabled = true
+  config.assets.compress = true
   config.assets.digest = true
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.initialize_on_precompile = true
+  #config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.prefix = "/assets"
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
@@ -80,9 +84,6 @@ Paperboard::Application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"

@@ -8,6 +8,8 @@ if defined?(AssetSync)
     config.fog_directory = ENV['FOG_DIRECTORY']
     config.fog_region = 'eu-west-1'
 
+    config.existing_remote_files = 'delete'
+
     # Fail silently.  Useful for environments such as Heroku
     config.fail_silently = true
   end
