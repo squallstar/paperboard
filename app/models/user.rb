@@ -29,8 +29,9 @@ class User < ActiveRecord::Base
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
 
-  has_many :organization_memberships, foreign_key: :user_id, class_name: :OrganizationMember, dependent: :destroy
-  has_many :organizations, through: :organization_memberships
+  has_many :team_memberships, foreign_key: :user_id, class_name: :TeamMember, dependent: :destroy
+  has_many :teams, through: :team_memberships
+  has_many :organizations, through: :teams
 
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
@@ -119,6 +120,12 @@ class User < ActiveRecord::Base
 
   def set_avatar_default_url
     ActionController::Base.helpers.asset_path('avatar.png')
+  end
+
+  def cached_organizations
+    Rails.cache.fetch ["organizations", self] do
+      self.organizations.all
+    end
   end
 
   private

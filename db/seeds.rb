@@ -16,6 +16,8 @@ ProjectMember.delete_all
 ProjectInvite.delete_all
 Organization.delete_all
 OrganizationMember.delete_all
+Team.delete_all
+TeamMember.delete_all
 Plan.delete_all
 Subscription.delete_all
 
@@ -42,34 +44,31 @@ User.create!(
 
 first_user = User.first
 
-1.upto(3) do |o|
+1.upto(5) do |o|
   puts "Generating organization #{o}."
-  organization = Organization.create(:name => Faker::Company.name)
-
-  OrganizationMember.create({
-    user: first_user,
-    organization: organization,
-    role: 'owner'
-  })
+  organization = Organization.new_with_user({name: Faker::Company.name}, first_user)
+  organization.save!
 end
 
 first_organization = Organization.first
 
+team = first_organization.teams.build({name: 'Developers', role: 'standard'})
+
 1.upto(8) do |p|
   puts "\r\nGenerating project #{p}."
 
-  project = Project.create(
+  project = Project.create!(
     name: Faker::Company.catch_phrase
   )
 
-  ProjectMember.create({
+  ProjectMember.create!({
     user: first_user,
     project: project,
     role: 'owner'
   })
 
   1.upto(14) do |i|
-    user = User.create(
+    user = User.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: "#{p}#{i}" + Faker::Internet.email,
@@ -85,9 +84,9 @@ first_organization = Organization.first
       role: 'member'
     })
 
-    OrganizationMember.create({
+    TeamMember.create!({
       user: user,
-      organization: first_organization,
+      team: team,
       role: 'member'
     })
   end

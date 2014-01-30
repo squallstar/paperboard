@@ -7,7 +7,7 @@
 
 class TeamMember < ActiveRecord::Base
   belongs_to :team, touch: true, counter_cache: :members_count
-  belongs_to :user
+  belongs_to :user, touch: true
 
   validates :team, null: false
   validates :user, null: false

@@ -26,15 +26,10 @@ class Organizations::OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(organization_params)
+    @organization = Organization.new_with_user(organization_params, @current_user)
 
     respond_to do |format|
       if @organization.save
-
-        # Create a new Owners team with the current user as admin
-        @team = Team.create name: 'Owners', role: 'admin', organization: @organization
-        @team.members.create role: 'admin', user: @current_user
-
         # Legacy support for members
         @organization.members.create role: 'owner', user: @current_user
 
