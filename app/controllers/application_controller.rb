@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless current_user
-      session.destroy
+      clean_session
       session[:return_to] = request.fullpath
 
       redirect_to login_url, notice: "Please log in"
@@ -23,8 +23,15 @@ class ApplicationController < ActionController::Base
       @start_time = Time.now.usec
     end
 
+    def clean_session
+      session.destroy
+    end
+
     def current_user
       return unless session[:user_id]
       @current_user ||= User.select(:id, :full_name, :updated_at, :avatar_file_name).find(session[:user_id])
+    rescue ActiveRecord::RecordNotFound
+      clean_session
+      redirect_to login_url
     end
 end
