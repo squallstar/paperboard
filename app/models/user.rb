@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
     small: ['80x80#', :png],
     medium: '200x200#'
   },
-  default_url: 'images/avatar.png'
+  default_url: lambda { |avatar| avatar.instance.set_avatar_default_url}
 
   validates_attachment_size :avatar, less_than: 1.megabyte
   validates_attachment :avatar,
@@ -115,6 +115,10 @@ class User < ActiveRecord::Base
     ProjectInvite.where(email: self.email, accepted: false).find_each do |invite|
       invite.accept_with_user(self)
     end
+  end
+
+  def set_avatar_default_url
+    ActionController::Base.helpers.asset_path('avatar.png')
   end
 
   private
