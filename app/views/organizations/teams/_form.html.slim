@@ -7,7 +7,20 @@
           li = message
 
   .field
-    = f.label :name
-    = f.text_field :name
+    = f.label :name, "Team name (only letters, numbers and dashes are allowed)"
+    = f.text_field :name, placeholder: 'Name your team...'
+    hr
 
-  .actions = f.submit 'Save'
+  .field
+    p What permission level should this team have?
+    div
+      ' Admin access
+      = f.radio_button :role, "admin"
+      p This team will be able to manage teams and projects (useful for Project managers)
+    div
+      ' Standard access
+      = f.radio_button :role, "standard"
+      p This team will only be able to view its projects
+    hr
+
+  .actions = f.submit 'Create team'

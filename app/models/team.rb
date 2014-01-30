@@ -10,4 +10,8 @@ class Team < ActiveRecord::Base
   def is_admin?
     role == 'admin'
   end
+
+  def can_be_deleted?
+    role != 'admin' && name != 'Owners'
+  end
 end

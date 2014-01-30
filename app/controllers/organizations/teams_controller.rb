@@ -14,7 +14,7 @@ class Organizations::TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @team = Team.new role: 'standard'
   end
 
   # GET /teams/1/edit
