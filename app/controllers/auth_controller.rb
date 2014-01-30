@@ -72,7 +72,7 @@ class AuthController < ApplicationController
   def signup_confirm_email
     @user = User.find(params[:id])
 
-    if @user.optin_key == params[:key] && @user.email_verified = false
+    if @user.optin_key == params[:key] && @user.email_verified != true
       # Enables the user
       @user.email_verified = true
       @user.is_active = true
@@ -86,7 +86,7 @@ class AuthController < ApplicationController
       # Send the welcome email
       AuthMailer.welcome(@user).deliver
 
-      logger.info "Email confirmed for user ##{user.id} #{user.email}"
+      logger.info "Email confirmed for user ##{@user.id} #{@user.email}"
     else
       redirect_to login_path, alert: 'Confirmation key not valid'
     end
