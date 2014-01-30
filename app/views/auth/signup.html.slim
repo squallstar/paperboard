@@ -5,32 +5,39 @@
 
 = form_for @user, url: "" do |f|
 
-  - if @user.errors.any?
-    #error_explanation
-      ul
-        - @user.errors.full_messages.each do |msg|
-          li = msg
-
   fieldset
-    legend New user
+    h2 New user
+    p
+      strong Start your free account.
+      br
+      | You'll be up and running in less than a minute.
+      hr
+
+    - if @user.errors.any?
+      .errors
+        h3 Oops...
+        ul
+          - @user.errors.full_messages.each do |msg|
+            li = msg
+
     .field
-      = f.text_field :first_name, placeholder: "First name"
-      = f.text_field :last_name, placeholder: "Last name"
+      = f.label :first_name, "First and last name"
+      = f.text_field :first_name, placeholder: "John"
+      = f.text_field :last_name, placeholder: "Doe"
       hr
     .field
-      = f.label :email
-      = f.email_field :email, autocomplete: 'off'
+      = f.label :email, "Email address"
+      = f.email_field :email, autocomplete: 'off', placeholder: "john.doe@example.org"
       hr
     .field
-      = f.label :password
+      = f.label :password, "Password"
       = f.password_field :password, autocomplete: 'off'
     .field
-      = f.label :password_confirmation
+      = f.label :password_confirmation, "Confirm password"
       = f.password_field :password_confirmation, autocomplete: 'off'
       hr
     .field
-      = f.submit "Create account"
-
-p
-  | Have an account?&nbsp;
-  = link_to "Log in", login_path
+      = f.submit "Create free account"
+      p
+        ' By creating a free account, you accept our
+        = link_to "Terms and conditions", "#"

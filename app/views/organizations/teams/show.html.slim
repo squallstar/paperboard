@@ -1,7 +1,7 @@
 = render "organizations/header"
 
 h2
-  | Team:&nbsp;
+  ' Team:
   = @team.name
 
 = link_to 'Team settings', edit_organization_team_path(@organization, @team)

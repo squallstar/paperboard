@@ -1,7 +1,9 @@
-h1 Just one more step
+h1 Please check your email
 
-p #{flash[:full_name]}, thanks for signing up!
 p
-  | We have sent you a confirmation email at&nbsp;
-  strong #{flash[:email]}
-  | &nbsp;please click the link in it to activate your account.
+  strong Dear #{flash[:full_name]},
+
+p
+  ' We have sent you a confirmation email at&nbsp;
+  strong.underline #{flash[:email]}
+  ' &nbsp;with a link to activate your Paperboard account.

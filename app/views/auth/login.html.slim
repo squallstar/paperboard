@@ -5,18 +5,19 @@
 
 = form_tag do
   fieldset
-    legend Please Log In
-    div
-      = label_tag :email, 'Email:'
+    h2 Sign in
+    .field
+      = label_tag :email, 'Email'
       = email_field_tag :email, params[:email]
-    div
-      = label_tag :password, 'Password:'
+    .field
+      = label_tag :password, 'Password'
       = password_field_tag :password, params[:password]
-    div
-      = submit_tag "Login"
       p
         = link_to "Forgot password", forgot_password_path
 
+    .field
+      = submit_tag "Login"
+
 p
- | No account?&nbsp;
+ ' No account?
  = link_to "Sign up", signup_path

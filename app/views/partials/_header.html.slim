@@ -1,9 +1,9 @@
 header
   p
-    | Logged in as&nbsp;
+    ' Logged in as
     = link_to @current_user.full_name, @current_user
     = image_tag @current_user.avatar.url(:small), style: 'width:25px;height:25px;border-radius:25px'
-    | &nbsp;-&nbsp;
+    ' -
     = link_to "Log out", logout_path
   ul
     li
