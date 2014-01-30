@@ -6,7 +6,7 @@ class Organizations::OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = @current_user.organizations
+    @organizations = @current_user.cached_organizations
   end
 
   # GET /organizations/1
