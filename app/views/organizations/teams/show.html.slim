@@ -8,6 +8,11 @@ h2
 
 hr
 
+- if @team.is_admin?
+
+  p Owners have full access to all repositories and have admin rights to the organization.
+  p Owners can change billing info and cancel organization accounts.
+
 table border=1 cellpadding=6 cellspacing=0
   tr
     th Role
@@ -18,4 +23,8 @@ table border=1 cellpadding=6 cellspacing=0
     tr
       td = member.role
       td = member.user.full_name
-      td = link_to 'Remove from the team', '#', :method => :delete
+      td
+        - if member.user.id != @current_user.id
+          = link_to 'Remove', '#', :method => :delete
+        - elsif @team.members.length > 1
+          = link_to 'Leave', '#', :method => :delete

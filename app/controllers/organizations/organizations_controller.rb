@@ -30,7 +30,12 @@ class Organizations::OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        # Sets the owner to the current user
+
+        # Create a new Owners team with the current user as admin
+        @team = Team.create name: 'Owners', role: 'admin', organization: @organization
+        @team.members.create role: 'admin', user: @current_user
+
+        # Legacy support for members
         @organization.members.create role: 'owner', user: @current_user
 
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }

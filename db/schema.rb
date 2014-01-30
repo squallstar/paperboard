@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129221132) do
+ActiveRecord::Schema.define(version: 20140130161221) do
 
   create_table "organization_members", force: true do |t|
     t.string   "role"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20140129221132) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "members_count",   default: 0
+    t.string   "role"
   end
 
   add_index "teams", ["organization_id"], name: "index_teams_on_organization_id"
