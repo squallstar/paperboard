@@ -1,12 +1,12 @@
 doctype html
 html dir='ltr' lang='en' prefix='og: http://ogp.me/ns schema: http://schema.org/' itemscope='' itemtype='http://schema.org/WebPage'
   head
-    title Paperboard
+    title #{@title ? @title + ' - ' : ''}Paperboard
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body#app
-    #wrapper
+    #wrapp
       = render "partials/header"
       = yield
       = render "partials/footer"

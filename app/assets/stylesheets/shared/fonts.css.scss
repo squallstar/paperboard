@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Proxima Nova';
+  src: font-url('ProximaNova-Light.eot'); /* IE9 Compat Modes */
+  src: local('☺'),
+    font-url('ProximaNova-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    font-url('ProximaNova-Light.woff') format('woff'), /* Modern Browsers */
+    font-url('ProximaNova-Light.ttf') format('truetype'), /* Safari, Android, iOS */
+    font-url('ProximaNova-Light.svg') format('svg'); /* Legacy iOS */
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: font-url('ProximaNova-Regular.eot'); /* IE9 Compat Modes */
+  src: local('☺'),
+    font-url('ProximaNova-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    font-url('ProximaNova-Regular.woff') format('woff'), /* Modern Browsers */
+    font-url('ProximaNova-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    font-url('ProximaNova-Regular.svg') format('svg'); /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: font-url('ProximaNova-Semibold.eot'); /* IE9 Compat Modes */
+  src: local('☺'),
+    font-url('ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    font-url('ProximaNova-Semibold.woff') format('woff'), /* Modern Browsers */
+    font-url('ProximaNova-Semibold.ttf') format('truetype'), /* Safari, Android, iOS */
+    font-url('ProximaNova-Semibold.svg') format('svg'); /* Legacy iOS */
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: font-url('ProximaNova-Bold.eot'); /* IE9 Compat Modes */
+  src: local('☺'),
+    font-url('ProximaNova-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    font-url('ProximaNova-Bold.woff') format('woff'), /* Modern Browsers */
+    font-url('ProximaNova-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    font-url('ProximaNova-Bold.svg') format('svg'); /* Legacy iOS */
+  font-weight: bold;
+  font-style: normal;
+}

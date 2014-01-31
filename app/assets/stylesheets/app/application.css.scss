@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
+@import "shared/fonts";
+
+@import "common/config";
 @import "common/colors";
 @import "common/reset";
-@import "common/placeholders.css.scss";
-@import "common/scaffolds.css.scss";
-
+@import "common/placeholders";
+@import "common/scaffolds";
 @import "common/base";
 
 @import "partials/header";

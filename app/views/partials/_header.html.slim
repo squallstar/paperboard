@@ -1,16 +1,21 @@
 header
-  p
-    ' Logged in as
-    = link_to @current_user.full_name, @current_user
-    = image_tag @current_user.avatar.url(:small), style: 'width:25px;height:25px;border-radius:25px'
-    ' -
-    = link_to "Log out", logout_path
-  ul
-    li
-      = link_to "My projects", projects_path
-    li
-      = link_to "Organizations", organizations_path
-hr
+  .logo Lorem ipsum
+
+  .settings
+    .user
+      = @current_user.full_name
+      = image_tag @current_user.avatar.url(:small)
+    ul
+      li
+        = link_to "Profile", user_path(@current_user)
+      li
+        = link_to "Account", settings_account_path
+      li
+        = link_to "My projects", projects_path
+      li
+        = link_to "Organizations", organizations_path
+      li
+        = link_to "Log out", logout_path
 
 - if flash[:alert]
   p#alert= flash[:alert]

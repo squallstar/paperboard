@@ -1,0 +1,53 @@
+#app {
+  $header-height: 50px;
+
+  padding-top: $header-height;
+
+  header {
+    @extend %antialias;
+    @extend %clear;
+    height: $header-height;
+    background: #EEE;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $color-primary;
+    color: #FFF;
+
+    .logo {
+      float: left;
+      padding-left: 15px;
+    }
+
+    .settings {
+      float: right;
+      height: 100%;
+      padding: 0 15px;
+
+      &:hover {
+        background-color: rgba(0,0,0,0.1);
+        cursor: pointer;
+      }
+
+      .user {
+        font-size: 13px;
+        margin-top: 12px;
+        line-height: 27px;
+        font-weight: 300;
+
+        img {
+          float: right;
+          width: 25px;
+          height: 25px;
+          border-radius: 6px;
+          margin-left: 7px;
+        }
+      }
+
+      ul {
+        display: none;
+      }
+    }
+  }
+}
