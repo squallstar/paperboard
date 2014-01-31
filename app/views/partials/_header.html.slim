@@ -1,22 +1,23 @@
 header#header
-  .logo
-    = link_to "Staging", dashboard_url
+  .grid
+    .logo
+      = link_to "Staging", dashboard_url
 
-  .settings
-    a.user href='#'
-      = @current_user.full_name
-      = image_tag @current_user.avatar.url(:small)
-    ul
-      li
-        = link_to "Profile", user_path(@current_user)
-      li
-        = link_to "Account", settings_account_path
-      li
-        = link_to "My projects", projects_path
-      li
-        = link_to "Organizations", organizations_path
-      li
-        = link_to "Log out", logout_path
+    .settings
+      a.user href='#'
+        = @current_user.full_name
+        = image_tag @current_user.avatar.url(:small)
+      ul
+        li
+          = link_to "Profile", user_path(@current_user)
+        li
+          = link_to "Account", settings_account_path
+        li
+          = link_to "Projects", projects_path
+        li
+          = link_to "Organizations", organizations_path
+        li
+          = link_to "Log out", logout_path
 
-- if flash[:alert]
-  p#alert= flash[:alert]
+  - if flash[:alert]
+    p#alert= flash[:alert]

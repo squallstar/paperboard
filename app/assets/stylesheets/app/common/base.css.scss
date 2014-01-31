@@ -1,3 +1,10 @@
 html, body {
   font-family: $base-font-family;
 }
+
+.grid {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $grid-gutter;
+}

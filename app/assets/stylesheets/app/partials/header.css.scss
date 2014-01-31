@@ -5,8 +5,6 @@ body {
 
   #header {
     @extend %antialias;
-    @extend %clear;
-    height: $header-height;
     background: #EEE;
     position: fixed;
     top: 0;
@@ -15,9 +13,13 @@ body {
     background-color: $color-primary;
     color: #FFF;
 
+    .grid {
+      @extend %clear;
+      height: $header-height;
+    }
+
     .logo {
       float: left;
-      padding-left: 15px;
       font-size: 20px;
       margin-top: 14px;
       font-weight: 600;
@@ -28,10 +30,11 @@ body {
       }
     }
 
-    > .settings {
+    .settings {
       float: right;
       height: 100%;
       position: relative;
+      margin-right: -$grid-gutter;
 
       > .user {
         display: block;
@@ -62,6 +65,8 @@ body {
         right: 0;
         top: $header-height;
         width: 100%;
+        border-right: 1px solid #CCC;
+        border-left: 1px solid #CCC;
 
         li {
           border-bottom: 1px solid #CCC;
@@ -83,7 +88,7 @@ body {
 
     &.with-menu {
 
-      > .settings {
+      .settings {
 
         > .user {
           background-color: rgba(0,0,0,0.1);
