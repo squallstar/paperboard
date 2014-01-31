@@ -1,9 +1,9 @@
-#app {
+body {
   $header-height: 50px;
 
   padding-top: $header-height;
 
-  header {
+  header#main {
     @extend %antialias;
     @extend %clear;
     height: $header-height;
@@ -18,6 +18,9 @@
     .logo {
       float: left;
       padding-left: 15px;
+      font-size: 20px;
+      margin-top: 14px;
+      font-weight: 600;
     }
 
     .settings {
@@ -34,7 +37,6 @@
         font-size: 13px;
         margin-top: 12px;
         line-height: 27px;
-        font-weight: 300;
 
         img {
           float: right;
