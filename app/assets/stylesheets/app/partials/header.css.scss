@@ -21,12 +21,17 @@ body {
     .logo {
       float: left;
       font-size: 20px;
-      margin-top: 14px;
+      margin-top: 9px;
       font-weight: 600;
 
       a {
+        @extend %text-indent;
         color: #FFF;
+        display: block;
         text-decoration: none;
+        width: 26px;
+        height: 31px;
+        background: image-url("logo-header.png");
       }
     }
 
@@ -68,7 +73,7 @@ body {
           margin-right: 10px;
 
           &:hover {
-            opacity: 0.8;
+            opacity: 0.7;
           }
         }
       }

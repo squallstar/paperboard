@@ -2,8 +2,12 @@ html, body {
   font-family: $base-font-family;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 .grid {
-  max-width: 980px;
+  width: 980px;
   margin-left: auto;
   margin-right: auto;
   padding: 0 $grid-gutter;
