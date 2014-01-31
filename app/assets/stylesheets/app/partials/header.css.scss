@@ -30,6 +30,50 @@ body {
       }
     }
 
+    .search {
+      float: left;
+      margin: 0 $grid-gutter;
+      padding: 0 $grid-gutter;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.1);
+      height: 100%;
+
+      input {
+        border: 0;
+        background-color: rgba(255,255,255,0.9);
+        font-family: $base-font-family;
+        color: $color-black;
+        padding: 8px;
+        border-radius: 3px;
+        margin-top: 11px;
+        font-size: 14px;
+      }
+    }
+
+    .menu {
+      float: left;
+      line-height: $header-height;
+
+      li {
+        display: inline-block;
+
+        a {
+          @extend %antialias;
+          color: #FFF;
+          font-size: 14px;
+          text-decoration: none;
+          font-weight: bold;
+          display: block;
+          height: 100%;
+          margin-right: 10px;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
     .settings {
       float: right;
       height: 100%;
@@ -63,7 +107,7 @@ body {
         position: absolute;
         background-color: #EEE;
         right: 0;
-        top: $header-height;
+        top: $header-height + 1;
         width: 100%;
         border-right: 1px solid #CCC;
         border-left: 1px solid #CCC;
