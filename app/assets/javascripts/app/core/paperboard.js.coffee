@@ -9,6 +9,5 @@ class Paperboard
     for hook in @hooks
       $el = $ hook[0]
       if $el.length then hook[1] $el
-    undefined
 
 window.Paperboard = new Paperboard

@@ -1,9 +1,9 @@
-header#main
+header#header
   .logo
     = link_to "Staging", dashboard_url
 
   .settings
-    .user
+    a.user href='#'
       = @current_user.full_name
       = image_tag @current_user.avatar.url(:small)
     ul

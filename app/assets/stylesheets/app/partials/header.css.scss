@@ -3,7 +3,7 @@ body {
 
   padding-top: $header-height;
 
-  header#main {
+  #header {
     @extend %antialias;
     @extend %clear;
     height: $header-height;
@@ -28,20 +28,23 @@ body {
       }
     }
 
-    .settings {
+    > .settings {
       float: right;
       height: 100%;
-      padding: 0 15px;
+      position: relative;
 
-      &:hover {
-        background-color: rgba(0,0,0,0.1);
-        cursor: pointer;
-      }
-
-      .user {
+      > .user {
+        display: block;
         font-size: 13px;
-        margin-top: 12px;
         line-height: 27px;
+        padding: 12px 15px 0;
+        height: 100%;
+        color: #FFF;
+        text-decoration: none;
+
+        &:hover {
+          background-color: rgba(0,0,0,0.1);
+        }
 
         img {
           float: right;
@@ -52,8 +55,43 @@ body {
         }
       }
 
-      ul {
+      > ul {
         display: none;
+        position: absolute;
+        background-color: #EEE;
+        right: 0;
+        top: $header-height;
+        width: 100%;
+
+        li {
+          border-bottom: 1px solid #CCC;
+
+          a {
+            display: block;
+            font-size: 13px;
+            color: $color-black;
+            text-decoration: none;
+            padding: 10px 30px 10px 15px;
+
+            &:hover {
+              background-color: #FAFAFA;
+            }
+          }
+        }
+      }
+    }
+
+    &.with-menu {
+
+      > .settings {
+
+        > .user {
+          background-color: rgba(0,0,0,0.1);
+        }
+
+        > ul {
+          display: block;
+        }
       }
     }
   }
