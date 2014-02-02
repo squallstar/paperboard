@@ -17,8 +17,13 @@
       color: #333;
 
       .button {
-        float: right;
-        display: inline-block;
+        font-size: 0.8em;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        padding: 0 8px;
+        height: 26px;
+        line-height: 26px;
         background-color: $color-button-primary;
         color: #FFF;
         text-decoration: none;
