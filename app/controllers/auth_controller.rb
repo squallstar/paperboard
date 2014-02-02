@@ -6,7 +6,6 @@ class AuthController < ApplicationController
   def login
     if params[:email]
       user = User.find_by(email: params[:email])
-      p user
       if user and user.authenticate(params[:password])
         logs_and_redirect(user)
       else
