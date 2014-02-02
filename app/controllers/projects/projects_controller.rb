@@ -5,7 +5,10 @@ class Projects::ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = @current_user.projects
+    projects = @current_user.projects
+
+    @user_projects = projects.select { |project| project.owner_id == @current_user.id }
+    @projects = projects.select { |project| project.owner_id != @current_user.id }
   end
 
   # GET /projects/new
@@ -23,6 +26,7 @@ class Projects::ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.owner = @current_user
 
     respond_to do |format|
       if @project.save

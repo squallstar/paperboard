@@ -12,16 +12,16 @@ body {
     width: 100%;
     background-color: $color-primary;
     color: #FFF;
+    height: $header-height;
 
-    .grid {
-      @extend %clear;
-      height: $header-height;
+    .frame {
+      height: 100%;
     }
 
     .logo {
       float: left;
       font-size: 20px;
-      margin-top: 9px;
+      margin-top: 8px;
       font-weight: 600;
 
       a {

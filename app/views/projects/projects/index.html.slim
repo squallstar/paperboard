@@ -1,15 +1,30 @@
-h2 Projects you belong to
+.frame.top-margin
+  .bit-3-2
+    h1 News feed
 
-- cache ["projects", @current_user] do
-  - if @projects.length > 0
-    - for project in @projects
-        li
-          h3
-            = link_to project.name, project_path(project)
-          p The project has #{pluralize project.members_count, 'member'}
-          = button_to 'Delete project', project, method: :delete, data: { confirm: 'Are you sure?' }
-          hr
-  - else
-    p You don't belong to any project
+  .bit-3
 
-= link_to "Create new", new_project_path
+    - cache ["projects/contributed", @current_user] do
+
+      - if @projects.length > 0
+
+        .ui.tbl
+          .head Projects you contribute to
+
+          - for project in @projects
+              a href=project_path(project) class='row'
+                #{project.name}
+
+    .ui.tbl
+      .head
+        | Your projects
+        = link_to "New project", new_project_path, class: 'button'
+
+      - cache ["projects/owned", @current_user] do
+
+        - if @user_projects.length > 0
+          - for project in @user_projects
+              a href=project_path(project) class='row'
+                #{project.name}
+        - else
+          .row You don't belong to any project

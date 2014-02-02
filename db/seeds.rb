@@ -26,18 +26,11 @@ puts "\r\nStarting up the seed..."
 User.create!(
   [
     {
-      password: 'testtest',
-      password_confirmation: 'testtest',
-      email: 'test@test.com',
+      password: 'cojone',
+      password_confirmation: 'cojone',
+      email: 'squallstar@gmail.com',
       first_name: 'Nicholas',
       last_name: 'Valbusa'
-    },
-    {
-      password: 'testtest',
-      password_confirmation: 'testtest',
-      email: 'test2@test.com',
-      first_name: 'Michela',
-      last_name: 'Tannoia'
     }
   ]
 )
@@ -58,7 +51,8 @@ team = first_organization.teams.build({name: 'Developers', role: 'standard'})
   puts "\r\nGenerating project #{p}."
 
   project = Project.create!(
-    name: Faker::Company.catch_phrase
+    name: Faker::Company.catch_phrase,
+    owner: first_user
   )
 
   ProjectMember.create!({

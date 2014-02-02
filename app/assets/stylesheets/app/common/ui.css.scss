@@ -1,0 +1,29 @@
+.ui {
+
+  &.tbl {
+    border-radius: 5px;
+
+    .head {
+      position: relative;
+      height: 35px;
+      line-height: 35px;
+      background: #EEE;
+      padding: 0 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border: 1px solid #AAA;
+      border-bottom: 0;
+      font-weight: bold;
+      color: #333;
+
+      .button {
+        float: right;
+        display: inline-block;
+        background-color: $color-button-primary;
+        color: #FFF;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    }
+  }
+}

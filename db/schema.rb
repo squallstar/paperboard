@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140202173920) do
     t.datetime "updated_at"
     t.integer  "members_count",   default: 0
     t.integer  "organization_id"
+    t.integer  "owner_id"
   end
 
   add_index "projects", ["organization_id"], name: "index_projects_on_organization_id"
