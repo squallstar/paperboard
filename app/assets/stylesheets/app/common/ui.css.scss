@@ -12,7 +12,6 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border: 1px solid #AAA;
-      border-bottom: 0;
       font-weight: bold;
       color: #333;
 
@@ -28,6 +27,8 @@
         color: #FFF;
         text-decoration: none;
         border-radius: 5px;
+        border: 1px solid $color-green;
+        @include background-image(linear-gradient(top, lighten($color-green, 10%), $color-green));
       }
     }
   }

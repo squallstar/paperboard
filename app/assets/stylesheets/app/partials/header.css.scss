@@ -5,12 +5,11 @@ body {
 
   #header {
     @extend %antialias;
-    background: #EEE;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: $color-primary;
+    background-color: $color-dark;
     color: #FFF;
     height: $header-height;
 
@@ -39,8 +38,8 @@ body {
       float: left;
       margin: 0 $grid-gutter;
       padding: 0 $grid-gutter;
-      border-left: 1px solid rgba(255,255,255,0.1);
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-left: 2px solid rgba(255,255,255,0.1);
+      border-right: 2px solid rgba(255,255,255,0.1);
       height: 100%;
 
       input {
@@ -146,6 +145,7 @@ body {
 
         > ul {
           display: block;
+          z-index: 2;
         }
       }
     }
