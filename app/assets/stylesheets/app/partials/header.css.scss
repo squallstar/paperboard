@@ -164,25 +164,21 @@ body {
 
   #notification {
     @extend %antialias;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    color: #FFF;
+    text-align: center;
+    padding: 17px;
 
     &.alert {
       @include icon("warning");
       background-color: $color-orange;
-      font-size: 13px;
-      font-weight: bold;
-      display: block;
     }
 
     &.notice {
       @include icon("check");
       background-color: $color-green;
-      font-size: 13px;
-      font-weight: bold;
-      display: block;
     }
-
-    color: #FFF;
-    text-align: center;
-    padding: 17px;
   }
 }

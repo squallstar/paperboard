@@ -28,6 +28,8 @@
             error_text = "The credit/debit card number is not valid"
           when "field_invalid_card_cvc"
             error_text = "The credit/debit CVC number is not valid"
+          when "field_invalid_card_exp"
+            error_text = "The expiratio date is not valid"
           when "3ds_cancelled"
             error_text = "You didn't authorize your card"
 

@@ -11,7 +11,7 @@
   font-weight: normal;
   font-style: normal;
 }
-.fa {
+.fa:before {
   display: inline-block;
   font-family: FontAwesome;
   font-style: normal;
