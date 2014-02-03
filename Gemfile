@@ -33,6 +33,9 @@ gem 'asset_sync'
 # Template engine
 gem "slim-rails"
 
+# Nav links
+gem 'nav_lynx'
+
 # Serializer for APIs
 gem "active_model_serializers"
 

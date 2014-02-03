@@ -1,39 +1,40 @@
-#project {
+header.top {
+  @extend %clear;
+  border-bottom: 2px solid $color-grey-light;
+  margin-bottom: 20px;
 
-  .frame > header {
-    @extend %clear;
-    border-bottom: 2px solid $color-grey-light;
-    margin-bottom: 30px;
+  h1 {
+    float: left;
+    font-size: 2em;
+    font-weight: 600;
+    padding-bottom: 15px;
+  }
 
-    h1 {
-      float: left;
-    }
+  .actions {
+    margin-top: 5px;
+    float: right;
 
-    .actions {
-      float: right;
+    li {
+      display: inline-block;
 
-      li {
-        display: inline-block;
+      a {
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        border: 2px solid $color-grey-dark;
+        color: $color-grey-dark;
+        text-align: center;
+        font-size: 16px;
+        padding-top: 5px;
 
-        a {
-          display: block;
-          width: 30px;
-          height: 30px;
-          border-radius: 30px;
-          border: 2px solid $color-grey-dark;
-          color: $color-grey-dark;
-          text-align: center;
-          font-size: 16px;
-          padding-top: 5px;
+        i {
+          vertical-align: middle;
+        }
 
-          i {
-            vertical-align: middle;
-          }
-
-          &:hover {
-            color: darken($color-grey-dark, 20%);
-            border-color: darken($color-grey-dark, 20%);
-          }
+        &:hover {
+          color: darken($color-grey-dark, 20%);
+          border-color: darken($color-grey-dark, 20%);
         }
       }
     }

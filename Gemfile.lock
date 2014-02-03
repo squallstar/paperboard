@@ -103,6 +103,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     mysql2 (0.3.15)
+    nav_lynx (1.1.0)
+      rails (>= 3.2.13)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -215,6 +217,7 @@ DEPENDENCIES
   jquery-rails
   memcachier
   mysql2
+  nav_lynx
   newrelic_rpm
   paperclip
   paymill

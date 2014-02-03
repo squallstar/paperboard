@@ -1,7 +1,14 @@
-ul
-  li.active
-    = link_to "Dashboard", project_path(@current_project)
-  li
-    = link_to "Members", project_members_path(@current_project)
-  li
-    = link_to "Invites", project_invites_path(@current_project)
+.sidebar
+  ul
+    li.active
+      a href=project_path(@current_project)
+        i class="fa fa-home fa-fw"
+        ' Dashboard
+    li
+      a href=project_members_path(@current_project)
+        i class="fa fa-users fa-fw"
+        ' Members
+    li
+      a href=project_invites_path(@current_project)
+        i class="fa fa-envelope fa-fw"
+        ' Invites

@@ -1,23 +1,31 @@
+- @title = 'Account'
+
 = render "settings/header"
 
-h1 Account settings
+.frame
+  .bit-5
+    = render "settings/sidebar"
 
-= form_for @user, url: settings_account_path do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited your password from being updated:"
-      ul
-        - @user.errors.full_messages.each do |message|
-          li = message
+  .bit-5-4.content
+    h2 Account settings
 
-  .field
-    = f.label :current_password
-    = f.password_field :current_password
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
+    = form_for @user, url: settings_account_path do |f|
+      - if @user.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@user.errors.count, "error")} prohibited your password from being updated:"
+          ul
+            - @user.errors.full_messages.each do |message|
+              li = message
 
-  .actions = f.submit 'Update password'
+      .field
+        = f.label :current_password
+        = f.password_field :current_password
+      .field
+        = f.label :password
+        = f.password_field :password
+      .field
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+
+      .actions = f.submit 'Update password'
+

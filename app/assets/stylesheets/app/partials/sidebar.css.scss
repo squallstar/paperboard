@@ -1,0 +1,39 @@
+.sidebar {
+  padding-right: 20px;
+
+  > ul {
+
+    li {
+      margin-bottom: 5px;
+
+      a {
+        @extend %antialias;
+        display: block;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 13px 10px;
+        border-radius: 5px;
+        color: $color-black;
+        font-weight: 600;
+
+        i {
+          margin-right: 10px;
+          color: #8A989C;
+          font-size: 15px;
+        }
+      }
+
+      &.selected {
+
+        a {
+          background-color: $color-cyan;
+          color: #FFF;
+
+          i {
+            color: #FFF;
+          }
+        }
+      }
+    }
+  }
+}

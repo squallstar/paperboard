@@ -127,6 +127,7 @@ body {
         width: 100%;
         border-right: 1px solid #CCC;
         border-left: 1px solid #CCC;
+        z-index: 100;
 
         li {
           border-bottom: 1px solid #CCC;
@@ -156,7 +157,6 @@ body {
 
         > ul {
           display: block;
-          z-index: 2;
         }
       }
     }
