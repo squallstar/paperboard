@@ -1,0 +1,7 @@
+ul
+  li.active
+    = link_to "Dashboard", project_path(@current_project)
+  li
+    = link_to "Members", project_members_path(@current_project)
+  li
+    = link_to "Invites", project_invites_path(@current_project)

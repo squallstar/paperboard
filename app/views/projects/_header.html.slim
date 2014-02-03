@@ -1,8 +1,9 @@
-header
-  h1 #{@current_project.name}
+- @title = @current_project.name
 
-  = link_to "Dashboard", project_path(@current_project)
-  '&nbsp;|
-  = link_to "Members", project_members_path(@current_project)
-  '&nbsp;|
-  = link_to "Invites", project_invites_path(@current_project)
+.frame.top-margin
+  header
+    h1 #{@current_project.name}
+    ul.actions
+      li
+        a href="#"
+          i class="fa fa-cog"

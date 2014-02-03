@@ -1,4 +1,14 @@
 @mixin icon($icon-name) {
-  @extend .fa;
+  position: relative;
+
+  &:before {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   @extend .fa-#{$icon-name};
 }
