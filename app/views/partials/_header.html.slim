@@ -24,5 +24,8 @@ header#header
         li
           = link_to "Log out", logout_path
 
-  - if flash[:alert]
-    p#alert= flash[:alert]
+- if flash[:alert]
+  p#notification.alert= flash[:alert]
+
+- if flash[:notice]
+  p#notification.notice= flash[:notice]
