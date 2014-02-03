@@ -35,12 +35,23 @@ body {
     }
 
     .search {
+      position: relative;
       float: left;
       margin: 0 $grid-gutter;
       padding: 0 $grid-gutter;
       border-left: 2px solid rgba(255,255,255,0.1);
       border-right: 2px solid rgba(255,255,255,0.1);
       height: 100%;
+
+      @include icon("search");
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #AAA;
+        top: 17px;
+        right: 21px;
+      }
 
       input {
         border: 0;

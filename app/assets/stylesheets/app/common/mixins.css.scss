@@ -1,0 +1,4 @@
+@mixin icon($icon-name) {
+  @extend .fa;
+  @extend .fa-#{$icon-name};
+}

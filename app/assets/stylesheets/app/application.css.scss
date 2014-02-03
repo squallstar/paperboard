@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
+@import "font-awesome";
 @import "lemonade";
 @import "shared/fonts";
 
 @import "common/config";
+@import "common/mixins";
 @import "common/colors";
 @import "common/reset";
 @import "common/typography";
