@@ -8,7 +8,7 @@ class Settings::AccountController < ApplicationController
     if @user.update_with_password(user_params)
       @current_user = @user
 
-      flash.now[:alert] = 'Your account was successfully updated.'
+      flash.now[:notice] = 'Your account was successfully updated.'
     end
 
     render action: 'index'

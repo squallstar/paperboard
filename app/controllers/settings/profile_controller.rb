@@ -8,7 +8,7 @@ class Settings::ProfileController < ApplicationController
     if @user.update(user_params)
       @current_user = @user
 
-      flash.now[:alert] = 'Your profile was successfully updated.'
+      flash.now[:notice] = 'Your profile was successfully updated.'
     end
 
     render action: 'index'
