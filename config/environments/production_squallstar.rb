@@ -15,7 +15,8 @@ Paperboard::Application.configure do
   config.action_controller.perform_caching = true
 
   config.action_mailer.default_url_options = {
-    :host => "rails.paperboard.me"
+    :host => "rails.paperboard.me",
+    :protocol => 'https'
   }
 
   config.paperclip_defaults = {
