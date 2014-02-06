@@ -12,6 +12,7 @@ body {
     background-color: $color-dark;
     color: #FFF;
     height: $header-height;
+    z-index: 2;
 
     .frame {
       height: 100%;
@@ -127,7 +128,6 @@ body {
         width: 100%;
         border-right: 1px solid #CCC;
         border-left: 1px solid #CCC;
-        z-index: 100;
 
         li {
           border-bottom: 1px solid #CCC;
