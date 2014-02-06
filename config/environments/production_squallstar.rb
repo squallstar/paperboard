@@ -63,7 +63,7 @@ Paperboard::Application.configure do
   config.assets.digest = true
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.initialize_on_precompile = true
-  config.assets.prefix = "/eu-assets"
+  config.assets.prefix = "/assets"
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'

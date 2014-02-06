@@ -11,8 +11,14 @@ gem 'rails_config'
 gem 'rack-cache', :groups => [:production, :production_squallstar]
 
 # Memcache
-gem 'dalli'
+gem 'dalli', :group => :production
 gem 'memcachier'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+end
 
 # Env files
 gem 'dotenv-rails'
@@ -70,6 +76,9 @@ end
 group :production_squallstar do
   # MySQL adapter
   gem 'mysql2'
+
+  # RVM
+  gem 'capistrano-rvm'
 end
 
 # Use CoffeeScript for .js.coffee assets and views
