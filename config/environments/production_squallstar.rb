@@ -3,6 +3,7 @@ Paperboard::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.static_cache_control = "public, max-age=2592000"
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
@@ -59,6 +60,7 @@ Paperboard::Application.configure do
   config.assets.digest = true
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.initialize_on_precompile = true
+  config.assets.prefix = "/eu-assets"
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
