@@ -1,4 +1,4 @@
-set :rails_env, 'production_squallstar'
+set :rails_env, 'staging_squallstar'
 set :keep_releases, 5
 set :assets_role, [:web, :app, :worker]
 

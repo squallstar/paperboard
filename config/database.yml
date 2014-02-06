@@ -16,13 +16,13 @@ production:
   username: user
   database: paper_prod
 
-production_squallstar:
+staging_squallstar:
    adapter: mysql2
    encoding: utf8
    collation: utf8_unicode_ci
-   database: paperboard
+   database: <%= ENV['DATABASE_NAME'] %>
    pool: 10
    username: paperboard
-   password: <%= ENV['PRODUCTION_SQUALLSTAR_DB_PASSWORD'] %>
+   password: <%= ENV['DATABASE_PASSWORD'] %>
    socket: /var/run/mysqld/mysqld.sock
    reconnect: true

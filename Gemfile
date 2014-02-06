@@ -8,7 +8,7 @@ gem 'rails', '4.0.0'
 # Config files
 gem 'rails_config'
 
-gem 'rack-cache', :groups => [:production, :production_squallstar]
+gem 'rack-cache', :groups => [:production, :staging_squallstar]
 
 # Memcache
 gem 'dalli', :group => :production
@@ -73,7 +73,7 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-group :production_squallstar do
+group :staging_squallstar do
   # MySQL adapter
   gem 'mysql2'
 
