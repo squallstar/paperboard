@@ -14,7 +14,7 @@ class Settings::BillingController < ApplicationController
       @subscription.user = User.find(@current_user.id)
 
       if @subscription.save_with_payment
-        redirect_to settings_billing_path, alert: "Thank you for subscribing!"
+        redirect_to settings_billing_path, notice: "Thank you for subscribing!"
       end
     end
   end
