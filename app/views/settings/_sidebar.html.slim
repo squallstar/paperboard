@@ -1,4 +1,8 @@
 .sidebar
+  a.head.selected href=settings_profile_path
+    = image_tag @current_user.avatar.url(:small)
+    span = @current_user.full_name
+
   ul
     li
       = nav_link_to settings_profile_path do
@@ -12,3 +16,8 @@
       = nav_link_to settings_billing_path do
         i class="fa fa-dollar fa-fw"
         ' Billing
+
+  / Other organizations here
+  / a.head href=settings_profile_path
+  /   = image_tag @current_user.avatar.url(:small)
+  /   span = @current_user.full_name

@@ -1,8 +1,6 @@
 - @title = 'Your profile'
 
-= render "settings/header"
-
-.frame
+.frame.top-margin
   .bit-5
     = render "settings/sidebar"
 
@@ -26,9 +24,8 @@
       .field
         = f.label :email
         = f.text_field :email
-      .field
-        hr
-        p Current avatar:
+      .field.file
+        = f.label "Profile picture"
         = image_tag @user.avatar.url(:small)
         = f.file_field :avatar
 

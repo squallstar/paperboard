@@ -1,7 +1,64 @@
 .sidebar {
   padding-right: 20px;
 
+  .head {
+    $height: 64px;
+
+    display: block;
+    position: relative;
+    background: $color-grey-light;
+    height: $height;
+    line-height: $height;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: $color-dark;
+    padding: 0 10px;
+
+    &:hover {
+      background: darken($color-grey-light, 5%);
+    }
+
+    img {
+      $size: 36px;
+
+      width: $size;
+      height: $size;
+      border-radius: 5px;
+      position: absolute;
+      top: ($height - $size)/2;
+      left: 10px;
+    }
+
+    span {
+      @extend %ellipsis;
+      position: absolute;
+      left: 55px;
+      right: 10px;
+    }
+
+    &.selected {
+      background: $color-dark;
+      color: #FFF;
+
+      &:after {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: 0;
+        border-top-color: $color-dark;
+        border-width: 7px;
+        margin-left: -7px;
+      }
+    }
+  }
+
   > ul {
+    margin-bottom: 30px;
 
     li {
       margin-bottom: 5px;
@@ -16,6 +73,10 @@
         color: $color-black;
         font-weight: 600;
 
+        &:hover {
+          background-color: #FAFAFA;
+        }
+
         i {
           margin-right: 10px;
           color: #8A989C;
@@ -24,7 +85,7 @@
       }
 
       a.selected {
-        background-color: $color-cyan;
+        background-color: $color-yellow;
         color: #FFF;
 
         i {
