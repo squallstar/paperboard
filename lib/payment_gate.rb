@@ -17,7 +17,9 @@ class PaymentGate
   end
 
   def self.create_payment(card_token, client)
-    Paymill::Payment.create token: card_token, client: client
+    payment = Paymill::Payment.create token: card_token, client: client
+    Rails.logger.info "Payment created with token #{card_token} for client #{client}"
+    payment
   end
 
   def self.subscribe(plan, client, card_token)
