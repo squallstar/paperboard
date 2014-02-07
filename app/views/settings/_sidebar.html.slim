@@ -1,7 +1,7 @@
 .sidebar
   ul
     li
-      a href=settings_profile_path
+      = nav_link_to settings_profile_path do
         i class="fa fa-user fa-fw"
         ' Profile
     li
@@ -9,6 +9,6 @@
         i class="fa fa-unlock-alt fa-fw"
         ' Account
     li
-      a href=settings_billing_path
+      = nav_link_to settings_billing_path do
         i class="fa fa-dollar fa-fw"
         ' Billing

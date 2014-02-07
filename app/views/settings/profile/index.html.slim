@@ -1,30 +1,37 @@
+- @title = 'Your profile'
+
 = render "settings/header"
 
-h1 Your profile
+.frame
+  .bit-5
+    = render "settings/sidebar"
 
-= form_for @user, url: settings_profile_path, html: { :multipart => true } do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited your profile from being updated:"
-      ul
-        - @user.errors.full_messages.each do |message|
-          li = message
+  .bit-5-4.content
+    h2 Your profile
 
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    hr
-    p Current avatar:
-    = image_tag @user.avatar.url(:small)
-    = f.file_field :avatar
+    = form_for @user, url: settings_profile_path, html: {:class => 'styled', :multipart => true } do |f|
+      - if @user.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@user.errors.count, "error")} prohibited your profile from being updated:"
+          ul
+            - @user.errors.full_messages.each do |message|
+              li = message
 
-  hr
+      .field
+        = f.label :first_name
+        = f.text_field :first_name
+      .field
+        = f.label :last_name
+        = f.text_field :last_name
+      .field
+        = f.label :email
+        = f.text_field :email
+      .field
+        hr
+        p Current avatar:
+        = image_tag @user.avatar.url(:small)
+        = f.file_field :avatar
 
-  .actions = f.submit 'Update profile'
+      hr
+
+      .actions = f.submit 'Update profile'

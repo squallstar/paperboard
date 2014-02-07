@@ -23,15 +23,12 @@
         }
       }
 
-      &.selected {
+      a.selected {
+        background-color: $color-cyan;
+        color: #FFF;
 
-        a {
-          background-color: $color-cyan;
+        i {
           color: #FFF;
-
-          i {
-            color: #FFF;
-          }
         }
       }
     }

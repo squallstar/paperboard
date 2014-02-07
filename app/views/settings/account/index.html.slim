@@ -9,7 +9,7 @@
   .bit-5-4.content
     h2 Account settings
 
-    = form_for @user, url: settings_account_path do |f|
+    = form_for @user, url: settings_account_path, html: {class: 'styled'} do |f|
       - if @user.errors.any?
         #error_explanation
           h2 = "#{pluralize(@user.errors.count, "error")} prohibited your password from being updated:"
