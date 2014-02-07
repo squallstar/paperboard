@@ -6,6 +6,7 @@ Paperboard::Application.routes.draw do
 
     get "account" => "account#index"
     patch "account" => "account#update"
+    delete "account" => "account#destroy"
 
     get "billing" => "billing#index"
     post "billing/subscribe/:plan_id" => "billing#subscribe", as: :billing_subscribe

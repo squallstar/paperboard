@@ -2,6 +2,7 @@ class Settings::AccountController < ApplicationController
   before_action :set_user
 
   def index
+
   end
 
   def update
@@ -14,9 +15,14 @@ class Settings::AccountController < ApplicationController
     render action: 'index'
   end
 
+  def destroy
+
+  end
+
   private
     def set_user
       @user = User.find(@current_user)
+      @owns_organizations = @user.teams.where(role: 'admin').count > 0
     end
 
     def user_params

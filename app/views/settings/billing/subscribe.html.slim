@@ -2,8 +2,6 @@ javascript:
   var PAYMILL_PUBLIC_KEY = "#{ENV['PAYMILL_PUBLIC_KEY']}";
 = javascript_include_tag "https://bridge.paymill.com/"
 
-= render "settings/header"
-
 h1 Subscribe to #{I18n.translate("plans.names.#{@subscription.plan.name}")}
 
 p

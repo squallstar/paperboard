@@ -9,8 +9,7 @@ class Subscription < ActiveRecord::Base
 
   def save_with_payment
     if valid?
-      payment = Paymill::Payment.create token: paymill_card_token, client: user.client.id
-      subscription = Paymill::Subscription.create offer: plan.paymill_id, client: user.client.id, payment: payment.id
+      subscription = PaymentGate.subscribe plan.paymill_id, user.client.id, paymill_card_token
 
       self.paymill_id = subscription.id
       self.active = true
@@ -21,19 +20,20 @@ class Subscription < ActiveRecord::Base
       save!
       logger.info "Subscription: a new subscription have been setup with paymill_id #{self.paymill_id}"
     end
-  rescue Paymill::PaymillError => e
-    logger.error "Paymill error while creating customer: #{e.message}"
+  rescue => e
+    logger.error "Error while creating subscription for user #{user.client.id}: #{e}"
     errors.add :base, "There was a problem with your credit card. Please try again."
     false
   end
 
   def expire_at
-    created_at + 1.months
+    # TODO: needs to be improved to change every month
+    updated_at + 1.months
   end
 
   private
     def delete_paymill_subscription
-      Paymill::Subscription.delete self.paymill_id
+      PaymentGate.unsubscribe self.paymill_id
       logger.info "Subscription: user #{user.id} has been unsubscribed from paymill_id #{self.paymill_id}"
     end
 end

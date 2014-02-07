@@ -85,9 +85,9 @@ class User < ActiveRecord::Base
   def client
     if not @client
       if client_id
-        @client = Paymill::Client.find(self.client_id)
+        @client = PaymentGate.find_client client_id
       else
-        @client = Paymill::Client.create paymill_attributes
+        @client = PaymentGate.create_client payment_client_attributes
         client_id = @client.id
         save!
       end
@@ -138,21 +138,21 @@ class User < ActiveRecord::Base
       self.full_name = first_name + ' ' + last_name
     end
 
-    # Updates the Paymill client whenever the full_name or email have changed
+    # Updates the Payments client whenever the full_name or email have changed
     def after_change
       if self.email_changed? or self.full_name_changed?
-        client.update_attributes paymill_attributes
+        PaymentGate.update_client client, payment_client_attributes
       end
     end
 
     def after_destroy
-      if self.client_id
-        Paymill::Client.delete(self.client_id)
+      if client_id
+        PaymentGate.delete_client client_id
       end
     end
 
-    # Attributes for Paymill client
-    def paymill_attributes
+    # Attributes for Payments client
+    def payment_client_attributes
       {email: email, description: full_name}
     end
 end
