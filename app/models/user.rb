@@ -85,9 +85,9 @@ class User < ActiveRecord::Base
   def client
     if not @client
       if client_id
-        @client = PaymentGate.find_client client_id
+        @client = Paperboard::Payments.find_client client_id
       else
-        @client = PaymentGate.create_client payment_client_attributes
+        @client = Paperboard::Payments.create_client payment_client_attributes
         client_id = @client.id
         save!
       end
@@ -141,13 +141,13 @@ class User < ActiveRecord::Base
     # Updates the Payments client whenever the full_name or email have changed
     def after_change
       if self.email_changed? or self.full_name_changed?
-        PaymentGate.update_client client, payment_client_attributes
+        Paperboard::Payments.update_client client, payment_client_attributes
       end
     end
 
     def after_destroy
       if client_id
-        PaymentGate.delete_client client_id
+        Paperboard::Payments.delete_client client_id
       end
     end
 

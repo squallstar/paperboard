@@ -15,19 +15,6 @@ form.styled {
       margin-bottom: 6px;
     }
 
-    p {
-      margin-bottom: 10px;
-      line-height: 1.4;
-
-      strong {
-        font-weight: bold;
-      }
-
-      a {
-        color: $color-primary;
-      }
-    }
-
     input[type="text"], input[type="email"], input[type="password"] {
       display: block;
       min-width: 400px;
@@ -42,15 +29,29 @@ form.styled {
         border-color: #999;
       }
 
-      &.short {
-        min-width: 0;
-        width: 100px;
+      &.number {
+        letter-spacing: 2px;
       }
     }
 
     input[type="submit"] {
-      @extend %button;
       margin-top: 5px;
+    }
+
+    select {
+      @include appearance(none);
+      font-family: $base-font-family;
+      border: 1px solid #CCC;
+      background: linear-gradient(color-stops(#FFF, $color-grey-light));
+      font-size: 15px;
+      padding: 10px 5px 10px 10px;
+      border-radius: 5px;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+      outline: none;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .file {
@@ -71,6 +72,25 @@ form.styled {
         }
       }
     }
+
+    .with-icon {
+      position: relative;
+
+      .fa {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        color: #CCC;
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        line-height: 37px;
+      }
+
+      input {
+        padding-left: 35px;
+      }
+    }
   }
 
   &.full {
@@ -79,6 +99,11 @@ form.styled {
 
       input[type="text"], input[type="email"], input[type="password"] {
         width: 100%;
+
+        &.short {
+          min-width: 0;
+          width: 110px;
+        }
       }
     }
   }
@@ -90,6 +115,30 @@ section.grey {
   background: #FAFAFA;
   border: 1px solid #EAEAEA;
   border-radius: 5px;
+
+  input[type="submit"] {
+    @extend %button;
+  }
+
+  p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+
+    strong {
+      font-weight: bold;
+    }
+
+    a {
+      color: $color-primary;
+    }
+
+    &.error {
+      @extend %antialias;
+      color: $color-red;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
 
   > h3 {
     font-size: 14px;

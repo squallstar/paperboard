@@ -10,31 +10,33 @@ javascript:
   .bit-2.offset-4.content
     h2 Subscribe to #{I18n.translate("plans.names.#{@subscription.plan.name}")} plan
 
+    h3 = plan_features @subscription.plan.name
+
     section.grey
       h3 Credit card billing details
 
       = form_for @subscription, url: "", html: {class: 'styled full'} do |f|
-        - if @subscription.errors.any?
-          #error_explanation
-            h2 = "#{pluralize(@subscription.errors.count, "error")}:"
-            ul
-              - @subscription.errors.full_messages.each do |message|
-                li = message
 
         = f.hidden_field :paymill_card_token
         = f.hidden_field :paymill_card_last
 
         .field
           = label_tag :cardholder_name, "Cardholder name"
-          = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
+          .with-icon
+            i class='fa fa-user'
+            = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
 
         .field
           = label_tag :card_number, "Credit Card Number"
-          = text_field_tag :card_number, nil, name: nil, maxlength: 16
+          .with-icon
+            i class='fa fa-credit-card'
+            = text_field_tag :card_number, nil, name: nil, maxlength: 16, class: 'number'
 
         .field
           = label_tag :card_code, "Security Code on Card (CVV)"
-          = text_field_tag :card_code, nil, name: nil, maxlength: 5, class: 'short'
+          .with-icon
+            i class='fa fa-key'
+            = text_field_tag :card_code, nil, name: nil, maxlength: 5, class: 'short number'
 
         .field
           = label_tag :card_month, "Card Expiration"
@@ -43,9 +45,15 @@ javascript:
 
         .field
           = label_tag :null, "Price"
-          = text_field_tag nil, number_to_currency(@subscription.plan.price, unit: "$") + " per month", disabled: true
+          .with-icon
+            i class='fa fa-money'
+            = text_field_tag nil, number_to_currency(@subscription.plan.price, unit: "$") + " per month", disabled: true
 
-        #paymill_error
+        p#paymill_error.error
           noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+
+        - if @subscription.errors.any?
+          - @subscription.errors.full_messages.each do |message|
+            p.error = message
 
         .field.actions = f.submit 'Subscribe'

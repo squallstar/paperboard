@@ -9,7 +9,7 @@ class Subscription < ActiveRecord::Base
 
   def save_with_payment
     if valid?
-      subscription = PaymentGate.subscribe plan.paymill_id, user.client.id, paymill_card_token
+      subscription = Paperboard::Payments.subscribe plan.paymill_id, user.client.id, paymill_card_token
 
       self.paymill_id = subscription.id
       self.active = true
@@ -33,7 +33,7 @@ class Subscription < ActiveRecord::Base
 
   private
     def delete_paymill_subscription
-      PaymentGate.unsubscribe self.paymill_id
+      Paperboard::Payments.unsubscribe self.paymill_id
       logger.info "Subscription: user #{user.id} has been unsubscribed from paymill_id #{self.paymill_id}"
     end
 end

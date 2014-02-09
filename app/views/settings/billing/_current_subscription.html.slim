@@ -1,7 +1,13 @@
 - if @current_user.has_active_subscription
-  p You're signed up for monthly billing with the #{I18n.translate("plans.names.#{@subscription.plan.name}")} plan.
+  p
+    ' You're signed up for
+    strong monthly billing
+    '  with the
+    strong #{I18n.translate("plans.names.#{@subscription.plan.name}")}
+    '  plan.
   p
     | Your credit card **** **** **** #{@subscription.paymill_card_last} will automatically be charged #{number_to_currency @subscription.plan.price, unit: "$"} on #{@subscription.expire_at.strftime("%B %d, %Y")}.
-    = button_to "Cancel subscription", settings_billing_subscribe_delete_path, method: 'delete'
+  = button_to "Cancel subscription", settings_billing_subscribe_delete_path, method: 'delete'
+
 - else
   p You don't have any active subscription.
