@@ -10,14 +10,7 @@
     section.grey
       h3 Change password
 
-      = form_for @user, url: settings_account_path, html: {class: 'styled'} do |f|
-        - if @user.errors.any?
-          #error_explanation
-            h2 = "#{pluralize(@user.errors.count, "error")} prohibited your password from being updated:"
-            ul
-              - @user.errors.full_messages.each do |message|
-                li = message
-
+      = form_for @user, url: settings_account_path, html: {class: 'styled', autocomplete: 'off'} do |f|
         .field
           = f.label :current_password, "Old password"
           = f.password_field :current_password
@@ -27,6 +20,14 @@
         .field
           = f.label :password_confirmation, "Confirm new password"
           = f.password_field :password_confirmation
+
+        - if @user.errors.any?
+          .errors
+            h4 = "#{pluralize(@user.errors.count, "error")} prohibited your password from being updated:"
+            ul
+              - @user.errors.full_messages.each do |message|
+                li = message
+
         .field.actions
           = f.submit 'Update password'
 
@@ -40,7 +41,9 @@
           .field
             p
               ' Your account is currently an owner on these organizations:
-              strong #{@user.organizations.map { |o| o.name }.join ', '}.
+              strong
+                == @user.organizations.map { |o| link_to(o.name, organization_path(o)).html_safe }.join ', '
+                | .
             p You must transfer ownership or delete these organizations before you can delete your user.
 
         - else
