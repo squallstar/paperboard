@@ -2,41 +2,50 @@ javascript:
   var PAYMILL_PUBLIC_KEY = "#{ENV['PAYMILL_PUBLIC_KEY']}";
 = javascript_include_tag "https://bridge.paymill.com/"
 
-h1 Subscribe to #{I18n.translate("plans.names.#{@subscription.plan.name}")}
+- @title = 'Billing'
 
-p
-  = number_to_currency @subscription.plan.price, unit: "$"
-  | &nbsp;per month!
+.frame.top-margin
 
-= form_for @subscription, url: "" do |f|
-  - if @subscription.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@subscription.errors.count, "error")}:"
-      ul
-        - @subscription.errors.full_messages.each do |message|
-          li = message
 
-  = f.hidden_field :paymill_card_token
-  = f.hidden_field :paymill_card_last
+  .bit-2.offset-4.content
+    h2 Subscribe to #{I18n.translate("plans.names.#{@subscription.plan.name}")} plan
 
-  .field
-    = label_tag :cardholder_name, "Cardholder name"
-    = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
+    section.grey
+      h3 Credit card billing details
 
-  .field
-    = label_tag :card_number, "Credit Card Number"
-    = text_field_tag :card_number, nil, name: nil, maxlength: 16
+      = form_for @subscription, url: "", html: {class: 'styled full'} do |f|
+        - if @subscription.errors.any?
+          #error_explanation
+            h2 = "#{pluralize(@subscription.errors.count, "error")}:"
+            ul
+              - @subscription.errors.full_messages.each do |message|
+                li = message
 
-  .field
-    = label_tag :card_code, "Security Code on Card (CVV)"
-    = text_field_tag :card_code, nil, name: nil, maxlength: 5
+        = f.hidden_field :paymill_card_token
+        = f.hidden_field :paymill_card_last
 
-  .field
-    = label_tag :card_month, "Card Expiration"
-    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+        .field
+          = label_tag :cardholder_name, "Cardholder name"
+          = text_field_tag :cardholder_name, @current_user.full_name, name: :cardholder_name, maxlength: 16
 
-  #paymill_error
-    noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+        .field
+          = label_tag :card_number, "Credit Card Number"
+          = text_field_tag :card_number, nil, name: nil, maxlength: 16
 
-  .actions = f.submit 'Subscribe'
+        .field
+          = label_tag :card_code, "Security Code on Card (CVV)"
+          = text_field_tag :card_code, nil, name: nil, maxlength: 5, class: 'short'
+
+        .field
+          = label_tag :card_month, "Card Expiration"
+          = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+          = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+
+        .field
+          = label_tag :null, "Price"
+          = text_field_tag nil, number_to_currency(@subscription.plan.price, unit: "$") + " per month", disabled: true
+
+        #paymill_error
+          noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+
+        .field.actions = f.submit 'Subscribe'

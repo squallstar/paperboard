@@ -41,6 +41,11 @@ form.styled {
       &:focus {
         border-color: #999;
       }
+
+      &.short {
+        min-width: 0;
+        width: 100px;
+      }
     }
 
     input[type="submit"] {
@@ -67,6 +72,16 @@ form.styled {
       }
     }
   }
+
+  &.full {
+
+    .field {
+
+      input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+      }
+    }
+  }
 }
 
 section.grey {
@@ -88,6 +103,11 @@ section.grey {
 
     input[type="text"], input[type="email"], input[type="password"] {
       background: #FFF;
+
+      &:disabled {
+        background-color: transparent;
+        color: #AAA;
+      }
     }
   }
 }

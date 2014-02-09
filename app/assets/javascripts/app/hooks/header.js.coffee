@@ -6,7 +6,7 @@
     $header.toggleClass 'with-menu'
 
   # Fade out green notifications
-  $alerts = $('#wrapp > .notice')
+  $alerts = $('#notification.notice')
   if $alerts.length
     window.setTimeout (=>
       $alerts.animate

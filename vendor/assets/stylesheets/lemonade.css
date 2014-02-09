@@ -29,10 +29,7 @@
   float: left;
 }
 
-/* Floats last ".bit-" to the right */
-[class*='bit-']:last-of-type {
-  float: right
-}
+
 
 /* Clearfix */
 .frame:after {
@@ -57,3 +54,5 @@
 .bit-10 { width: 10% }
 .bit-11 { width: 9.09090909091% }
 .bit-12 { width: 8.33% }
+
+.offset-4 { margin-left: 25%; }
