@@ -8,7 +8,9 @@ en:
               match: "doesn't match with your user password."
 
   plans:
-    features: "%{projects} project, %{team} team, %{users} users"
+    features:
+      one: "%{projects} project, %{team} team, %{users} users"
+      other: "%{projects} projects, %{team} teams, %{users} users"
     names:
       free: "Free"
       standard: "Start-up"

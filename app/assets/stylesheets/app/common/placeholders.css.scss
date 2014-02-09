@@ -19,3 +19,32 @@
 %antialias {
   -webkit-font-smoothing: antialiased;
 }
+
+%button {
+  border: 0;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  background: linear-gradient(color-stops(#FFF, $color-grey-light));
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  color: $color-black;
+  text-shadow: 0 1px 0 #FFF;
+
+  &:hover {
+    cursor: pointer;
+    border-color: #AAA;
+  }
+
+  &:active {
+    border-color: #777;
+    background: $color-grey-light;
+  }
+
+  &.danger {
+    background: linear-gradient(color-stops(lighten($color-orange, 10%), $color-orange));
+    border-color: $color-orange;
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+}
