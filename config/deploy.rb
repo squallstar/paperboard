@@ -45,16 +45,6 @@ namespace :deploy do
     end
   end
 
-  desc 'Import plans'
-  task :import_plans do
-    on roles(:app), in: :sequence, wait: 5 do
-      within release_path do
-        execute :rake, 'paymill:import_plans'
-      end
-    end
-  end
-
-  after :publishing, :import_plans
   after :publishing, :restart
 
   after :restart, :clear_cache do
