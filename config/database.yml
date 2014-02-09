@@ -26,3 +26,14 @@ staging_squallstar:
    password: <%= ENV['DATABASE_PASSWORD'] %>
    socket: /var/run/mysqld/mysqld.sock
    reconnect: true
+
+production_squallstar:
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_unicode_ci
+  database: <%= ENV['DATABASE_NAME'] %>
+  pool: 10
+  username: paperboard
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
+  reconnect: true
