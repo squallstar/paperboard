@@ -5,6 +5,7 @@ html dir='ltr' lang='en' prefix='og: http://ogp.me/ns schema: http://schema.org/
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico'
   body#app
     #wrapp
       = render "partials/header"
