@@ -36,6 +36,10 @@ form.styled {
 
     input[type="submit"] {
       margin-top: 5px;
+
+      &:disabled {
+        opacity: 0.5;
+      }
     }
 
     select {
