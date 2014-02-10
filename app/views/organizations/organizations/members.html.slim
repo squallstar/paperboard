@@ -12,6 +12,6 @@ table border=1 cellpadding=6 cellspacing=0
       td
         = link_to user.full_name, user_path(user)
       td
-        - if @is_admin && @users.count > 0
+        - if @is_admin && @users.count > 1
           - lbl = @current_user.id != user.id ? 'Remove' : 'Leave'
           = link_to lbl, remove_member_organization_path(@organization, user), data: {method: 'delete'}
