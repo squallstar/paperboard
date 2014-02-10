@@ -19,6 +19,10 @@ class Organization < ActiveRecord::Base
     self.new params
   end
 
+  def remove_user(user)
+    user.team_memberships.where(team_id: teams).destroy_all
+  end
+
   private
     def create_default_teams
       team = Team.create! name: 'Owners', role: 'admin', organization: self

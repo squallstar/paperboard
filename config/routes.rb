@@ -22,7 +22,11 @@ Paperboard::Application.routes.draw do
 
   # Organizations
   resources :organizations, module: 'organizations' do
-    resources :members
+    member do
+      get 'members' => 'organizations#members'
+      delete 'members/:user' => 'organizations#remove_member', as: :remove_member
+    end
+
     resources :teams do
       collection do
         post 'members' => 'teams#add_member'

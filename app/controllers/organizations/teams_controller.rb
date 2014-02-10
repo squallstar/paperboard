@@ -36,7 +36,7 @@ class Organizations::TeamsController < ApplicationController
         # Sets the admin to the current user
         @team.members.create role: 'admin', user: @current_user
 
-        format.html { redirect_to organization_team_path(@organization, @team), notice: 'Team was successfully created.' }
+        format.html { redirect_to organization_team_path(@organization, @team), notice: "Team #{@team.name} was successfully created." }
         format.json { render action: 'show', status: :created, location: @team }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class Organizations::TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to @team, notice: "Team #{@team.name} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,13 +62,13 @@ class Organizations::TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    if not team.can_be_deleted?
-      return redirect_to organization_teams_path(@organization), notice: 'You cannot delete this team.'
+    if not @team.can_be_deleted?
+      return redirect_to organization_teams_path(@organization), alert: 'You cannot delete this team.'
     end
 
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to organization_teams_path(@organization) }
+      format.html { redirect_to organization_teams_path(@organization), notice: "Team #{@team.name} was successfully deleted." }
       format.json { head :no_content }
     end
   end
@@ -78,7 +78,7 @@ class Organizations::TeamsController < ApplicationController
       @team = Team.where(organization: @organization, id: params[:id]).first
 
       if not @team
-        redirect_to organization_teams_path(@organization), notice: 'The team does not exist.'
+        redirect_to organization_teams_path(@organization), alert: 'The team does not exist.'
       end
     end
 

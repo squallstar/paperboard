@@ -1,7 +1,9 @@
 class Organizations::OrganizationsController < ApplicationController
   include OrganizationLoading
 
-  before_action :load_organization, only: [:show, :edit, :update, :destroy]
+  before_action :load_organization, except: [:index, :new, :create]
+  before_action :is_admin, only: [:members]
+  before_action :require_admin, only: [:update, :destroy, :remove_member]
 
   # GET /organizations
   # GET /organizations.json
@@ -30,7 +32,7 @@ class Organizations::OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        format.html { redirect_to @organization, notice: "Organization #{@organization.name} was successfully created." }
         format.json { render action: 'show', status: :created, location: @organization }
       else
         format.html { render action: 'new' }
@@ -44,7 +46,7 @@ class Organizations::OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization, notice: "Organization #{@organization.name} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,8 +60,23 @@ class Organizations::OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url }
+      format.html { redirect_to organizations_url, notice: "Organization #{@organization.name} was successfully deleted." }
       format.json { head :no_content }
+    end
+  end
+
+  def members
+    @users = @organization.users
+  end
+
+  def remove_member
+    user = User.select(:id).find(params[:user])
+    if @organization.remove_user(user)
+      if user == @current_user
+        redirect_to organizations_path, notice: "You just left the organization #{@organization.name}."
+      else
+        redirect_to @organization, notice: "#{user.full_name} was successfully removed from the organization #{@organization.name}."
+      end
     end
   end
 
