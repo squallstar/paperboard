@@ -1,7 +1,9 @@
 class Organization < ActiveRecord::Base
-  has_many :users, through: :organization_members
-  has_many :members, foreign_key: :organization_id, class_name: :OrganizationMember, dependent: :destroy
   has_many :teams, dependent: :destroy
+
+  has_many :members, through: :teams
+  has_many :users, -> { uniq } , through: :members
+
   after_create :create_default_teams
 
   class_attribute :creator

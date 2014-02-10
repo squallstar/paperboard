@@ -11,8 +11,8 @@ module OrganizationLoading
   end
 
   def is_admin
-    # to be changed with teams
-    @is_admin ||= OrganizationMember.select(:role).where(organization: @organization, user: @current_user, role: 'owner').count > 0
+    team = @current_user.cached_teams.find { |t| t.organization_id == @organization.id && t.role == "admin" }
+    @is_admin ||= team != nil
   end
 
   def require_admin

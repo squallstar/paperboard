@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
   has_many :team_memberships, foreign_key: :user_id, class_name: :TeamMember, dependent: :destroy
   has_many :teams, through: :team_memberships
-  has_many :organizations, through: :teams, :uniq => true
+  has_many :organizations, -> { uniq }, through: :teams
 
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
@@ -124,7 +124,13 @@ class User < ActiveRecord::Base
 
   def cached_organizations
     Rails.cache.fetch ["organizations", self] do
-      self.organizations.all
+      self.organizations.to_a
+    end
+  end
+
+  def cached_teams
+    Rails.cache.fetch ["teams", self] do
+      self.teams.to_a
     end
   end
 
