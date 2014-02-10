@@ -4,6 +4,8 @@ lock '3.1.0'
 set :application, 'paperboard'
 set :repo_url, 'https://squallstar:L9ndoners@github.com/squallstar/paperboard.git'
 
+set :test_log, "logs/capistrano.test.log"
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
@@ -35,36 +37,35 @@ set :linked_files, %w{.env}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-desc 'Run the tests'
-task :run_tests do
-  run_locally do
-    with rails_env: :test do
-      execute :rspec
-    end
-  end
-end
-
-before :deploy, :run_tests
-
 namespace :deploy do
 
+  desc 'Rspec tests'
+  before :starting, :run_tests do
+    puts "--> Running tests, please wait ..."
+    unless system "bundle exec rspec"
+      puts "--> Tests failed.."
+      exit
+    else
+      puts "--> Tests passed"
+    end
+  end
+
   desc 'Restart application'
-  task :restart do
+  before :publishing, :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
+      puts "--> Server restarted.."
     end
   end
 
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  # after :restart, :clear_cache do
+  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
+  #     # Here we can do anything such as:
+  #     # within release_path do
+  #     #   execute :rake, 'cache:clear'
+  #     # end
+  #   end
+  # end
 
 end
