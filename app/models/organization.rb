@@ -1,6 +1,7 @@
 class Organization < ActiveRecord::Base
-  has_many :teams, dependent: :destroy
+  include Subscriptions
 
+  has_many :teams, dependent: :destroy
   has_many :members, through: :teams
   has_many :users, -> { uniq } , through: :members
 

@@ -1,6 +1,7 @@
 class Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :user
+  belongs_to :organization
 
   before_destroy :delete_paymill_subscription
 

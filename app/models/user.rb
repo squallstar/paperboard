@@ -13,6 +13,8 @@
 # string   "request_token"
 
 class User < ActiveRecord::Base
+  include Subscriptions
+
   before_save :before_save
   after_update :after_change
   after_destroy :after_destroy
@@ -35,8 +37,6 @@ class User < ActiveRecord::Base
 
   has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
   has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
-
-  has_one :subscription, dependent: :destroy
 
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
