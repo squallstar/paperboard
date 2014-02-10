@@ -35,6 +35,17 @@ set :linked_files, %w{.env}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+desc 'Run the tests'
+task :run_tests do
+  run_locally do
+    with rails_env: :test do
+      execute :rspec
+    end
+  end
+end
+
+before :deploy, :run_tests
+
 namespace :deploy do
 
   desc 'Restart application'
