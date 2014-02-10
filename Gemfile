@@ -8,17 +8,10 @@ gem 'rails', '4.0.0'
 # Config files
 gem 'rails_config'
 
-gem 'rack-cache', :groups => [:production, :staging_squallstar]
+gem 'rack-cache', :groups => [:production, :staging_squallstar, :production_squallstar]
 
 # Memcache
-gem 'dalli', :group => :production
 gem 'memcachier'
-
-group :development do
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-end
 
 # Env files
 gem 'dotenv-rails'
@@ -48,39 +41,6 @@ gem "active_model_serializers"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# For DB seed - we might move it to development environment at some point
-gem 'faker'
-
-group :development do
-  # SQLite adapter
-  gem 'sqlite3'
-
-  # Quiet Assets turns off the Rails asset pipeline log
-  gem 'quiet_assets'
-
-  # Eager loading
-  gem 'bullet'
-end
-
-group :production do
-  # PostgreSQL adapter
-  gem 'pg'
-
-  # Heroku logs and assets
-  gem 'rails_12factor'
-
-  # New relic for heroku
-  gem 'newrelic_rpm'
-end
-
-group :staging_squallstar do
-  # MySQL adapter
-  gem 'mysql2'
-
-  # RVM
-  gem 'capistrano-rvm'
-end
-
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
@@ -93,6 +53,54 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+group :development do
+  # Deploy
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+
+  # SQLite adapter
+  gem 'sqlite3'
+
+  # Quiet Assets turns off the Rails asset pipeline log
+  gem 'quiet_assets'
+
+  # Eager loading
+  gem 'bullet'
+end
+
+group :development, :test do
+  # Tests
+  gem 'rspec-rails'
+
+  # DB seed
+  gem 'faker'
+end
+
+# Heroku
+group :production do
+  # PostgreSQL adapter
+  gem 'pg'
+
+  # Memcachier storage
+  gem 'dalli'
+
+  # Heroku logs and assets
+  gem 'rails_12factor'
+
+  # New relic for heroku
+  gem 'newrelic_rpm'
+end
+
+# Squallstar Holland
+group :staging_squallstar, :production_squallstar do
+  # MySQL adapter
+  gem 'mysql2'
+
+  # RVM
+  gem 'capistrano-rvm'
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -103,9 +111,6 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Multi thread app server
 gem "puma"
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
