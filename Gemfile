@@ -72,6 +72,7 @@ end
 group :development, :test do
   # Tests
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 
   # DB seed
   gem 'faker'
