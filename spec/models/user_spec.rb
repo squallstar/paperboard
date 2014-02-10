@@ -7,7 +7,7 @@ describe User do
     User.create(email: "foo@bar.com")
     User.create(first_name: "A", last_name: "C", email: "foo@bar.com")
     User.create(first_name: "A", last_name: "C", email: "foo@bar.com", password: "123456")
-    expect(User.count).to eq 4
+    expect(User.count).to eq 0
   end
 
   it "should not accept two users with the same email address" do
