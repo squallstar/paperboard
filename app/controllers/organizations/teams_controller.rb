@@ -74,13 +74,15 @@ class Organizations::TeamsController < ApplicationController
   end
 
   def remove_member
-    member = TeamMember.includes(:user).where(id: params[:member], team: @team, organization: @organization)
-    if member.destroy
+    member = TeamMember.includes(:user).where(id: params[:member], team: @team).first
+    if member and member.destroy
       if member.user == @current_user
-        redirect_to organization_teams_path(@organization), notice: "You just left the team #{@team.name}."
+        redirect_to organization_team_path(@organization, @team), notice: "You just left the team #{@team.name}."
       else
-        redirect_to organization_teams_path(@organization), notice: "#{user.full_name} was successfully removed from the team #{@team.name}."
+        redirect_to organization_team_path(@organization, @team), notice: "#{member.user.full_name} was successfully removed from the team #{@team.name}."
       end
+    else
+      redirect_to organization_team_path(@organization, @team), alert: 'The member specified does not exist.'
     end
   end
 
