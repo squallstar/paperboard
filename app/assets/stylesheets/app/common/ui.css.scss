@@ -67,9 +67,19 @@ table.ui {
           text-align: center;
         }
 
+        &.right {
+          text-align: right;
+        }
+
         input[type="submit"] {
           @extend %button;
           padding: 7px 12px;
+        }
+
+        a {
+          color: $color-primary;
+          font-weight: 600;
+          text-decoration: none;
         }
       }
 

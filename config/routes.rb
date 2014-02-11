@@ -8,6 +8,9 @@ Paperboard::Application.routes.draw do
     patch "account" => "account#update"
     delete "account" => "account#destroy"
 
+    get "organizations" => "organizations#index"
+    delete "organizations/:id" => "organizations#leave", as: :leave_organizations
+
     get "billing" => "billing#index"
     post "billing/subscribe/:plan_id" => "billing#subscribe", as: :billing_subscribe
     delete "billing/subscribe" => "billing#delete_subscription", as: :billing_subscribe_delete

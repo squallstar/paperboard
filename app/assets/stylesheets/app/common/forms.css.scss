@@ -152,6 +152,14 @@ section.grey {
     opacity: 0.25;
   }
 
+  hr {
+    height: 2px;
+    border: 0;
+    background: #EEE;
+    border-bottom: 1px solid #FFF;
+    margin: 20px 0;
+  }
+
   form.styled .field {
 
     input[type="text"], input[type="email"], input[type="password"] {

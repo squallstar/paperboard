@@ -1,0 +1,26 @@
+- @title = 'Organizations'
+
+.frame.top-margin
+  .bit-5
+    = render "settings/sidebar"
+
+  .bit-5-4.content
+    h2 #{@title}
+
+    section.grey
+      h3 Organizations you belong to
+
+      - if @organizations.count > 0
+
+        table class='ui'
+          tbody
+            - @organizations.each do |organization|
+              tr
+                td = link_to organization.name, organization
+                td.right = button_to "Leave", settings_leave_organizations_path(organization), method: :delete
+
+      - else
+        p You don't belong to any organization.
+
+      hr
+      = button_to "Create new organization", new_organization_path, method: :get

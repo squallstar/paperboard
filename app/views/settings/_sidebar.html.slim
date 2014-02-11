@@ -17,7 +17,12 @@
         i class="fa fa-dollar fa-fw"
         ' Billing
 
-  / Other organizations here
+    li
+      = nav_link_to settings_organizations_path do
+        i class="fa fa-briefcase fa-fw"
+        ' Organizations
+
+  / Other contexts here
   / a.head href=settings_profile_path
   /   = image_tag @current_user.avatar.url(:small)
   /   span = @current_user.full_name
