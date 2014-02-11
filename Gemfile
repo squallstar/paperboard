@@ -78,6 +78,11 @@ group :development, :test do
   gem 'faker'
 end
 
+group :development, :production do
+  # Multi thread app server
+  gem "puma"
+end
+
 # Heroku
 group :production do
   # PostgreSQL adapter
@@ -109,9 +114,6 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Multi thread app server
-gem "puma"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

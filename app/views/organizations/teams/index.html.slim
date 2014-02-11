@@ -13,7 +13,7 @@ table border=1 cellpadding=6 cellspacing=0
       td = link_to team.name, organization_team_path(@organization, team)
       td = pluralize(team.members_count, 'member')
       td
-        - if team.can_be_deleted?
+        - if @is_admin && team.can_be_deleted?
           = link_to 'Delete team', organization_team_path(@organization, team), :method => :delete
 
 br
