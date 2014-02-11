@@ -2,9 +2,9 @@ class Organizations::TeamsController < ApplicationController
   include OrganizationLoading
 
   before_action :load_organization
-  before_action :is_admin, only: [:index]
-  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, only: [:index, :show]
+  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy, :remove_member]
+  before_action :set_team, only: [:edit, :update, :destroy, :remove_member]
 
   # GET /teams
   # GET /teams.json
@@ -22,7 +22,7 @@ class Organizations::TeamsController < ApplicationController
   end
 
   def show
-    @team.members.includes(:user)
+    @team = Team.where(organization_id: params[:organization_id], id: params[:id]).includes({members: :user}).first
   end
 
   # POST /teams
@@ -70,6 +70,17 @@ class Organizations::TeamsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to organization_teams_path(@organization), notice: "Team #{@team.name} was successfully deleted." }
       format.json { head :no_content }
+    end
+  end
+
+  def remove_member
+    member = TeamMember.includes(:user).where(id: params[:member], team: @team, organization: @organization)
+    if member.destroy
+      if member.user == @current_user
+        redirect_to organization_teams_path(@organization), notice: "You just left the team #{@team.name}."
+      else
+        redirect_to organization_teams_path(@organization), notice: "#{user.full_name} was successfully removed from the team #{@team.name}."
+      end
     end
   end
 

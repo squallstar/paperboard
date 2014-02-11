@@ -15,16 +15,15 @@ hr
 
 table border=1 cellpadding=6 cellspacing=0
   tr
+    th User
     th Role
-    th
     th
 
   - @team.members.each do |member|
     tr
-      td = member.role
       td = member.user.full_name
+      td = member.role
       td
-        - if member.user.id != @current_user.id
-          = link_to 'Remove', '#', :method => :delete
-        - elsif @team.members.length > 1
-          = link_to 'Leave', '#', :method => :delete
+        - if @is_admin
+          - lbl = member.user.id != @current_user.id ? 'Remove' : 'Leave'
+          = link_to lbl, remove_member_organization_team_path(@organization, @team, member), :method => :delete

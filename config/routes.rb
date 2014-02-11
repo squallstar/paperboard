@@ -28,9 +28,8 @@ Paperboard::Application.routes.draw do
     end
 
     resources :teams do
-      collection do
-        post 'members' => 'teams#add_member'
-        delete 'members/:id' => 'teams#remove_member'
+      member do
+        delete 'members/:member' => 'teams#remove_member', as: :remove_member
       end
     end
   end

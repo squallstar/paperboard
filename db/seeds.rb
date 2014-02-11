@@ -53,8 +53,8 @@ end
 first_organization = Organization.first
 
 puts "Creating new teams"
-team = first_organization.teams.create({name: 'Project managers', role: 'admin'})
-team.members.create role: 'admin', user: second_user
+pm_team = first_organization.teams.create({name: 'Project managers', role: 'admin'})
+pm_team.members.create role: 'admin', user: second_user
 team = first_organization.teams.create({name: 'Developers', role: 'standard'})
 team.members.create role: 'standard', user: second_user
 
@@ -72,7 +72,7 @@ team.members.create role: 'standard', user: second_user
     role: 'owner'
   })
 
-  1.upto(3) do |i|
+  1.upto(5) do |i|
     user = User.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -95,6 +95,12 @@ team.members.create role: 'standard', user: second_user
       role: 'member'
     })
   end
+
+  TeamMember.create!({
+    user: user,
+    team: pm_team,
+    role: 'member'
+  })
 
   1.upto(3) do |i|
     puts "Generating invite #{i} for project #{p}"
