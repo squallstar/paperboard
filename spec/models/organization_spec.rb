@@ -19,8 +19,9 @@ describe Organization do
     expect(organization.users.first).to eq user
 
     expect(organization.teams.count).to eq 1
-    expect(organization.teams.where(role: 'admin').count).to eq 1
+    expect(organization.teams.where(role: 'owner').count).to eq 1
     expect(organization.teams.first.members.count).to eq 1
+    expect(organization.teams.first.members.first.role).to eq 'admin'
     expect(organization.teams.first.members.first.user).to eq user
   end
 end

@@ -14,13 +14,17 @@
   .field
     p What permission level should this team have?
     div
+      ' Owners
+      = f.radio_button :role, "admin", disabled: true
+      p Owners have full access to all projects and have admin rights to the organization. You can only have one team of this kind.
+    div
       ' Admin access
       = f.radio_button :role, "admin"
-      p This team will be able to manage teams and projects (useful for Project managers)
+      p This team will be able to manage teams and their projects (useful for Project Managers)
     div
       ' Standard access
       = f.radio_button :role, "standard"
-      p This team will only be able to view its projects
+      p This team will only be able to view its projects.
     hr
 
   .actions = f.submit 'Create team'

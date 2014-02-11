@@ -3,7 +3,7 @@ class Organizations::TeamsController < ApplicationController
 
   before_action :load_organization
   before_action :is_admin, only: [:index]
-  before_action :require_admin, only: [:new, :create, :update, :destroy]
+  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   # GET /teams

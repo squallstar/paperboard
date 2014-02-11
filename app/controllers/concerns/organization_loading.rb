@@ -11,7 +11,9 @@ module OrganizationLoading
   end
 
   def is_admin
-    team = @current_user.cached_teams.find { |t| t.organization_id == @organization.id && t.role == "admin" }
+    team = @current_user.cached_teams.find do |t|
+      t.organization_id == @organization.id && (t.role == 'owner' || t.role == 'admin')
+    end
     @is_admin ||= team != nil
   end
 

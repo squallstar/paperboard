@@ -26,7 +26,7 @@ class Organization < ActiveRecord::Base
 
   private
     def create_default_teams
-      team = Team.create! name: 'Owners', role: 'admin', organization: self
+      team = Team.create! name: 'Owners', role: 'owner', organization: self
       team.members.create! role: 'admin', user: self.creator
     end
 end
