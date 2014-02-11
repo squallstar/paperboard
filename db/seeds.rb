@@ -72,6 +72,8 @@ team.members.create role: 'standard', user: second_user
     role: 'owner'
   })
 
+  user = nil
+
   1.upto(5) do |i|
     user = User.create!(
       first_name: Faker::Name.first_name,
