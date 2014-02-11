@@ -70,12 +70,12 @@ class Organizations::OrganizationsController < ApplicationController
   end
 
   def remove_member
-    user = User.select(:id).find(params[:user])
+    user = User.select(:id, :full_name).find(params[:user])
     if @organization.remove_user(user)
       if user == @current_user
         redirect_to organizations_path, notice: "You just left the organization #{@organization.name}."
       else
-        redirect_to @organization, notice: "#{user.full_name} was successfully removed from the organization #{@organization.name}."
+        redirect_to members_organization_path(@organization), notice: "#{user.full_name} was successfully removed from the organization #{@organization.name}."
       end
     end
   end
