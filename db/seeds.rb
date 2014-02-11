@@ -15,7 +15,6 @@ Project.delete_all
 ProjectMember.delete_all
 ProjectInvite.delete_all
 Organization.delete_all
-OrganizationMember.delete_all
 Team.delete_all
 TeamMember.delete_all
 Plan.delete_all
@@ -26,18 +25,26 @@ puts "\r\nStarting up the seed..."
 User.create!(
   [
     {
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: 'test@test.com',
       password: 'cojone',
-      password_confirmation: 'cojone',
-      email: 'squallstar@gmail.com',
-      first_name: 'Nicholas',
-      last_name: 'Valbusa'
+      password_confirmation: 'cojone'
+    },
+    {
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: 'test2@test.com',
+      password: 'cojone',
+      password_confirmation: 'cojone'
     }
   ]
 )
 
 first_user = User.first
+second_user = User.offset(1).first
 
-1.upto(5) do |o|
+1.upto(3) do |o|
   puts "Generating organization #{o}."
   organization = Organization.new_with_user({name: Faker::Company.name}, first_user)
   organization.save!
@@ -45,9 +52,13 @@ end
 
 first_organization = Organization.first
 
-team = first_organization.teams.build({name: 'Developers', role: 'standard'})
+puts "Creating new teams"
+team = first_organization.teams.create({name: 'Project managers', role: 'admin'})
+team.members.create role: 'admin', user: second_user
+team = first_organization.teams.create({name: 'Developers', role: 'standard'})
+team.members.create role: 'standard', user: second_user
 
-1.upto(8) do |p|
+1.upto(2) do |p|
   puts "\r\nGenerating project #{p}."
 
   project = Project.create!(
@@ -61,7 +72,7 @@ team = first_organization.teams.build({name: 'Developers', role: 'standard'})
     role: 'owner'
   })
 
-  1.upto(14) do |i|
+  1.upto(3) do |i|
     user = User.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -85,7 +96,7 @@ team = first_organization.teams.build({name: 'Developers', role: 'standard'})
     })
   end
 
-  1.upto(5) do |i|
+  1.upto(3) do |i|
     puts "Generating invite #{i} for project #{p}"
     ProjectInvite.create!({
       email: Faker::Internet.email,
