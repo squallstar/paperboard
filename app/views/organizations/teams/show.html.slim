@@ -30,4 +30,5 @@ table border=1 cellpadding=6 cellspacing=0
 
 hr
 h3 Add member
-input type="text" data-autocomplete="post" data-endpoint=add_member_organization_team_path(@organization, @team)
+.suggestions data-source=v1_suggestions_people_path(format: :html)
+  input type="text" data-post=add_member_organization_team_path(@organization, @team)
