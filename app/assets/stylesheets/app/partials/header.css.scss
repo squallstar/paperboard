@@ -171,6 +171,10 @@ body {
     text-align: center;
     padding: 17px;
 
+    &:before {
+      margin-right: 5px;
+    }
+
     &.alert {
       @include icon("warning");
       background-color: $color-orange;
