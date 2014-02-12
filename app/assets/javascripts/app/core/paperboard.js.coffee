@@ -2,6 +2,8 @@ class Paperboard
 
   hooks : []
 
+  helpers: {}
+
   hook: (selector, callback) ->
     @hooks.push [selector, callback]
 

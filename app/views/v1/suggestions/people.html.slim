@@ -1,4 +1,4 @@
 - @people.each do |person|
   li
-    a href='#' class='person'
+    a href='#' class='person' data-name="user" data-value="#{person.id}"
       strong = person.full_name
