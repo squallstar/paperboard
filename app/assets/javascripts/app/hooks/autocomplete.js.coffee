@@ -1,7 +1,5 @@
 @Paperboard.hook "div[data-source]", ($el) ->
 
-  console.log 'running hook'
-
   $el.each ->
     timeout = undefined
 
