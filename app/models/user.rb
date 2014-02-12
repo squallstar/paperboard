@@ -48,15 +48,17 @@ class User < ActiveRecord::Base
   validates_attachment :avatar,
     content_type: { :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
 
+  scope :where_name_like, ->(query) do
+    where("lower(last_name) LIKE :query OR lower(full_name) LIKE :query OR lower(email) LIKE :query", query: query)
+  end
+
   def to_param
     "#{id}-#{full_name.parameterize}"
   end
 
   def colleagues
     User.where(id:
-      OrganizationMember.select(:user_id).where(organization_id:
-        OrganizationMember.select(:organization_id).where(user: self)
-      )
+      TeamMember.select(:user_id).where(team_id: cached_teams)
     ).where('id != ?', self.id)
   end
 

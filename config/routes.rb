@@ -32,6 +32,7 @@ Paperboard::Application.routes.draw do
 
     resources :teams do
       member do
+        post 'members' => 'teams#add_member', as: :add_member
         delete 'members/:member' => 'teams#remove_member', as: :remove_member
       end
     end

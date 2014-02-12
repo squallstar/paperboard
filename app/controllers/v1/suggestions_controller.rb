@@ -3,16 +3,16 @@ class V1::SuggestionsController < ApplicationController
 
   def people
 
-    @colleagues = @current_user.colleagues.where("last_name ILIKE :query OR full_name ILIKE :query", query: @query)
-    @siblings = @current_user.siblings.where("last_name ILIKE :query OR full_name ILIKE :query", query: @query)
+    @colleagues = @current_user.colleagues.where_name_like(@query).select(:id, :full_name)
+    @siblings = @current_user.siblings.where_name_like(@query).select(:id, :full_name)
 
     people = (@colleagues + @siblings).uniq{ |user| user.id }
 
-    render json: people
+    render json: people, root: "people"
   end
 
   private
     def set_query
-      @query = "#{params[:query]}%"
+      @query = "#{params[:query]}%".downcase
     end
 end

@@ -27,3 +27,7 @@ table border=1 cellpadding=6 cellspacing=0
         - if @is_admin
           - lbl = member.user.id != @current_user.id ? 'Remove' : 'Leave'
           = link_to lbl, remove_member_organization_team_path(@organization, @team, member), :method => :delete
+
+hr
+h3 Add member
+input type="text" data-autocomplete="post" data-endpoint=add_member_organization_team_path(@organization, @team)
