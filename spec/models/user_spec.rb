@@ -22,11 +22,27 @@ describe User do
     expect(User.count).to eq 1
   end
 
+  it "should be able to get his colleagues and siblings" do
+    user = User.create(first_name: "A", last_name: "B", email: "foo@bar.com", password: "123456", password_confirmation: "123456")
+    expect(user.colleagues.count).to eq 0
+    expect(user.siblings.count).to eq 0
+  end
+
   it "should keep updated a user full_name" do
     (0..10).each do
       user = create(:user)
       expect(user.full_name).to eq "#{user.first_name} #{user.last_name}"
     end
+  end
+
+  it "should require a password when using the update_with_password method" do
+    user = User.create(first_name: "A", last_name: "B", email: "foo@bar.com", password: "123456", password_confirmation: "123456")
+
+    user.update_with_password({first_name: 'foo'})
+    expect(user.errors.count).to eq 1
+
+    user.update_with_password({first_name: 'foo', current_password: "123456"})
+    expect(user.errors.count).to eq 0
   end
 
   it "should belong to the free plan" do
