@@ -1,7 +1,7 @@
 class AuthController < ApplicationController
   skip_before_action :authorize
   before_action :check_if_logged_in, only: [:login, :signup, :forgot_password]
-  layout "forms"
+  layout 'forms'
 
   def login
     if params[:email]
@@ -39,7 +39,7 @@ class AuthController < ApplicationController
 
         # Redirect to thank you page
         @email = user.email
-        render "forgot_password_sent"
+        render 'forgot_password_sent'
       else
         flash.now[:alert] = 'Email address not registered'
       end
@@ -63,9 +63,7 @@ class AuthController < ApplicationController
   end
 
   def signup_complete
-    if not flash[:email]
-      redirect_to login_url
-    end
+    redirect_to login_url unless flash[:email]
   end
 
   def signup_confirm_email

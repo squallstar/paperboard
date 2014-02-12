@@ -1,7 +1,7 @@
 class WebsiteController < ApplicationController
   skip_before_action :authorize
   before_filter :check_auth
-  layout "website"
+  layout 'website'
 
   def index
   end
