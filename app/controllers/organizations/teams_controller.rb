@@ -62,7 +62,7 @@ class Organizations::TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    if not @team.can_be_deleted?
+    unless @team.can_be_deleted?
       return redirect_to organization_teams_path(@organization), alert: 'You cannot delete this team.'
     end
 
@@ -90,9 +90,7 @@ class Organizations::TeamsController < ApplicationController
     def set_team
       @team = Team.where(organization: @organization, id: params[:id]).first
 
-      if not @team
-        redirect_to organization_teams_path(@organization), alert: 'The team does not exist.'
-      end
+      redirect_to organization_teams_path(@organization), alert: 'The team does not exist.' unless @team
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
