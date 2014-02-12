@@ -2,9 +2,11 @@ class Organizations::TeamsController < ApplicationController
   include OrganizationLoading
 
   before_action :load_organization
-  before_action :is_admin, only: [:index, :show]
-  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy, :remove_member]
-  before_action :set_team, only: [:edit, :update, :destroy, :remove_member]
+  before_action :is_admin, only: [:index, :show, :create]
+  before_action :require_admin, expect: [:index, :show]
+  before_action :set_team, except: [:index, :new, :create]
+
+  protect_from_forgery :except => [:add_member]
 
   # GET /teams
   # GET /teams.json
@@ -22,7 +24,7 @@ class Organizations::TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.where(organization_id: params[:organization_id], id: params[:id]).includes({members: :user}).first
+    @members = @team.members.includes(:user)
   end
 
   # POST /teams
@@ -71,6 +73,32 @@ class Organizations::TeamsController < ApplicationController
       format.html { redirect_to organization_teams_path(@organization), notice: "Team #{@team.name} was successfully deleted." }
       format.json { head :no_content }
     end
+  end
+
+  def add_member
+    data = {}
+
+    if params[:email]
+      # Search by user email
+      user = User.where(email: params[:email]).first
+    elsif params[:user]
+      # Search by user id
+      user = User.find params[:user]
+    end
+
+    if user
+      # Adds the user straight to the team
+      if @team.members.where(user: user).count == 0
+        @team.members.create role: 'member', user: user
+        data[:notice] = "#{user.full_name} has been added to the #{@team.name} team."
+      else
+        data[:alert] = "#{user.full_name} is already part of the #{@team.name} team."
+      end
+    elsif params[:email]
+      # Send an email invitation
+    end
+
+    redirect_to organization_team_path(@organization, @team), data
   end
 
   def remove_member

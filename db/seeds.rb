@@ -25,8 +25,8 @@ puts "\r\nStarting up the seed..."
 User.create!(
   [
     {
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
+      first_name: 'Nicholas',
+      last_name: 'Valbusa',
       email: 'test@test.com',
       password: 'cojone',
       password_confirmation: 'cojone'
@@ -78,7 +78,7 @@ team.members.create role: 'standard', user: second_user
     user = User.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
-      email: "#{p}#{i}" + Faker::Internet.email,
+      email: Faker::Internet.email,
       password: 'testtest',
       password_confirmation: 'testtest'
     )

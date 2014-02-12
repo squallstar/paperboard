@@ -17,12 +17,14 @@ table border=1 cellpadding=6 cellspacing=0
   tr
     th User
     th Role
+    th Joined
     th
 
-  - @team.members.each do |member|
+  - @members.each do |member|
     tr
       td = member.user.full_name
       td = member.role
+      td = time_ago_in_words(member.created_at) + " ago"
       td
         - if @is_admin
           - lbl = member.user.id != @current_user.id ? 'Remove' : 'Leave'
@@ -31,4 +33,4 @@ table border=1 cellpadding=6 cellspacing=0
 hr
 h3 Add member
 .suggestions data-source=v1_suggestions_people_path(format: :html)
-  input type="text" data-post=add_member_organization_team_path(@organization, @team) data-accept="email"
+  input placeholder="Name or email" type="text" data-post=add_member_organization_team_path(@organization, @team) data-accept="email"

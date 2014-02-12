@@ -3,14 +3,16 @@ class Organization < ActiveRecord::Base
 
   has_many :teams, dependent: :destroy
   has_many :members, through: :teams
-  has_many :users, -> { uniq } , through: :members
+  has_many :users, -> { uniq }, through: :members
   has_many :projects, dependent: :destroy
 
   after_create :create_default_teams
-
   class_attribute :creator
-
   validates :name, null: false, presence: true
+
+  after_save -> do
+    self.users.each { |u| u.touch }
+  end
 
   def to_param
     "#{id}-#{name.parameterize}"
