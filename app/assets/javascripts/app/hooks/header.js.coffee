@@ -13,4 +13,4 @@
         opacity: 0
       , 1500, ->
         $alerts.slideUp 500
-    ), 2000
+    ), 4000

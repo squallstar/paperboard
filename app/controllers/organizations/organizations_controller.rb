@@ -77,6 +77,8 @@ class Organizations::OrganizationsController < ApplicationController
       else
         redirect_to members_organization_path(@organization), notice: "#{user.full_name} was successfully removed from the organization #{@organization.name}."
       end
+    else
+      redirect_to members_organization_path(@organization), alert: "We couldn't do that. Please try later."
     end
   end
 

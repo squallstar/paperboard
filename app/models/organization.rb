@@ -22,11 +22,9 @@ class Organization < ActiveRecord::Base
   end
 
   def remove_user(user)
-    user.team_memberships.where(team_id: teams).destroy_all
-
-    if members.count == 0
-      destroy
-    end
+    success = user.team_memberships.where(team_id: teams).destroy_all
+    destroy if members.count == 0
+    success
   end
 
   private
