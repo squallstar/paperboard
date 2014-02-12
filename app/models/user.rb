@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   def colleagues
     User.where(id:
       TeamMember.select(:user_id).where(team_id: cached_teams)
-    ).where('id != ?', self.id)
+    )
   end
 
   def siblings

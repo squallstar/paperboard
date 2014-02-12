@@ -25,6 +25,7 @@ class Organizations::TeamsController < ApplicationController
 
   def show
     @members = @team.members.includes(:user)
+    @members.sort_by! { |m| m.user.full_name }
   end
 
   # POST /teams
