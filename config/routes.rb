@@ -64,6 +64,11 @@ Paperboard::Application.routes.draw do
   # Generic root url (dashboard) for logged in users
   get "projects" => 'projects/projects#index', as: :dashboard
 
+  # Custom error routes
+  get '404', to: 'errors#404'
+  get '422', to: 'errors#422'
+  get '500', to: 'errors#500'
+
   root 'website#index'
 
 end
