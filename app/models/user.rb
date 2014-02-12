@@ -43,14 +43,13 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
     medium: '200x200#'
-  },
-  default_url: lambda { |avatar| avatar.instance.set_avatar_default_url}
+  }, default_url: lambda { |avatar| avatar.instance.set_avatar_default_url}
 
   validates_attachment_size :avatar, less_than: 1.megabyte
   validates_attachment :avatar,
     content_type: { :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
 
-  scope :where_name_like, ->(query) do
+  scope :where_name_like, -> (query) do
     where("lower(last_name) LIKE :query OR lower(full_name) LIKE :query OR lower(email) LIKE :query", query: query)
   end
 

@@ -10,6 +10,12 @@ describe User do
     expect(User.count).to eq 0
   end
 
+  it "should not accept s user with an invalid email" do
+    user = User.create(first_name: "A", last_name: "B", email: "foo", password: "123456", password_confirmation: "123456")
+    expect(user.errors.count).to eq 1
+    expect(User.count).to eq 0
+  end
+
   it "should not accept two users with the same email address" do
     first = User.create(first_name: "A", last_name: "B", email: "foo@bar.com", password: "123456", password_confirmation: "123456")
     second = User.create(first_name: "C", last_name: "D", email: first.email, password: "123456", password_confirmation: "123456")
