@@ -1,14 +1,20 @@
-h1 Organizations you belong to
+.frame.top-margin
+  .bit-1
+    header.top
+      h1 Organizations
 
-- if @organizations.length > 0
-  ul
-  - @organizations.each do |organization|
-    li
-      h3 = link_to organization.name, organization_path(organization)
+    section.grey
+      h3 Organizations you belong to
 
-- else
-  p You don't belong to any organization.
+      - if @organizations.length > 0
+        ul
+        - @organizations.each do |organization|
+          li
+            h3 = link_to organization.name, organization_path(organization)
 
-hr
+      - else
+        p You don't belong to any organization.
 
-= link_to 'New Organization', new_organization_path
+      hr
+
+      = link_to 'New Organization', new_organization_path, class: 'button'
