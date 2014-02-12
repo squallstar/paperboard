@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210161730) do
+ActiveRecord::Schema.define(version: 20140212224045) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -87,6 +87,21 @@ ActiveRecord::Schema.define(version: 20140210161730) do
   add_index "subscriptions", ["organization_id"], name: "index_subscriptions_on_organization_id"
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+
+  create_table "team_invites", force: true do |t|
+    t.boolean  "accepted"
+    t.string   "email"
+    t.string   "key"
+    t.integer  "sender_id"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_invites", ["sender_id"], name: "index_team_invites_on_sender_id"
+  add_index "team_invites", ["team_id"], name: "index_team_invites_on_team_id"
+  add_index "team_invites", ["user_id"], name: "index_team_invites_on_user_id"
 
   create_table "team_members", force: true do |t|
     t.string   "role"

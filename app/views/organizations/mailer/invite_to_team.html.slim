@@ -1,0 +1,18 @@
+h1 You have been invited to join a team
+
+p
+  ' You have been invited by
+  strong #{@sender.full_name}
+  '  to join the team
+  strong = @team.name
+  '  on
+  strong = @team.organization.name
+  | .
+
+p To join the project, just follow this link:
+p = link_to @url, @url
+
+p
+  ' Yours sincerely,
+  br
+  ' Paperboard team

@@ -82,6 +82,10 @@ class Organizations::OrganizationsController < ApplicationController
     end
   end
 
+  def join_team
+    #Todo
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params

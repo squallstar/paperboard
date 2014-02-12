@@ -1,7 +1,4 @@
-class ProjectMailer < ActionMailer::Base
-  default from: "no-reply@paperboard.me"
-  layout 'emails'
-
+class ProjectMailer < Paperboard::Mailer
   def send_invite(invite, from_user)
     @project = invite.project
     @from_user = from_user

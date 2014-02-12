@@ -1,7 +1,4 @@
-class AuthMailer < ActionMailer::Base
-  default from: "no-reply@paperboard.me"
-  layout 'emails'
-
+class AuthMailer < Paperboard::Mailer
   def confirm_email(user)
     @user = user
     @url = signup_confirm_email_url user.id, user.optin_key

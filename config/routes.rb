@@ -30,6 +30,10 @@ Paperboard::Application.routes.draw do
       delete 'members/:user' => 'organizations#remove_member', as: :remove_member
     end
 
+    collection do
+      get 'join/:key' => 'organizations#join_team', as: :join_team
+    end
+
     resources :teams do
       member do
         post 'members' => 'teams#add_member', as: :add_member

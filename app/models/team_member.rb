@@ -13,4 +13,9 @@ class TeamMember < ActiveRecord::Base
   validates :user, null: false
   validates_inclusion_of :role, :in => %w(admin member)
   validates_uniqueness_of :team_id, scope: :user_id
+
+  validates_uniqueness_of :team_id,
+    scope: [:user_id],
+    message: "has already been used to invite the user onboard"
+
 end

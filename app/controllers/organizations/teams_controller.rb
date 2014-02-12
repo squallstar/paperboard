@@ -90,13 +90,31 @@ class Organizations::TeamsController < ApplicationController
     if user
       # Adds the user straight to the team
       if @team.members.where(user: user).count == 0
-        @team.members.create role: 'member', user: user
-        data[:notice] = "#{user.full_name} has been added to the #{@team.name} team."
+        if @team.members.create(role: 'member', user: user)
+          data[:notice] = "#{user.full_name} has been added to the #{@team.name} team."
+        end
       else
         data[:alert] = "#{user.full_name} is already part of the #{@team.name} team."
       end
     elsif params[:email]
-      # Send an email invitation
+      # Create the invite
+      invite = @team.invites.build({
+        email: params[:email],
+        sender: @current_user
+      })
+
+      if invite.save
+        # Send an email invitation
+        if OrganizationMailer.invite_to_team(invite, @team, @current_user, params[:email]).deliver
+          data[:notice] = "An invite to join #{@team.name} team has been sent to #{params[:email]}"
+        else
+          invite.destroy
+          data[:alert] = "Could not send the email. Please try later."
+        end
+
+      else
+        data[:alert] = "#{invite.errors.full_messages.join('. ')}."
+      end
     end
 
     redirect_to organization_team_path(@organization, @team), data
