@@ -15,11 +15,13 @@ class TeamInvite < ActiveRecord::Base
   before_create :set_defaults
 
   def accept_with_user(user)
-    self.accepted = true
-    self.user = user
-    save!
+    self.transaction do
+      self.accepted = true
+      self.user = user
+      save!
 
-    team.members.create role: 'member', user: user
+      team.members.create role: 'member', user: user
+    end
   end
 
   private

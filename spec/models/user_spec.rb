@@ -53,4 +53,29 @@ describe User do
     expect(user.plan("teams")).to be > 0
     expect(user.plan("users")).to be > 1
   end
+
+  it "should be able to join any pending invite" do
+    user = create(:user)
+    sender = create(:user)
+
+    expect(user.accepted_invites.count).to eq 0
+    expect(user.accepted_team_invites.count).to eq 0
+
+    organization = Organization.new_with_user({name: Faker::Company.name}, sender)
+    organization.save!
+
+    invite = organization.teams.first.invites.create({
+      email: user.email,
+      sender: sender
+    })
+
+    expect(user.accepted_team_invites.count).to eq 0
+    expect(organization.teams.first.members.count).to eq 1
+
+    user.join_pending_invites
+    expect(user.accepted_team_invites.count).to eq 1
+    expect(user.accepted_team_invites.first.email).to eq user.email
+
+    expect(organization.teams.first.members.count).to eq 2
+  end
 end

@@ -35,8 +35,11 @@ class User < ActiveRecord::Base
   has_many :teams, through: :team_memberships
   has_many :organizations, -> { uniq }, through: :teams
 
-  has_many :sent_invites, :class_name => 'Invites', :foreign_key => 'sender_id'
-  has_many :accepted_invites, :class_name => 'Invites', :foreign_key => 'user_id'
+  has_many :sent_invites, :class_name => :ProjectInvite, :foreign_key => 'sender_id'
+  has_many :accepted_invites, :class_name => :ProjectInvite, :foreign_key => 'user_id'
+
+  has_many :sent_team_invites, :class_name => :TeamInvite, :foreign_key => 'sender_id'
+  has_many :accepted_team_invites, :class_name => :TeamInvite, :foreign_key => 'user_id'
 
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
@@ -115,6 +118,9 @@ class User < ActiveRecord::Base
 
   def join_pending_invites
     ProjectInvite.where(email: self.email, accepted: false).find_each do |invite|
+      invite.accept_with_user(self)
+    end
+    TeamInvite.where(email: self.email, accepted: false).find_each do |invite|
       invite.accept_with_user(self)
     end
   end
