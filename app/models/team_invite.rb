@@ -10,7 +10,6 @@ class TeamInvite < ActiveRecord::Base
   belongs_to :user, class_name: :User
   belongs_to :team, touch: true
   belongs_to :sender, class_name: :User
-  belongs_to :team
 
   before_create :set_defaults
 
