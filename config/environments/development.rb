@@ -27,7 +27,11 @@ Paperboard::Application.configure do
 
   # Mailer
   config.action_mailer.raise_delivery_errors = true
-  ActionMailer::Base.delivery_method = :sendmail
+  if ENV['SEND_EMAILS'] == false
+    config.action_mailer.delivery_method = :letter_opener
+  else
+    ActionMailer::Base.delivery_method = :sendmail
+  end
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

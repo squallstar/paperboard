@@ -62,6 +62,9 @@ group :development do
   # SQLite adapter
   gem 'sqlite3'
 
+  # Send local emails
+  gem 'letter_opener'
+
   # Quiet Assets turns off the Rails asset pipeline log
   gem 'quiet_assets'
 
