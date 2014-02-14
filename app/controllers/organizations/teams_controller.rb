@@ -26,6 +26,7 @@ class Organizations::TeamsController < ApplicationController
   def show
     @members = @team.members.includes(:user)
     @members.sort_by! { |m| m.user.full_name }
+    @invites = @team.invites.pending.includes(:sender)
   end
 
   # POST /teams
@@ -131,6 +132,11 @@ class Organizations::TeamsController < ApplicationController
     else
       redirect_to organization_team_path(@organization, @team), alert: 'The member specified does not exist.'
     end
+  end
+
+  def remove_invite
+    @team.invites.find(params[:key]).destroy
+    redirect_to organization_team_path(@organization, @team), notice: "The invite has been deleted."
   end
 
   private

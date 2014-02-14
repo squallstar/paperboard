@@ -38,6 +38,7 @@ Paperboard::Application.routes.draw do
       member do
         post 'members' => 'teams#add_member', as: :add_member
         delete 'members/:member' => 'teams#remove_member', as: :remove_member
+        delete 'invite/:key' => 'teams#remove_invite', as: :remove_invite
       end
     end
   end

@@ -14,7 +14,7 @@ hr
   p Owners can change billing info and cancel organization accounts.
 
 table border=1 cellpadding=6 cellspacing=0
-  tr
+  thead
     th User
     th Role
     th Joined
@@ -29,6 +29,26 @@ table border=1 cellpadding=6 cellspacing=0
         - if @is_admin
           - lbl = member.user.id != @current_user.id ? 'Remove' : 'Leave'
           = link_to lbl, remove_member_organization_team_path(@organization, @team, member), :method => :delete
+
+- if @invites.length
+  hr
+  h3 Pending invites
+
+  table border=1 cellpadding=6 cellspacing=0
+  thead
+    th Sent by
+    th
+    th Email
+    th
+
+  - @invites.each do |invite|
+    tr
+      td = invite.sender.full_name
+      td = time_ago_in_words(invite.created_at) + " ago"
+      td = invite.email
+      td
+        - if @is_admin
+          = link_to lbl, remove_invite_organization_team_path(@organization, @team, invite), :method => :delete
 
 hr
 h3 Add member

@@ -83,7 +83,12 @@ class Organizations::OrganizationsController < ApplicationController
   end
 
   def join_team
-    #Todo
+    invite = TeamInvite.where(key: params[:key]).pending.first
+    return redirect_to(organizations_path) unless invite
+
+    if invite.accept_with_user(@current_user)
+      redirect_to invite.team.organization, notice: "You joined team #{invite.team.name} of #{invite.team.organization.name}."
+    end
   end
 
   private

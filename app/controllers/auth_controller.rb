@@ -7,6 +7,9 @@ class AuthController < ApplicationController
     if params[:email]
       user = User.find_by(email: params[:email])
       if user and user.authenticate(params[:password])
+        # Joins any pending project
+        user.join_pending_invites
+
         logs_and_redirect(user)
       else
         flash.now[:alert] = 'Invalid email/password combination'

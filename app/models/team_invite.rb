@@ -13,6 +13,8 @@ class TeamInvite < ActiveRecord::Base
 
   before_create :set_defaults
 
+  scope :pending, -> { where(accepted: false) }
+
   def accept_with_user(user)
     self.transaction do
       self.accepted = true
