@@ -30,7 +30,7 @@ table border=1 cellpadding=6 cellspacing=0
           - lbl = member.user.id != @current_user.id ? 'Remove' : 'Leave'
           = link_to lbl, remove_member_organization_team_path(@organization, @team, member), :method => :delete
 
-- if @invites.length
+- if @invites.length > 0
   hr
   h3 Pending invites
 
@@ -48,9 +48,10 @@ table border=1 cellpadding=6 cellspacing=0
       td = invite.email
       td
         - if @is_admin
-          = link_to lbl, remove_invite_organization_team_path(@organization, @team, invite), :method => :delete
+          = link_to "Delete", remove_invite_organization_team_path(@organization, @team, invite), :method => :delete
 
-hr
-h3 Add member
-.suggestions data-source=v1_suggestions_people_path(format: :html)
-  input placeholder="Name or email" type="text" data-post=add_member_organization_team_path(@organization, @team) data-accept="email"
+- if @is_admin
+  hr
+  h3 Add member
+  .suggestions data-source=v1_suggestions_people_path(format: :html)
+    input placeholder="Name or email" type="text" data-post=add_member_organization_team_path(@organization, @team) data-accept="email"

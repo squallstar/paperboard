@@ -2,8 +2,8 @@ class Organizations::TeamsController < ApplicationController
   include OrganizationLoading
 
   before_action :load_organization
-  before_action :is_admin, only: [:index, :show, :create]
-  before_action :require_admin, expect: [:index, :show]
+  before_action :is_admin
+  before_action :require_admin, except: [:index, :show]
   before_action :set_team, except: [:index, :new, :create]
 
   protect_from_forgery :except => [:add_member]

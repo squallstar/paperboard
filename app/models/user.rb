@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
     medium: '200x200#'
   }, default_url: lambda { |avatar| avatar.instance.set_avatar_default_url}
 
-  validates_attachment_size :avatar, less_than: 1.megabyte
+  validates_attachment_size :avatar, less_than: 1.megabyte, message: " should be less than 1Mb"
   validates_attachment :avatar,
     content_type: { :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
 

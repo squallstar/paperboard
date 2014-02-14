@@ -2,7 +2,7 @@ class Organizations::OrganizationsController < ApplicationController
   include OrganizationLoading
 
   before_action :load_organization, except: [:index, :new, :create]
-  before_action :is_admin, only: [:members]
+  before_action :is_admin, only: [:members, :show]
   before_action :require_admin, only: [:update, :destroy, :remove_member]
 
   # GET /organizations

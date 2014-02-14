@@ -16,6 +16,6 @@ table border=1 cellpadding=6 cellspacing=0
         - if @is_admin && team.can_be_deleted?
           = link_to 'Delete team', organization_team_path(@organization, team), :method => :delete
 
-br
-
-= link_to 'New Team', new_organization_team_path
+- if @is_admin
+  hr
+  = link_to 'New Team', new_organization_team_path
