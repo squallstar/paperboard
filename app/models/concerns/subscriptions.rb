@@ -7,6 +7,7 @@ module Subscriptions
 
   # Calling .plan gives the plan name, while passing "projects"
   # "teams" or "users" will return the permitted number.
+  # Calling "projects_left" will return the number of projects the user/organization can create
   def plan(key = nil)
     @plan ||= subscription ? subscription.plan.name : "free"
     return @plan unless key
