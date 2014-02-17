@@ -48,10 +48,23 @@ describe User do
   it "should belong to the free plan" do
     user = create(:user)
 
-    expect(user.plan).to eq "free"
     expect(user.plan("projects")).to be > 0
+    expect(user.plan).to eq "free"
     expect(user.plan("teams")).to be > 0
     expect(user.plan("users")).to be > 1
+  end
+
+  it "should correctly count owned projects and resources left" do
+    user = create(:user)
+
+    expect(user.projects.count).to be 0
+    expect(user.plan("projects_left")).to be user.plan("projects")
+
+    project = Project.new(name: Faker::Company.name, owner: user)
+    project.save!
+
+    project.members.create role: 'owner', user: user
+    expect(user.plan("projects_left")).to be user.plan("projects")-1
   end
 
   describe "Team Invites" do

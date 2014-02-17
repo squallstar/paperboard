@@ -8,6 +8,11 @@
         - @project.errors.full_messages.each do |msg|
           li= msg
 
+  .field#choose_context
+    = f.hidden_field "organization"
+    button
+    = render 'settings/billing/available_contexts'
+
   .field
     = f.label :name
     = f.text_field :name

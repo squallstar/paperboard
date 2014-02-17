@@ -24,4 +24,18 @@ describe Organization do
     expect(organization.teams.first.members.first.role).to eq 'admin'
     expect(organization.teams.first.members.first.user).to eq user
   end
+
+  it "should correctly count owned projects and resources left" do
+    user = create(:user)
+    organization = Organization.new_with_user({name: Faker::Company.name}, user)
+    organization.save!
+
+    expect(organization.projects.count).to be 0
+    expect(organization.plan("projects_left")).to be organization.plan("projects")
+
+    project = Project.new(name: 'foo', owner: user, organization: organization)
+    project.save!
+
+    expect(organization.plan("projects_left")).to be organization.plan("projects")-1
+  end
 end

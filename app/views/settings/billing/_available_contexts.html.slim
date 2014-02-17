@@ -1,0 +1,9 @@
+ul
+  li
+    a data-context="user" data-left=@current_user.n_projects_left data-forward-url=settings_billing_path
+      = image_tag @current_user.avatar.url(:small)
+      strong = @current_user.full_name
+  - for organization in @current_user.cached_organizations
+    li
+      a data-context="organization" data-id=organization.id data-left=organization.n_projects_left data-forward-url=organization_path(organization)
+        strong = organization.name

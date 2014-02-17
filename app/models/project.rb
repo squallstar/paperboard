@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :owner, foreign_key: :owner_id, class_name: :User
-  has_one :organization
+  belongs_to :organization
   has_many :users, through: :project_members
   has_many :members, foreign_key: :project_id, class_name: :ProjectMember, dependent: :destroy
   has_many :invites, foreign_key: :project_id, class_name: :ProjectInvite, dependent: :destroy

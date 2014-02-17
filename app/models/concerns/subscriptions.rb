@@ -10,6 +10,11 @@ module Subscriptions
   def plan(key = nil)
     @plan ||= subscription ? subscription.plan.name : "free"
     return @plan unless key
+
+    if key == 'projects_left'
+      return AppSettings.plans[@plan]["n_projects"] - projects.count
+    end
+
     AppSettings.plans[@plan]["n_#{key}"]
   end
 end

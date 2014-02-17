@@ -29,6 +29,10 @@ class Organization < ActiveRecord::Base
     success
   end
 
+  def n_projects_left
+    1 #todo
+  end
+
   private
     def create_default_teams
       team = Team.create! name: 'Owners', role: 'owner', organization: self
