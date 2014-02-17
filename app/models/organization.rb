@@ -25,12 +25,8 @@ class Organization < ActiveRecord::Base
 
   def remove_user(user)
     success = user.team_memberships.where(team_id: teams).destroy_all
-    destroy if members.count == 0
+    destroy if members.size == 0
     success
-  end
-
-  def n_projects_left
-    1 #todo
   end
 
   private

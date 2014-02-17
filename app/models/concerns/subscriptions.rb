@@ -12,7 +12,7 @@ module Subscriptions
     return @plan unless key
 
     if key == 'projects_left'
-      return AppSettings.plans[@plan]["n_projects"] - projects.count
+      return AppSettings.plans[@plan]["n_projects"] - projects.size
     end
 
     AppSettings.plans[@plan]["n_#{key}"]

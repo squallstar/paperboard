@@ -90,7 +90,7 @@ class Organizations::TeamsController < ApplicationController
 
     if user
       # Adds the user straight to the team
-      if @team.members.where(user: user).count == 0
+      if @team.members.where(user: user).size == 0
         if @team.members.create(role: 'member', user: user)
           data[:notice] = "#{user.full_name} has been added to the #{@team.name} team."
         end
