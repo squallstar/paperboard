@@ -1,9 +1,9 @@
 ul
   li
-    a data-context="user" data-left=@current_user.plan("projects_left") data-forward-url=settings_billing_path
+    a href=settings_billing_path data-context="user" data-left=@current_user.plan("projects_left")
       = image_tag @current_user.avatar.url(:small)
       strong = @current_user.full_name
   - for organization in @current_user.organizations.includes(:subscription, :projects)
     li
-      a data-context="organization" data-id=organization.id data-left=organization.plan("projects_left") data-forward-url=organization_path(organization)
+      a href=organization_path(organization) data-context="organization" data-id=organization.id data-left=organization.plan("projects_left")
         strong = organization.name

@@ -171,3 +171,58 @@ section.grey {
     }
   }
 }
+
+.field#choose_context {
+  position: relative;
+
+  button {
+    @extend %button;
+  }
+
+  ul {
+    position: absolute;
+    display: none;
+    background: #FFF;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+
+    li {
+
+      a {
+        @extend %clear;
+        display: block;
+        padding: 0 10px;
+        border-bottom: 1px solid #CCC;
+        height: 50px;
+        line-height: 50px;
+        color: $color-black;
+
+        &:hover {
+          background-color: #EFEFEF;
+        }
+
+        img {
+          float: left;
+          width: 30px;
+          height: 30px;
+          margin: 10px 10px 0 0;
+        }
+
+        strong {
+          float: left;
+        }
+      }
+
+      &:last-child a {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  &.open {
+
+    ul {
+      display: block;
+    }
+  }
+}
