@@ -61,5 +61,7 @@ Paperboard::Application.configure do
     Bullet.bullet_logger = false
     Bullet.console = false
     Bullet.rails_logger = true
+
+    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => "Organization", :association => :projects
   end
 end
