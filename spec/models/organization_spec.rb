@@ -36,6 +36,7 @@ describe Organization do
     project = Project.new(name: 'foo', owner: user, organization: organization)
     project.save!
 
+    organization.reload
     expect(organization.plan("projects_left")).to be organization.plan("projects")-1
   end
 end
