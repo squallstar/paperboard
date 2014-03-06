@@ -24,6 +24,11 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  config.after(:all) do
+    # Clears all Papermill subscriptions
+    User.destroy_all
+  end
+
   # Stops on first failed test
   config.fail_fast = true
 
