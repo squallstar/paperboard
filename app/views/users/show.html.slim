@@ -1,6 +1,8 @@
 - cache ["profile", @user] do
-  h2 #{@user.full_name}
-  h3 #{@user.email}
+  .frame.top-margin
+    h2 #{@user.full_name}
+    h3 #{@user.email}
 
 - if @can_edit
-  = link_to 'Edit your profile', settings_profile_path
+  .frame.top-margin
+    = link_to 'Edit your profile', settings_profile_path, class: 'button'

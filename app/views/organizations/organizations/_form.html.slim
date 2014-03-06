@@ -1,12 +1,14 @@
-= form_for @organization do |f|
+= form_for @organization, html: {class: 'styled full'} do |f|
+
   - if @organization.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:"
+    .errors
+      h4 = "#{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:"
       ul
         - @organization.errors.full_messages.each do |message|
           li = message
 
   .field
-    = f.label :name
+    = f.label :name, "Organization name"
     = f.text_field :name
-  .actions = f.submit 'Save'
+
+  .field.actions = f.submit 'Save'
