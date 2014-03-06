@@ -16,7 +16,8 @@ class Settings::AccountController < ApplicationController
   end
 
   def destroy
-
+    User.find(@current_user).destroy
+    redirect_to logout_path
   end
 
   private

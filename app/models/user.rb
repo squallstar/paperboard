@@ -158,8 +158,14 @@ class User < ActiveRecord::Base
       end
     end
 
+    def before_destroy
+      if self.has_active_subscription
+        self.subscription.destroy
+      end
+    end
+
     def after_destroy
-      if client_id
+      if self.client_id
         Paperboard::Payments.delete_client client_id
       end
     end
