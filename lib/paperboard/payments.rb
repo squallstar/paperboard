@@ -32,5 +32,44 @@ module Paperboard
       Paymill::Subscription.delete subscription_id
     end
 
+    def self.destroy_all
+      return unless Rails.env == 'development'
+
+      for client in Paymill::Client.all
+        p "Reading client #{client.id}"
+
+        begin
+
+          if client.payment
+            p "The client has payments"
+            for payment in client.payment
+              p "Deleting payment #{payment['id']}"
+              Paymill::Payment.delete payment["id"]
+            end
+          end
+
+          if client.subscription
+            p "The client has subscriptions"
+            for sub in client.subscription
+              p "Deleting subscription #{sub['id']}"
+              Paymill::Subscription.delete sub["id"]
+            end
+          end
+
+        rescue
+          #p "Error: #{$!}"
+        ensure
+          p "Deleting the client #{client.id}"
+          Paymill::Client.delete client.id
+        end
+        p "------------"
+        nil
+      end
+
+      p "Clearing all client_ids"
+      User.update_all(client_id: nil)
+
+      p "Done!"
+    end
   end
 end
