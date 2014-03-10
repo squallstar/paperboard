@@ -17,6 +17,10 @@
     = select_tag(:priority, options_for_select(@priorities))
 
   .field
+    = f.label :due_at
+    = f.date_field :due_at, class: 'datepicker'
+
+  .field
     = f.label :body
     = f.text_area :body
 

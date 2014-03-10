@@ -45,6 +45,6 @@ class Projects::StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:project_story).permit(:title, :body, :priority)
+    params.require(:project_story).permit(:title, :body, :priority, :due_at)
   end
 end
