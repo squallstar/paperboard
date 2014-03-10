@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310140042) do
+ActiveRecord::Schema.define(version: 20140310172356) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140310140042) do
     t.datetime "updated_at"
     t.integer  "assigned_to_id"
     t.integer  "priority",       default: 0
-    t.datetime "due_at"
+    t.date     "due_at"
   end
 
   add_index "project_stories", ["assigned_to_id"], name: "index_project_stories_on_assigned_to_id"
