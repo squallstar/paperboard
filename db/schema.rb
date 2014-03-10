@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212224045) do
+ActiveRecord::Schema.define(version: 20140310112234) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 20140212224045) do
 
   add_index "project_members", ["project_id"], name: "index_project_members_on_project_id"
   add_index "project_members", ["user_id"], name: "index_project_members_on_user_id"
+
+  create_table "project_stories", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "closed"
+    t.integer  "project_id"
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_stories", ["owner_id"], name: "index_project_stories_on_owner_id"
+  add_index "project_stories", ["project_id"], name: "index_project_stories_on_project_id"
 
   create_table "project_teams", force: true do |t|
     t.integer  "project_id"

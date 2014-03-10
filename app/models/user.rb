@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
+  has_many :stories, foreign_key: :owner_id, class_name: :ProjectStory
 
   has_many :team_memberships, foreign_key: :user_id, class_name: :TeamMember, dependent: :destroy
   has_many :teams, through: :team_memberships

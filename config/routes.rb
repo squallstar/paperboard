@@ -52,6 +52,7 @@ Paperboard::Application.routes.draw do
     end
 
     resources :members
+    resources :stories
   end
 
   # Login/Logout sessions

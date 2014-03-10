@@ -1,0 +1,25 @@
+= render "projects/header"
+
+h2 Stories
+
+= link_to "New story", new_project_story_path(params[:project_id])
+
+- cache ["stories", @current_project] do
+
+  - if @stories.size > 0
+
+    table border=1 cellpadding=5 cellspacing=3
+      tr
+        th Title
+        th Created at
+        th Created by
+
+      - @stories.each do |story|
+        tr
+          td = link_to story.title, project_story_path(params[:project_id], story.id)
+          td created #{time_ago_in_words(story.created_at)} ago
+          td = link_to story.owner.full_name, story.owner
+
+  - else
+
+    p No stories have been created for this project

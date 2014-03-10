@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_many :members, foreign_key: :project_id, class_name: :ProjectMember, dependent: :destroy
   has_many :invites, foreign_key: :project_id, class_name: :ProjectInvite, dependent: :destroy
   has_many :teams, foreign_key: :team_id, class_name: :ProjectTeam, dependent: :destroy
+  has_many :stories, foreign_key: :project_id, class_name: :ProjectStory, dependent: :destroy
 
   validates :owner, null: false, presence: true
   validates :name, null: false, presence: true
