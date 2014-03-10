@@ -13,6 +13,10 @@
     = f.text_field :title
 
   .field
+    = f.label :priority
+    = select_tag(:priority, options_for_select(@priorities))
+
+  .field
     = f.label :body
     = f.text_area :body
 

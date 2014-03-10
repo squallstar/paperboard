@@ -2,6 +2,7 @@ class Projects::StoriesController < ApplicationController
   include ProjectLoading
 
   before_action :load_project
+  before_action :set_priorities, only: [:new, :create]
 
   def index
     @stories = @current_project.stories.includes(:owner)
@@ -33,7 +34,11 @@ class Projects::StoriesController < ApplicationController
 
   private
 
+  def set_priorities
+    @priorities = ProjectStory.priorities.invert
+  end
+
   def story_params
-    params.require(:project_story).permit(:title, :body)
+    params.require(:project_story).permit(:title, :body, :priority)
   end
 end

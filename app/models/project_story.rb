@@ -25,4 +25,12 @@ class ProjectStory < ActiveRecord::Base
   validates :owner, null: false
   validates :title, presence: true
   validates :priority, :inclusion => { :in => 0..4, :message => "The priority must be between 0 and 4" }
+
+  def self.priorities
+    {0 => 'Very low', 1 => 'Low', 2 => 'Normal', 3 => 'High', 4 => 'Critical'}
+  end
+
+  def priority_label
+    self.priorities[priority]
+  end
 end

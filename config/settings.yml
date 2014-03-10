@@ -1,3 +1,4 @@
+# Plans limits. Using 0 indicates "unlimited"
 plans:
   free:
     n_projects: 1
