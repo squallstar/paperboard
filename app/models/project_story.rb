@@ -11,7 +11,7 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  assigned_to_id :integer
-#  priority       :integer
+#  priority       :integer          default(0)
 #  due_at         :datetime
 #
 

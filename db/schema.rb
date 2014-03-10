@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140310140042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assigned_to_id"
-    t.integer  "priority"
+    t.integer  "priority",       default: 0
     t.datetime "due_at"
   end
 
