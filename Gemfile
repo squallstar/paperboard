@@ -25,7 +25,7 @@ gem 'paymill'
 
 # Assets
 gem 'sass-rails'
-gem 'compass-rails', github: 'Compass/compass-rails'
+gem 'compass-rails'
 gem 'unf'
 gem 'asset_sync'
 
