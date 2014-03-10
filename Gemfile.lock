@@ -35,6 +35,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    annotate (2.6.2)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (4.0.2)
     asset_sync (1.0.0)
       activemodel
@@ -245,6 +248,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  annotate
   asset_sync
   aws-sdk
   bcrypt-ruby (~> 3.0.0)

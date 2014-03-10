@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: subscriptions
+#
+#  id                 :integer          not null, primary key
+#  plan_id            :integer
+#  user_id            :integer
+#  paymill_card_token :string(255)
+#  paymill_card_last  :string(255)
+#  paymill_id         :string(255)
+#  active             :boolean
+#  created_at         :datetime
+#  updated_at         :datetime
+#  organization_id    :integer
+#
+
 class Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :user

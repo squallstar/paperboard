@@ -38,6 +38,11 @@ To run the tests:
     $ rake test
 
 
+## Annotating models
+
+    $ annotate --exclude tests,fixtures,factories
+
+
 ## Deployment
 
 ### 1. Heroku staging

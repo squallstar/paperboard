@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310112234) do
+ActiveRecord::Schema.define(version: 20140310140042) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -59,8 +59,12 @@ ActiveRecord::Schema.define(version: 20140310112234) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "assigned_to_id"
+    t.integer  "priority"
+    t.datetime "due_at"
   end
 
+  add_index "project_stories", ["assigned_to_id"], name: "index_project_stories_on_assigned_to_id"
   add_index "project_stories", ["owner_id"], name: "index_project_stories_on_owner_id"
   add_index "project_stories", ["project_id"], name: "index_project_stories_on_project_id"
 

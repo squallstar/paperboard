@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  email               :string(255)
+#  password_digest     :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  is_active           :boolean
+#  email_verified      :boolean
+#  full_name           :string(255)
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  client_id           :string(255)
+#  request_token       :string(255)
+#
+
 #
 # Database Schema for User class
 #
@@ -31,6 +53,7 @@ class User < ActiveRecord::Base
   has_many :memberships, foreign_key: :user_id, class_name: :ProjectMember, dependent: :destroy
   has_many :projects, through: :memberships
   has_many :stories, foreign_key: :owner_id, class_name: :ProjectStory
+  has_many :assigned_stories, foreign_key: :assigned_to_id, class_name: :ProjectStory
 
   has_many :team_memberships, foreign_key: :user_id, class_name: :TeamMember, dependent: :destroy
   has_many :teams, through: :team_memberships

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: team_invites
+#
+#  id         :integer          not null, primary key
+#  accepted   :boolean
+#  email      :string(255)
+#  key        :string(255)
+#  sender_id  :integer
+#  user_id    :integer
+#  team_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class TeamInvite < ActiveRecord::Base
   include Email
   validates :accepted, :default => false

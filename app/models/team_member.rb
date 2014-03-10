@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: team_members
+#
+#  id         :integer          not null, primary key
+#  role       :string(255)
+#  user_id    :integer
+#  team_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 #
 # SCHEMA:
 # role

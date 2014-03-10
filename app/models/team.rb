@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  organization_id :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  members_count   :integer          default(0)
+#  role            :string(255)
+#
+
 class Team < ActiveRecord::Base
   belongs_to :organization
   validates_inclusion_of :role, :in => %w(owner admin standard)

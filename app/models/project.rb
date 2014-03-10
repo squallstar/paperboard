@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  members_count   :integer          default(0)
+#  organization_id :integer
+#  owner_id        :integer
+#
+
 class Project < ActiveRecord::Base
   belongs_to :owner, foreign_key: :owner_id, class_name: :User
   belongs_to :organization

@@ -59,6 +59,9 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
 
+  # Annotate the schema on models
+  gem 'annotate'
+
   # SQLite adapter
   gem 'sqlite3'
 

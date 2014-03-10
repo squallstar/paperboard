@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: project_invites
+#
+#  id         :integer          not null, primary key
+#  accepted   :boolean
+#  email      :string(255)
+#  key        :string(255)
+#  project_id :integer
+#  user_id    :integer
+#  sender_id  :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class ProjectInvite < ActiveRecord::Base
   validates :accepted, :default => false
   validates :email, :presence => true
