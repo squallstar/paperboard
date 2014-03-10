@@ -1,0 +1,15 @@
+.frame.top-margin
+  h2 = @story.title
+  h3
+    ' Created
+    ' #{time_ago_in_words(@story.created_at)} ago by
+    = link_to @story.owner.full_name, @story.owner
+
+  hr
+  p = @story.body
+  hr
+
+  - if @story.closed
+    = link_to "Reopen story", ""
+  - else
+    = link_to "Close story", ""

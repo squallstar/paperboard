@@ -3,6 +3,7 @@ class Projects::StoriesController < ApplicationController
 
   before_action :load_project
   before_action :set_priorities, only: [:new, :create]
+  before_action :set_story, only: [:show, :destroy]
 
   def index
     @stories = @current_project.stories.includes(:owner)
@@ -24,9 +25,10 @@ class Projects::StoriesController < ApplicationController
     end
   end
 
-  def destroy
-    story = Story.find(params[:id])
+  def show
+  end
 
+  def destroy
     if story.destroy
       redirect_to project_stories_path(@current_project)
     end
@@ -36,6 +38,10 @@ class Projects::StoriesController < ApplicationController
 
   def set_priorities
     @priorities = ProjectStory.priorities.invert
+  end
+
+  def set_story
+    @story = ProjectStory.find params[:id]
   end
 
   def story_params

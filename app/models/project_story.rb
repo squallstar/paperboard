@@ -33,4 +33,8 @@ class ProjectStory < ActiveRecord::Base
   def priority_label
     self.priorities[priority]
   end
+
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 end
