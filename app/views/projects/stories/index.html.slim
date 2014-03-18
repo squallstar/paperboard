@@ -16,12 +16,16 @@
           th Title
           th Created at
           th Created by
+          th Due at
+          th Comments
 
         - @stories.each do |story|
           tr
             td = link_to story.title, project_story_path(params[:project_id], story)
             td created #{time_ago_in_words(story.created_at)} ago
             td = link_to story.owner.full_name, story.owner
+            td = story.due_at
+            td = story.comments_count
 
     - else
 

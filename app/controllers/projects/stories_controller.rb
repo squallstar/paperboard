@@ -3,7 +3,7 @@ class Projects::StoriesController < ApplicationController
 
   before_action :load_project
   before_action :set_priorities, only: [:new, :create]
-  before_action :set_story, only: [:show, :destroy]
+  before_action :set_story, only: [:destroy]
 
   def index
     @stories = @current_project.stories.includes(:owner)
@@ -26,10 +26,15 @@ class Projects::StoriesController < ApplicationController
   end
 
   def show
+    @story = ProjectStory.where(id: params[:id]).includes(:comments, comments: :user).first
+
+    unless @story
+      redirect_to project_stories_path(@current_project), alert: 'Story not found'
+    end
   end
 
   def destroy
-    if story.destroy
+    if @story.destroy
       redirect_to project_stories_path(@current_project)
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310172356) do
+ActiveRecord::Schema.define(version: 20140318221901) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140310172356) do
     t.integer  "assigned_to_id"
     t.integer  "priority",       default: 0
     t.date     "due_at"
+    t.integer  "comments_count", default: 0
   end
 
   add_index "project_stories", ["assigned_to_id"], name: "index_project_stories_on_assigned_to_id"
@@ -88,6 +89,17 @@ ActiveRecord::Schema.define(version: 20140310172356) do
   end
 
   add_index "projects", ["organization_id"], name: "index_projects_on_organization_id"
+
+  create_table "story_comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_story_id"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "story_comments", ["project_story_id"], name: "index_story_comments_on_project_story_id"
+  add_index "story_comments", ["user_id"], name: "index_story_comments_on_user_id"
 
   create_table "subscriptions", force: true do |t|
     t.integer  "plan_id"

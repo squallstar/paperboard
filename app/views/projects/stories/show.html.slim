@@ -1,12 +1,28 @@
 .frame.top-margin
-  h2 = @story.title
-  h3
+  = link_to "Back to stories", project_stories_path(@story.project_id)
+  hr
+  h1 = @story.title
+  h2
     ' Created
     ' #{time_ago_in_words(@story.created_at)} ago by
     = link_to @story.owner.full_name, @story.owner
 
+    - if @story.due_at
+      br
+      ' Due #{@story.due_at}
+
   hr
   p = @story.body
+  hr
+  h2 Comments (#{@story.comments_count})
+  - @story.comments.each do |comment|
+    p comment.body
+    p
+      ' Posted by
+      = link_to comment.user.full_name, comment.user
+    hr
+
+  hr
   hr
 
   - if @story.closed
