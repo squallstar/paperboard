@@ -44,8 +44,14 @@ class Subscription < ActiveRecord::Base
   end
 
   def expire_at
-    # TODO: needs to be improved to change every month
-    updated_at + 1.months
+    next_at = updated_at
+    now = Time.now
+
+    while next_at < now
+      next_at += 1.months
+    end
+
+    next_at
   end
 
   private
