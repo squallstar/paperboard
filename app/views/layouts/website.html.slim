@@ -3,6 +3,7 @@ html id="r-c-#{params[:controller]}" dir='ltr' lang='en' prefix='og: http://ogp.
   head
     title Paperboard
     = csrf_meta_tags
+    = stylesheet_link_tag "website", media: "all", "data-turbolinks-track" => true
     = favicon_link_tag 'favicon.ico'
   body id="r-a-w-#{params[:action]}"
     = yield
