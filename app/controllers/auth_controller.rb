@@ -18,6 +18,10 @@ class AuthController < ApplicationController
   end
 
   def signup
+    if ENV['SIGNUP_ENABLED'] == "false"
+      raise ActionController::RoutingError.new('Feature not enabled')
+    end
+
     @user = User.new
     if params[:user]
       @user = User.new(signup_params)
