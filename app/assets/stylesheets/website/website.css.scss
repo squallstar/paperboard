@@ -1,20 +1,40 @@
 @charset "UTF-8";
 
 @import "shared/reset";
+@import "shared/fonts";
 
 html, body {
   background-color: #15395d;
 }
 
-.logo {
-  $size: 100px;
-
+#w {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: $size;
-  height: $size;
-  margin-left: -$size / 2;
-  margin-top: -$size / 2;
-  background: image-url("logo-coming-soon.png") no-repeat center center;
+  width: 300px;
+  margin-top: -100px;
+  margin-left: -150px;
+
+  .logo {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-bottom: 20px;
+    background: image-url("logo-coming-soon.png") no-repeat center center;
+  }
+
+  p {
+    color: #FFF;
+    font-family: "Proxima Nova", sans-serif;
+    font-weight: 300;
+    font-size: 0.9em;
+    opacity: 0.5;
+    margin-left: 12px;
+
+    a {
+      color: #FFF;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
 }
