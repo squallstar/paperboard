@@ -1,0 +1,16 @@
+- @title = 'Billing'
+
+= render partial: "organizations/header"
+
+.frame
+
+  .bit-1.content
+    h2 Organization billing
+
+    section.grey
+      h3 Billing information
+      = render partial: "settings/billing/current_subscription", locals: {subject: @organization}
+
+    section.grey
+      h3 Available plans
+      = render partial: "settings/billing/plans", locals: {subject: @organization}

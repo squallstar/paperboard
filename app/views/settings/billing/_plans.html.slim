@@ -1,0 +1,33 @@
+table class='ui'
+  thead
+    th Plan name
+    th Features
+    th Price
+    th
+
+  tbody
+
+    - @plans.reverse_each do |plan|
+
+      tr
+        td = I18n.translate("plans.names.#{plan.name}")
+        td = plan_features plan.name
+        td
+          = number_to_currency plan.price, unit: "$", precision: 0
+          | /month
+        td.center
+          - if subject.has_active_subscription
+            - if subject.subscription.plan.id == plan.id
+              | Your plan
+            - else
+              = button_to (subject.subscription.plan.price > plan.price ? "Downgrade" : "Upgrade"), settings_billing_subscribe_path(plan.id)
+          - else
+            = button_to "Subscribe", settings_billing_subscribe_path(plan.id)
+
+    tr
+      td = I18n.translate("plans.names.free")
+      td = plan_features "free"
+      td = number_to_currency 0, unit: "$", precision: 0
+      td.center
+        - if not subject.has_active_subscription
+          | Your plan

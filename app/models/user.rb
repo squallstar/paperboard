@@ -123,10 +123,6 @@ class User < ActiveRecord::Base
     @client
   end
 
-  def has_active_subscription
-    subscription and subscription.active
-  end
-
   # Key to be used in the registration email
   def optin_key
     require 'digest/md5'

@@ -18,4 +18,8 @@ module Subscriptions
 
     AppSettings.plans[@plan]["n_#{key}"]
   end
+
+  def has_active_subscription
+    subscription and subscription.active
+  end
 end

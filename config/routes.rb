@@ -28,6 +28,10 @@ Paperboard::Application.routes.draw do
     member do
       get 'members' => 'organizations#members'
       delete 'members/:user' => 'organizations#remove_member', as: :remove_member
+
+      namespace :settings do
+        get 'billing' => 'billing#index'
+      end
     end
 
     collection do
