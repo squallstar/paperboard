@@ -1,11 +1,13 @@
 - @title = 'Login'
 
+header
+  h1 Login to your account
+
 - if flash[:alert]
   p#alert= flash[:alert]
 
 = form_tag do
   fieldset
-    h2 Sign in
     .field
       = label_tag :email, 'Email'
       = email_field_tag :email, params[:email]

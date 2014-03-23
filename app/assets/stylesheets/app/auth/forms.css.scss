@@ -1,5 +1,5 @@
 #forms {
-  background-color: #EEE;
+  background-color: #363F49;
   line-height: 1.4em;
   color: $color-black;
 
@@ -7,14 +7,20 @@
     background-color: #FFF;
     max-width: 450px;
     margin: 50px auto;
-    padding: 35px 60px;
-  }
+    border-radius: 5px;
 
-  h1 {
-    font-family: $proxima-condensed;
-    font-size: 3em;
-    line-height: 1.15em;
-    margin-bottom: 30px;
+    header {
+      background-color: #F4F5F7;
+      padding: 0 0 30px 0;
+
+      h1 {
+        font-family: $proxima-light;
+        font-size: 3em;
+        line-height: 1.15em;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+    }
   }
 
   h2 {
