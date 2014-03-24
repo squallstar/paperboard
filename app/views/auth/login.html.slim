@@ -4,6 +4,9 @@ header
   .logo
   h1 Login to your account
 
+- if flash[:notice]
+  .message.success= flash[:notice]
+
 - if flash[:alert]
   .message.alert= flash[:alert]
 
