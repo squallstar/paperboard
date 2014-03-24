@@ -9,7 +9,7 @@
   #wrapper {
     background-color: #FFF;
     max-width: 450px;
-    margin: 50px auto;
+    margin: 70px auto;
     border-radius: $radius;
 
     header {
@@ -41,7 +41,7 @@
         width: 120px;
         height: 120px;
         display: block;
-        margin: -100px auto 18px;
+        margin: -91px auto 21px;
         background: $color-black;
         border-radius: 120px;
         border: 5px solid #FFF;
@@ -67,7 +67,7 @@
         font-weight: 300;
         line-height: 1;
         text-align: center;
-        color: #303439;
+        color: #575A5F;
       }
     }
 
@@ -200,6 +200,10 @@
         height: 100%;
         text-align: center;
         line-height: 45px;
+
+        &.fa-envelope {
+          font-size: 0.9em;
+        }
       }
 
       input {
