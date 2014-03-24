@@ -11,6 +11,7 @@
     max-width: 450px;
     margin: 70px auto;
     border-radius: $radius;
+    box-shadow: 0 3px 2px rgba(0,0,0,0.1);
 
     header {
       $bg: #F4F5F7;
@@ -73,6 +74,14 @@
 
     .content {
       padding: 40px;
+
+      h1 {
+        font-size: 2em;
+        font-weight: 300;
+        line-height: 1.2;
+        color: #575A5F;
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -84,7 +93,8 @@
   }
 
   p {
-    font-size: 0.8em;
+    font-size: 0.9em;
+    line-height: 1.8;
     margin: 0 0 20px;
 
     &:last-child {
@@ -171,6 +181,7 @@
     }
 
     input[type="submit"] {
+      @include single-transition(background-color, 0.2s);
       border: 0;
       border-radius: 4px;
       font-size: 1.1em;
@@ -231,7 +242,7 @@
           text-decoration: none;
 
           &:hover {
-            text-decoration: underline;
+            border-bottom: 1px dotted #8894A2;
           }
         }
       }
