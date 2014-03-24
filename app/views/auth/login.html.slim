@@ -1,25 +1,32 @@
 - @title = 'Login'
 
 header
+  .logo
   h1 Login to your account
 
-- if flash[:alert]
-  p#alert= flash[:alert]
+.content
+  = form_tag do
+    fieldset
 
-= form_tag do
-  fieldset
-    .field
-      = label_tag :email, 'Email'
-      = email_field_tag :email, params[:email]
-    .field
-      = label_tag :password, 'Password'
-      = password_field_tag :password, params[:password]
-      p
-        = link_to "Forgot password", forgot_password_path
+      - if flash[:alert]
+        p.message.alert= flash[:alert]
 
-    .field
-      = submit_tag "Login"
+      .field
+        .with-icon
+          i class='fa fa-envelope'
+          = email_field_tag :email, params[:email], placeholder: 'Email address'
 
-p
- ' No account?
- = link_to "Sign up", signup_path
+      .field
+        .with-icon
+          i class='fa fa-lock'
+          = password_field_tag :password, params[:password], placeholder: 'Password'
+
+      .field
+        = submit_tag "Login"
+
+      .field.note
+        p.left
+          = link_to "Forgot password?", forgot_password_path
+        p.right
+          ' Don't have an account? -&nbsp;
+          = link_to "Sign up", signup_path

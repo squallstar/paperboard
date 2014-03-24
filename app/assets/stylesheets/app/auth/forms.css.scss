@@ -1,25 +1,78 @@
 #forms {
+  $radius: 5px;
+
   background-color: #363F49;
   line-height: 1.4em;
   color: $color-black;
+  color: #8894A2;
 
   #wrapper {
     background-color: #FFF;
     max-width: 450px;
     margin: 50px auto;
-    border-radius: 5px;
+    border-radius: $radius;
 
     header {
-      background-color: #F4F5F7;
-      padding: 0 0 30px 0;
+      $bg: #F4F5F7;
+
+      position: relative;
+      background-color: $bg;
+      padding: 30px;
+      border-top-left-radius: $radius;
+      border-top-right-radius: $radius;
+
+      &:after {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(0, 0, 0, 0);
+        border-top-color: $bg;
+        border-width: 13px;
+        margin-left: -13px;
+      }
+
+      .logo {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: block;
+        margin: -100px auto 18px;
+        background: $color-black;
+        border-radius: 120px;
+        border: 5px solid #FFF;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.14);
+
+        &:after {
+          $size: 66px;
+          content: " ";
+          width: $size;
+          height: $size;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-left: - $size / 2;
+          margin-top: - $size / 2;
+          background: image-url("logo-coming-soon.png") no-repeat center center;
+          background-size: contain;
+        }
+      }
 
       h1 {
-        font-family: $proxima-light;
-        font-size: 3em;
-        line-height: 1.15em;
-        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: 300;
+        line-height: 1;
         text-align: center;
+        color: #303439;
       }
+    }
+
+    .content {
+      padding: 40px;
     }
   }
 
@@ -45,6 +98,20 @@
     .underline {
       color: $color-button-primary;
       text-decoration: underline;
+    }
+
+    &.message {
+      margin: 0 0 30px;
+      padding: 12px;
+      font-size: 1em;
+      color: #FFF;
+      text-align: center;
+
+      &.alert {
+        background: $color-red;
+        border-right: 5px solid lighten($color-red, 10%);
+        border-left: 5px solid lighten($color-red, 10%);
+      }
     }
   }
 
@@ -78,16 +145,20 @@
   }
 
   .field {
-    margin: 5px 0 15px;
+    margin: 0 0 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
 
     label {
       display: block;
     }
 
     input[type="text"], input[type="password"], input[type="email"] {
-      border: 1px solid #CCC;
-      padding: 10px 10px;
-      font-size: 0.9em;
+      border: 2px solid #D7D7D7;
+      padding: 13px 10px;
+      font-size: 1em;
       width: 100%;
       border-radius: 4px;
 
@@ -102,16 +173,63 @@
     input[type="submit"] {
       border: 0;
       border-radius: 4px;
-      font-size: 1em;
-      font-weight: 300;
-      background: $color-button-primary;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      background: #7AA7E0;
       color: white;
-      padding: 14px 22px;
-      margin: 10px 0;
+      padding: 16px 22px;
+      margin: 10px 0 3px;
+      width: 100%;
       cursor: pointer;
+      text-transform: uppercase;
 
       &:hover {
         background: darken($color-button-primary, 4%);
+      }
+    }
+
+    .with-icon {
+      position: relative;
+
+      .fa {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        color: #C6C6C6;
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        line-height: 45px;
+      }
+
+      input {
+        padding-left: 45px;
+      }
+    }
+
+    &.note {
+      @extend %clear;
+
+      p {
+        font-size: 0.9em;
+        margin: 0;
+
+        &.left {
+          float: left;
+        }
+
+        &.right {
+          float: right;
+        }
+
+        a {
+          color: #8894A2;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
 
