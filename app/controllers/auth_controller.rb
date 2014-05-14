@@ -18,8 +18,8 @@ class AuthController < ApplicationController
   end
 
   def signup
-    if ENV['SIGNUP_ENABLED'] == "false"
-      raise ActionController::RoutingError.new('Feature not enabled')
+    if ENV['SIGNUP_ENABLED'] == 'false'
+      fail ActionController::RoutingError.new('Feature not enabled')
     end
 
     @user = User.new
@@ -101,28 +101,28 @@ class AuthController < ApplicationController
 
   def logout
     session.destroy
-    redirect_to login_url, notice: "Logged out"
+    redirect_to login_url, notice: 'Logged out'
   end
 
   private
-    def check_if_logged_in
-      if session[:user_id]
-        redirect_to root_url
-      end
+  def check_if_logged_in
+    if session[:user_id]
+      redirect_to root_url
     end
+  end
 
-    def logs_and_redirect(user)
-      session[:user_id] = user.id
+  def logs_and_redirect(user)
+    session[:user_id] = user.id
 
-      redirect_to session[:return_to] || dashboard_url
-      session.delete(:return_to)
-    end
+    redirect_to session[:return_to] || dashboard_url
+    session.delete(:return_to)
+  end
 
-    def signup_params
-      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
-    end
+  def signup_params
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+  end
 
-    def reset_password_params
-      params.require(:user).permit(:password, :password_confirmation)
-    end
+  def reset_password_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
 end

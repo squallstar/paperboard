@@ -8,7 +8,7 @@
 
 # encoding: utf-8
 
-puts "Clearing entities..."
+puts 'Clearing entities...'
 
 User.delete_all
 Project.delete_all
@@ -46,16 +46,16 @@ second_user = User.offset(1).first
 
 1.upto(3) do |o|
   puts "Generating organization #{o}."
-  organization = Organization.new_with_user({name: Faker::Company.name}, first_user)
+  organization = Organization.new_with_user({ name: Faker::Company.name }, first_user)
   organization.save!
 end
 
 first_organization = Organization.first
 
-puts "Creating new teams"
-pm_team = first_organization.teams.create({name: 'Project managers', role: 'admin'})
+puts 'Creating new teams'
+pm_team = first_organization.teams.create(name: 'Project managers', role: 'admin')
 pm_team.members.create role: 'admin', user: second_user
-team = first_organization.teams.create({name: 'Developers', role: 'standard'})
+team = first_organization.teams.create(name: 'Developers', role: 'standard')
 team.members.create role: 'standard', user: second_user
 
 1.upto(2) do |p|
@@ -66,11 +66,11 @@ team.members.create role: 'standard', user: second_user
     owner: first_user
   )
 
-  ProjectMember.create!({
+  ProjectMember.create!(
     user: first_user,
     project: project,
     role: 'owner'
-  })
+  )
 
   user = nil
 
@@ -85,48 +85,48 @@ team.members.create role: 'standard', user: second_user
 
     puts "User #{user.full_name} created."
 
-    ProjectMember.create!({
+    ProjectMember.create!(
       user: user,
       project: project,
       role: 'member'
-    })
+    )
 
-    TeamMember.create!({
+    TeamMember.create!(
       user: user,
       team: team,
       role: 'member'
-    })
+    )
   end
 
-  TeamMember.create!({
+  TeamMember.create!(
     user: user,
     team: pm_team,
     role: 'member'
-  })
+  )
 
   1.upto(3) do |i|
     puts "Generating invite #{i} for project #{p}"
-    ProjectInvite.create!({
+    ProjectInvite.create!(
       email: Faker::Internet.email,
       project: project,
       accepted: true,
       key: '1234',
-      sender: first_user,
-    })
+      sender: first_user
+    )
   end
 
 end
 
-ProjectInvite.create!({
+ProjectInvite.create!(
   email: 'squallstar@gmail.com',
   project: Project.first,
   accepted: true,
   key: '1234',
   sender: User.first,
-  user: User.first(:offset => 1)
-})
+  user: User.first(offset: 1)
+)
 
 puts "\r\nImporting plans from Paymill..."
 Rake::Task['paymill:import_plans'].invoke
 
-puts "Done!"
+puts 'Done!'

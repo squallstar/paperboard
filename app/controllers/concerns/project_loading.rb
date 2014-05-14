@@ -11,5 +11,4 @@ module ProjectLoading
   rescue ActiveRecord::RecordNotFound
     redirect_to projects_path, alert: 'That project does not exist or you don\'t have the rights to see it.'
   end
-
 end

@@ -15,11 +15,11 @@ class Settings::ProfileController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(@current_user)
-    end
+  def set_user
+    @user = User.find(@current_user)
+  end
 
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :avatar)
-    end
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :avatar)
+  end
 end

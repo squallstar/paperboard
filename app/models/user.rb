@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :password, presence: true, length: { :within => 6..40 }, if: :should_validate_password?
+  validates :password, presence: true, length: { within: 6..40 }, if: :should_validate_password?
 
   has_secure_password
   attr_accessor :updating_password
@@ -59,23 +59,23 @@ class User < ActiveRecord::Base
   has_many :teams, through: :team_memberships
   has_many :organizations, -> { uniq }, through: :teams
 
-  has_many :sent_invites, :class_name => :ProjectInvite, :foreign_key => 'sender_id'
-  has_many :accepted_invites, :class_name => :ProjectInvite, :foreign_key => 'user_id'
+  has_many :sent_invites, class_name: :ProjectInvite, foreign_key: 'sender_id'
+  has_many :accepted_invites, class_name: :ProjectInvite, foreign_key: 'user_id'
 
-  has_many :sent_team_invites, :class_name => :TeamInvite, :foreign_key => 'sender_id'
-  has_many :accepted_team_invites, :class_name => :TeamInvite, :foreign_key => 'user_id'
+  has_many :sent_team_invites, class_name: :TeamInvite, foreign_key: 'sender_id'
+  has_many :accepted_team_invites, class_name: :TeamInvite, foreign_key: 'user_id'
 
   has_attached_file :avatar, styles: {
     small: ['80x80#', :png],
     medium: '200x200#'
-  }, default_url: lambda { |avatar| avatar.instance.set_avatar_default_url}
+  },                         default_url: lambda { |avatar| avatar.instance.set_avatar_default_url }
 
-  validates_attachment_size :avatar, less_than: 1.megabyte, message: " should be less than 1Mb"
+  validates_attachment_size :avatar, less_than: 1.megabyte, message: ' should be less than 1Mb'
   validates_attachment :avatar,
-    content_type: { :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
+                       content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'] }
 
   scope :where_name_like, -> (query) do
-    where("lower(last_name) LIKE :query OR lower(full_name) LIKE :query OR lower(email) LIKE :query", query: query)
+    where('lower(last_name) LIKE :query OR lower(full_name) LIKE :query OR lower(email) LIKE :query', query: query)
   end
 
   def to_param
@@ -93,25 +93,25 @@ class User < ActiveRecord::Base
       ProjectMember.select(:user_id).where(project_id:
         ProjectMember.select(:project_id).where(user: self)
       )
-    ).where('id != ?', self.id)
+    ).where('id != ?', id)
   end
 
   def update_with_password(user_params)
     updating_password = true
     current_password = user_params.delete(:current_password)
 
-    if self.authenticate(current_password)
-      self.update(user_params)
+    if authenticate(current_password)
+      update(user_params)
       true
     else
-      self.errors.add(:current_password, current_password.blank? ? :blank : :match)
+      errors.add(:current_password, current_password.blank? ? :blank : :match)
       false
     end
   end
 
   # Gets the paymill associated client
   def client
-    if not @client
+    unless @client
       if client_id
         @client = Paperboard::Payments.find_client client_id
       else
@@ -133,14 +133,14 @@ class User < ActiveRecord::Base
     require 'digest/md5'
     self.request_token = Digest::MD5.hexdigest("#{email}#{Time.now}")
     save!
-    self.request_token
+    request_token
   end
 
   def join_pending_invites
-    ProjectInvite.where(email: self.email, accepted: false).find_each do |invite|
+    ProjectInvite.where(email: email, accepted: false).find_each do |invite|
       invite.accept_with_user(self)
     end
-    TeamInvite.where(email: self.email, accepted: false).find_each do |invite|
+    TeamInvite.where(email: email, accepted: false).find_each do |invite|
       invite.accept_with_user(self)
     end
   end
@@ -150,42 +150,42 @@ class User < ActiveRecord::Base
   end
 
   def cached_organizations
-    Rails.cache.fetch ["organizations", self] do
-      self.organizations.to_a
+    Rails.cache.fetch ['organizations', self] do
+      organizations.to_a
     end
   end
 
   def cached_teams
-    Rails.cache.fetch ["teams", self] do
-      self.teams.to_a
+    Rails.cache.fetch ['teams', self] do
+      teams.to_a
     end
   end
 
   private
-    def should_validate_password?
-      updating_password || new_record?
-    end
+  def should_validate_password?
+    updating_password || new_record?
+  end
 
     # Updates the full_name before saving
-    def before_save
-      self.full_name = first_name + ' ' + last_name
-    end
+  def before_save
+    self.full_name = first_name + ' ' + last_name
+  end
 
     # Updates the Payments client whenever the full_name or email have changed
-    def after_change
-      if self.email_changed? or self.full_name_changed?
-        Paperboard::Payments.update_client client, payment_client_attributes
-      end
+  def after_change
+    if self.email_changed? || self.full_name_changed?
+      Paperboard::Payments.update_client client, payment_client_attributes
     end
+  end
 
-    def after_destroy
-      if self.client_id
-        Paperboard::Payments.delete_client client_id
-      end
+  def after_destroy
+    if client_id
+      Paperboard::Payments.delete_client client_id
     end
+  end
 
     # Attributes for Payments client
-    def payment_client_attributes
-      {email: email, description: full_name}
-    end
+  def payment_client_attributes
+    { email: email, description: full_name }
+  end
 end

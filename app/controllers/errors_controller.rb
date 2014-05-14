@@ -1,5 +1,5 @@
 class ErrorsController < ApplicationController
-  layout "errors"
+  layout 'errors'
 
   def not_found
     render template: 'errors/404', status: 404

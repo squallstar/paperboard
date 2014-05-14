@@ -1,6 +1,5 @@
 module Paperboard
   class Payments
-
     def self.find_client(id)
       Paymill::Client.find id
     end
@@ -24,7 +23,7 @@ module Paperboard
     end
 
     def self.subscribe(plan, client, card_token)
-      payment = self.create_payment card_token, client
+      payment = create_payment card_token, client
       Paymill::Subscription.create offer: plan, client: client, payment: payment.id
     end
 
@@ -41,35 +40,35 @@ module Paperboard
         begin
 
           if client.payment
-            p "The client has payments"
+            p 'The client has payments'
             for payment in client.payment
               p "Deleting payment #{payment['id']}"
-              Paymill::Payment.delete payment["id"]
+              Paymill::Payment.delete payment['id']
             end
           end
 
           if client.subscription
-            p "The client has subscriptions"
+            p 'The client has subscriptions'
             for sub in client.subscription
               p "Deleting subscription #{sub['id']}"
-              Paymill::Subscription.delete sub["id"]
+              Paymill::Subscription.delete sub['id']
             end
           end
 
         rescue
-          #p "Error: #{$!}"
+          # p "Error: #{$!}"
         ensure
           p "Deleting the client #{client.id}"
           Paymill::Client.delete client.id
         end
-        p "------------"
+        p '------------'
         nil
       end
 
-      p "Clearing all client_ids"
+      p 'Clearing all client_ids'
       User.update_all(client_id: nil)
 
-      p "Done!"
+      p 'Done!'
     end
   end
 end

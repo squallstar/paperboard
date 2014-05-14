@@ -4,7 +4,7 @@ lock '3.1.0'
 set :application, 'paperboard'
 set :repo_url, 'https://squallstar:L9ndoners@github.com/squallstar/paperboard.git'
 
-set :test_log, "logs/capistrano.test.log"
+set :test_log, 'logs/capistrano.test.log'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -41,12 +41,12 @@ namespace :deploy do
 
   desc 'Rspec tests'
   before :starting, :run_tests do
-    puts "--> Running tests, please wait ..."
-    unless system "bundle exec rspec"
-      puts "--> Tests failed.."
+    puts '--> Running tests, please wait ...'
+    unless system 'bundle exec rspec'
+      puts '--> Tests failed..'
       exit
     else
-      puts "--> Tests passed"
+      puts '--> Tests passed'
     end
   end
 
@@ -55,7 +55,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
-      puts "--> Server restarted.."
+      puts '--> Server restarted..'
     end
   end
 

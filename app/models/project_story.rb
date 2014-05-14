@@ -25,17 +25,17 @@ class ProjectStory < ActiveRecord::Base
   validates :project, null: false
   validates :owner, null: false
   validates :title, presence: true
-  validates :priority, :inclusion => { :in => 0..4, :message => "The priority must be between 0 and 4" }
+  validates :priority, inclusion: { in: 0..4, message: 'The priority must be between 0 and 4' }
 
   scope :open, -> { where(closed: false) }
   scope :closed, -> { where(closed: true) }
 
   def self.priorities
-    {0 => 'Very low', 1 => 'Low', 2 => 'Normal', 3 => 'High', 4 => 'Critical'}
+    { 0 => 'Very low', 1 => 'Low', 2 => 'Normal', 3 => 'High', 4 => 'Critical' }
   end
 
   def priority_label
-    self.priorities[priority]
+    priorities[priority]
   end
 
   def to_param

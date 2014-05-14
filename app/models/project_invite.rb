@@ -14,12 +14,12 @@
 #
 
 class ProjectInvite < ActiveRecord::Base
-  validates :accepted, :default => false
-  validates :email, :presence => true
-  validates :sender, :presence => true
+  validates :accepted, default: false
+  validates :email, presence: true
+  validates :sender, presence: true
   validates_uniqueness_of :email,
-    scope: [:project_id, :user_id],
-    message: "has already been used to invite a user on this project"
+                          scope: [:project_id, :user_id],
+                          message: 'has already been used to invite a user on this project'
 
   before_create :set_defaults
 
@@ -36,10 +36,10 @@ class ProjectInvite < ActiveRecord::Base
   end
 
   private
-    def set_defaults
-      self.accepted = false
+  def set_defaults
+    self.accepted = false
 
-      require 'securerandom'
-      self.key = SecureRandom.uuid
-    end
+    require 'securerandom'
+    self.key = SecureRandom.uuid
+  end
 end

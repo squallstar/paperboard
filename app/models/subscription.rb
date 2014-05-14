@@ -35,11 +35,11 @@ class Subscription < ActiveRecord::Base
       Subscription.where(user: user).destroy_all
 
       save!
-      logger.info "Subscription: a new subscription have been setup with paymill_id #{self.paymill_id}"
+      logger.info "Subscription: a new subscription have been setup with paymill_id #{paymill_id}"
     end
   rescue => e
     logger.error "Error while creating subscription for user #{user.client.id}: #{e}"
-    errors.add :base, "There was a problem with your credit card. Please try again."
+    errors.add :base, 'There was a problem with your credit card. Please try again.'
     false
   end
 
@@ -55,8 +55,8 @@ class Subscription < ActiveRecord::Base
   end
 
   private
-    def delete_paymill_subscription
-      Paperboard::Payments.unsubscribe self.paymill_id
-      logger.info "Subscription: user #{user.id} has been unsubscribed from paymill_id #{self.paymill_id}"
-    end
+  def delete_paymill_subscription
+    Paperboard::Payments.unsubscribe paymill_id
+    logger.info "Subscription: user #{user.id} has been unsubscribed from paymill_id #{paymill_id}"
+  end
 end

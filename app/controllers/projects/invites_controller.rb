@@ -41,7 +41,7 @@ class Projects::InvitesController < ApplicationController
       else
         # Check if the user that wants to accept belongs to the project
         if ProjectMember.where(project_id: params[:project_id], user: @current_user).count > 0
-          redirect_to project_path(@current_project), notice: "You already joined this project."
+          redirect_to project_path(@current_project), notice: 'You already joined this project.'
         else
           # Ok, we can accept the invite
           invite.accept_with_user(@current_user)
@@ -65,15 +65,15 @@ class Projects::InvitesController < ApplicationController
 
   private
 
-    def set_invites
-      @invites = @current_project.invites.includes(:user, :sender).order(:accepted, :email)
-    end
+  def set_invites
+    @invites = @current_project.invites.includes(:user, :sender).order(:accepted, :email)
+  end
 
-    def set_invite
-      @invite = ProjectInvite.find(params[:id])
-    end
+  def set_invite
+    @invite = ProjectInvite.find(params[:id])
+  end
 
-    def invite_params
-      params.require(:project_invite).permit(:email)
-    end
+  def invite_params
+    params.require(:project_invite).permit(:email)
+  end
 end

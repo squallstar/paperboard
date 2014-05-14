@@ -23,6 +23,6 @@ class ProjectMember < ActiveRecord::Base
 
   validates :project, null: false
   validates :user, null: false
-  validates_inclusion_of :role, :in => %w(owner member)
+  validates_inclusion_of :role, in: %w(owner member)
   validates_uniqueness_of :project_id, scope: :user_id
 end

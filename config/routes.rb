@@ -1,23 +1,23 @@
 Paperboard::Application.routes.draw do
 
   namespace :settings do
-    get "profile" => "profile#index"
-    patch "profile" => "profile#update"
+    get 'profile' => 'profile#index'
+    patch 'profile' => 'profile#update'
 
-    get "account" => "account#index"
-    patch "account" => "account#update"
-    delete "account" => "account#destroy"
+    get 'account' => 'account#index'
+    patch 'account' => 'account#update'
+    delete 'account' => 'account#destroy'
 
-    get "organizations" => "organizations#index"
-    delete "organizations/:id" => "organizations#leave", as: :leave_organizations
+    get 'organizations' => 'organizations#index'
+    delete 'organizations/:id' => 'organizations#leave', as: :leave_organizations
 
-    get "billing" => "billing#index"
-    post "billing/subscribe/:plan_id" => "billing#subscribe", as: :billing_subscribe
-    delete "billing/subscribe" => "billing#delete_subscription", as: :billing_subscribe_delete
+    get 'billing' => 'billing#index'
+    post 'billing/subscribe/:plan_id' => 'billing#subscribe', as: :billing_subscribe
+    delete 'billing/subscribe' => 'billing#delete_subscription', as: :billing_subscribe_delete
   end
 
   namespace :v1, format: :json do
-    get "suggestions/people" => "suggestions#people"
+    get 'suggestions/people' => 'suggestions#people'
   end
 
   # User
@@ -60,19 +60,19 @@ Paperboard::Application.routes.draw do
   end
 
   # Login/Logout sessions
-  get   "login"  => "auth#login", as: :login
-  get   "logout" => "auth#logout", as: :logout
-  post  "login"  => "auth#login"
-  match "forgot-password" => "auth#forgot_password", via: [:get, :post], as: :forgot_password
-  match "reset-password/:id/:request_token" => "auth#reset_password", via: [:get, :patch], as: :reset_password
+  get 'login'  => 'auth#login', as: :login
+  get 'logout' => 'auth#logout', as: :logout
+  post 'login'  => 'auth#login'
+  match 'forgot-password' => 'auth#forgot_password', via: [:get, :post], as: :forgot_password
+  match 'reset-password/:id/:request_token' => 'auth#reset_password', via: [:get, :patch], as: :reset_password
 
   # User Signup
-  match "signup" => "auth#signup", via: [:get, :post], as: :signup
-  get   "signup/complete" => "auth#signup_complete", as: :signup_complete
-  get   "signup/confirm/:id/:key" => "auth#signup_confirm_email", as: :signup_confirm_email
+  match 'signup' => 'auth#signup', via: [:get, :post], as: :signup
+  get 'signup/complete' => 'auth#signup_complete', as: :signup_complete
+  get 'signup/confirm/:id/:key' => 'auth#signup_confirm_email', as: :signup_confirm_email
 
   # Generic root url (dashboard) for logged in users
-  get "projects" => 'projects/projects#index', as: :dashboard
+  get 'projects' => 'projects/projects#index', as: :dashboard
 
   # Custom error routes
   get '404', to: 'errors#404'

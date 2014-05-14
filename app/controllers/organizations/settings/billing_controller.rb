@@ -9,7 +9,7 @@ class Organizations::Settings::BillingController < ApplicationController
   end
 
   private
-    def set_plans
-      @plans = Plan.all
-    end
+  def set_plans
+    @plans = Plan.all
+  end
 end

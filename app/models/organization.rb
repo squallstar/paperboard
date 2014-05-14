@@ -21,7 +21,7 @@ class Organization < ActiveRecord::Base
   validates :name, null: false, presence: true
 
   after_save -> do
-    self.users.each { |u| u.touch }
+    users.each { |u| u.touch }
   end
 
   def to_param
@@ -30,7 +30,7 @@ class Organization < ActiveRecord::Base
 
   def self.new_with_user(params, user)
     self.creator = user
-    self.new params
+    new params
   end
 
   def remove_user(user)
@@ -40,8 +40,8 @@ class Organization < ActiveRecord::Base
   end
 
   private
-    def create_default_teams
-      team = Team.create! name: 'Owners', role: 'owner', organization: self
-      team.members.create! role: 'admin', user: self.creator
-    end
+  def create_default_teams
+    team = Team.create! name: 'Owners', role: 'owner', organization: self
+    team.members.create! role: 'admin', user: creator
+  end
 end

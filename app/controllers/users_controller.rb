@@ -9,14 +9,14 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to root_path, alert: 'User not found.'
-    end
+  def set_user
+    @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'User not found.'
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name)
-    end
+  def user_params
+    params.require(:user).permit(:first_name, :last_name)
+  end
 end

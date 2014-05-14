@@ -10,18 +10,18 @@ Paperboard::Application.configure do
   config.eager_load = false
 
   config.action_mailer.default_url_options = {
-    :host => "localhost",
-    :port => 3000 # refine with real port
+    host: 'localhost',
+    port: 3000 # refine with real port
   }
 
   # S3
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_protocol => :https,
-    :s3_credentials => {
-      :bucket => ENV['FOG_DIRECTORY'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    storage: :s3,
+    s3_protocol: :https,
+    s3_credentials: {
+      bucket: ENV['FOG_DIRECTORY'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
 
@@ -62,6 +62,6 @@ Paperboard::Application.configure do
     Bullet.console = false
     Bullet.rails_logger = true
 
-    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => "Organization", :association => :projects
+    Bullet.add_whitelist type: :unused_eager_loading, class_name: 'Organization', association: :projects
   end
 end

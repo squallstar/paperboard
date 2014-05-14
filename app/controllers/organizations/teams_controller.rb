@@ -6,7 +6,7 @@ class Organizations::TeamsController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   before_action :set_team, except: [:index, :new, :create]
 
-  protect_from_forgery :except => [:add_member]
+  protect_from_forgery except: [:add_member]
 
   # GET /teams
   # GET /teams.json
@@ -99,10 +99,10 @@ class Organizations::TeamsController < ApplicationController
       end
     elsif params[:email]
       # Create the invite
-      invite = @team.invites.build({
-        email: params[:email],
-        sender: @current_user
-      })
+      invite = @team.invites.build(
+                                     email: params[:email],
+                                     sender: @current_user
+      )
 
       if invite.save
         # Send an email invitation
@@ -110,7 +110,7 @@ class Organizations::TeamsController < ApplicationController
           data[:notice] = "An invite to join #{@team.name} team has been sent to #{params[:email]}"
         else
           invite.destroy
-          data[:alert] = "Could not send the email. Please try later."
+          data[:alert] = 'Could not send the email. Please try later.'
         end
 
       else
@@ -136,18 +136,18 @@ class Organizations::TeamsController < ApplicationController
 
   def remove_invite
     @team.invites.find(params[:key]).destroy
-    redirect_to organization_team_path(@organization, @team), notice: "The invite has been deleted."
+    redirect_to organization_team_path(@organization, @team), notice: 'The invite has been deleted.'
   end
 
   private
-    def set_team
-      @team = Team.where(organization: @organization, id: params[:id]).first
+  def set_team
+    @team = Team.where(organization: @organization, id: params[:id]).first
 
-      redirect_to organization_teams_path(@organization), alert: 'The team does not exist.' unless @team
-    end
+    redirect_to organization_teams_path(@organization), alert: 'The team does not exist.' unless @team
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.require(:team).permit(:name, :role)
-    end
+  def team_params
+    params.require(:team).permit(:name, :role)
+  end
 end

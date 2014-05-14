@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :team_invite do
-    accepted ""
-    email "MyString"
+    accepted ''
+    email 'MyString'
     sender nil
     team nil
   end

@@ -15,7 +15,7 @@ class Settings::OrganizationsController < ApplicationController
   end
 
   private
-    def load_organizations
-      @organizations = @current_user.cached_organizations
-    end
+  def load_organizations
+    @organizations = @current_user.cached_organizations
+  end
 end

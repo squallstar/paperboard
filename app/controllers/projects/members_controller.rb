@@ -9,7 +9,7 @@ class Projects::MembersController < ApplicationController
   end
 
   def destroy
-    return if not is_admin
+    return unless is_admin
 
     member = ProjectMember.find(params[:id])
 
@@ -26,7 +26,7 @@ class Projects::MembersController < ApplicationController
   end
 
   private
-    def load_is_admin
-      @is_admin ||= ProjectMember.select(:role).where(project: @current_project, user: @current_user, role: 'owner').count > 0
-    end
+  def load_is_admin
+    @is_admin ||= ProjectMember.select(:role).where(project: @current_project, user: @current_user, role: 'owner').count > 0
+  end
 end

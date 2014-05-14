@@ -3,7 +3,7 @@ Paperboard::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-  config.static_cache_control = "public, max-age=2592000"
+  config.static_cache_control = 'public, max-age=2592000'
 
   # Force https
   config.force_ssl = true
@@ -19,17 +19,17 @@ Paperboard::Application.configure do
   config.action_controller.perform_caching = true
 
   config.action_mailer.default_url_options = {
-    :host => "paperboard.me",
-    :protocol => 'https'
+    host: 'paperboard.me',
+    protocol: 'https'
   }
 
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_protocol => :https,
-    :s3_credentials => {
-      :bucket => ENV['FOG_DIRECTORY'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    storage: :s3,
+    s3_protocol: :https,
+    s3_credentials: {
+      bucket: ENV['FOG_DIRECTORY'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
 
@@ -64,7 +64,7 @@ Paperboard::Application.configure do
   config.assets.digest = true
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.initialize_on_precompile = true
-  config.assets.prefix = "/assets"
+  config.assets.prefix = '/assets'
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
