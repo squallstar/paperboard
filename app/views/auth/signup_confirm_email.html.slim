@@ -1,3 +1,12 @@
-h1 Congratulations #{@user.first_name}, you're in!
+- @title = 'You\'re in!'
 
-= link_to "Get started", dashboard_url
+header
+  .logo
+  h1 Yipee!!
+
+.message.success Congratulations #{@user.first_name}, you're in!
+
+.content
+  p Thanks for having confirmed your email account. Your brand new Paperboard account is now ready to be used!
+  .field
+    = link_to "Get started", dashboard_url, class: 'button'

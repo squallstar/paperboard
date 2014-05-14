@@ -1,43 +1,47 @@
 - @title = 'Signup for a new account'
 
-- if flash[:alert]
-  p#notice= flash[:alert]
+header
+  .logo.is-icon
+    i class='fa fa-user'
+  h1 Create new account
 
 = form_for @user, url: "" do |f|
 
-  fieldset
-    h2 New user
-    p
-      strong Start your free account.
-      br
-      | You'll be up and running in less than a minute.
-      hr
+  - if @user.errors.any?
+    .message.alert = @user.errors.full_messages.join(', ') + '.'
 
-    - if @user.errors.any?
-      .errors
-        h3 Oops...
-        ul
-          - @user.errors.full_messages.each do |msg|
-            li = msg
+  .content
+      fieldset
+        p
+          strong Start your free account.
+          br
+          | You'll be up and running in less than a minute.
+          hr
 
-    .field
-      = f.label :first_name, "First and last name"
-      = f.text_field :first_name, placeholder: "John"
-      = f.text_field :last_name, placeholder: "Doe"
-      hr
-    .field
-      = f.label :email, "Email address"
-      = f.email_field :email, autocomplete: 'off', placeholder: "john.doe@example.org"
-      hr
-    .field
-      = f.label :password, "Password"
-      = f.password_field :password, autocomplete: 'off'
-    .field
-      = f.label :password_confirmation, "Confirm password"
-      = f.password_field :password_confirmation, autocomplete: 'off'
-      hr
-    .field
-      = f.submit "Create free account"
-      p
-        ' By creating a free account, you accept our
-        = link_to "Terms and conditions", "#"
+        .field
+          = f.label :first_name, "First and last name"
+          .group
+            = f.text_field :first_name, placeholder: "John"
+            = f.text_field :last_name, placeholder: "Doe"
+          hr
+        .field
+          = f.label :email, "Email address"
+          = f.email_field :email, autocomplete: 'off', placeholder: "john.doe@example.org"
+          hr
+        .field
+          = f.label :password, "Password"
+          = f.password_field :password, autocomplete: 'off'
+        .field
+          = f.label :password_confirmation, "Confirm password"
+          = f.password_field :password_confirmation, autocomplete: 'off'
+          hr
+
+        .field
+          = f.submit "Create free account"
+
+        .field.note
+          p
+            ' By creating a free account, you accept our
+            strong
+              = link_to "Terms and conditions", "#"
+            ' .

@@ -12,7 +12,7 @@ class AuthController < ApplicationController
 
         logs_and_redirect(user)
       else
-        flash.now[:alert] = 'Invalid email/password combination'
+        flash.now[:alert] = 'The password you entered is incorrect.'
       end
     end
   end
@@ -48,7 +48,7 @@ class AuthController < ApplicationController
         @email = user.email
         render 'forgot_password_sent'
       else
-        flash.now[:alert] = 'Email address not registered'
+        flash.now[:alert] = 'The email address is not registered to any account.'
       end
     end
   end
@@ -64,7 +64,7 @@ class AuthController < ApplicationController
       reset_password_params[:request_token] = nil
 
       if @user.update(reset_password_params)
-        redirect_to login_path, alert: 'Your password has been updated!'
+        redirect_to login_path, notice: 'Your password has been updated!'
       end
     end
   end

@@ -1,9 +1,14 @@
-h1 Please check your email
+- @title = 'Please check your email'
 
-p
-  strong Dear #{flash[:full_name]},
+header
+  .logo.is-icon
+    i class='fa fa-user'
+  h1 Create new account
 
-p
-  ' We have sent you a confirmation email at&nbsp;
-  strong.underline #{flash[:email]}
-  ' &nbsp;with a link to activate your Paperboard account.
+.message.success You're almost done! Please check your email.
+
+.content
+  p
+    ' We have sent you a confirmation email at&nbsp;
+    strong.underline #{flash[:email]}
+    ' &nbsp;with a link to activate your brand new Paperboard account.
